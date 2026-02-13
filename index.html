@@ -29,20 +29,30 @@
 
         /* Header */
         header {
-            padding: 60px 0 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 24px;
+            background-color: #0a0a0a;
             border-bottom: 1px solid #2a2a2a;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background-color: rgba(10, 10, 10, 0.95);
         }
 
         .header-content {
+            max-width: 100%;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 16px;
         }
 
         h1 {
-            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
             font-weight: 600;
             letter-spacing: -0.02em;
         }
@@ -50,7 +60,7 @@
         .contact-info a {
             color: #999999;
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             font-weight: 400;
             transition: color 0.3s ease;
         }
@@ -61,7 +71,7 @@
 
         /* Project Grid */
         .projects {
-            padding: 40px 0 60px;
+            padding: 90px 0 60px;
         }
 
         .project-grid {
@@ -134,13 +144,13 @@
             }
 
             header {
-                padding: 40px 0 30px;
+                padding: 12px 16px;
             }
 
             .header-content {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 12px;
+                gap: 8px;
             }
 
             .project-grid {
@@ -149,7 +159,7 @@
             }
 
             .projects {
-                padding: 30px 0 40px;
+                padding: 80px 0 40px;
             }
         }
 
@@ -171,7 +181,7 @@
             <div class="header-content">
                 <h1>Donghyun.Han</h1>
                 <div class="contact-info">
-                    <a href="mailto:magudol95@gmail.com">magudol95@gmail.com</a>
+                    <a href="/cdn-cgi/l/email-protection#7b161a1c0e1f1417424e3b1c161a121755181416"><span class="__cf_email__" data-cfemail="fd909c9a88999291c4c8bd9a909c9491d39e9290">[email&#160;protected]</span></a>
                 </div>
             </div>
         </header>
@@ -341,14 +351,7 @@
         </footer>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Optional: Click handler for project cards
         document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', function() {
-                // Add your navigation logic here
-                console.log('Project clicked:', this.querySelector('.project-title').textContent);
-            });
-        });
-    </script>
-</body>
-</html>
+            card.ad
