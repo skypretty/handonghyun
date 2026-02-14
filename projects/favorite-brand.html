@@ -111,12 +111,54 @@
             flex-direction: column;
             gap: 8px;
             padding: 20px 28px;
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: #121212;
             border: 1px solid #1a1a1a;
             border-radius: 12px;
             transition: all 0.3s ease;
             flex: 1;
             min-width: 200px;
+            position: relative;
+            overflow: hidden;
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+        }
+
+        .info-item::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 222, 89, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            left: var(--mouse-x);
+            top: var(--mouse-y);
+            transform: translate(-50%, -50%);
+        }
+
+        .info-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            padding: 1px;
+            background: radial-gradient(150px circle at var(--mouse-x) var(--mouse-y), rgba(0, 222, 89, 0.4), transparent 80%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .info-item:hover::before {
+            opacity: 1;
+        }
+
+        .info-item:hover::after {
+            opacity: 1;
         }
 
         .info-item:hover {
@@ -130,6 +172,11 @@
             text-transform: uppercase;
             letter-spacing: 0.12em;
             font-weight: 600;
+            transition: text-shadow 0.3s ease;
+        }
+
+        .info-item:hover .info-label {
+            text-shadow: 0 0 20px rgba(0, 222, 89, 0.3);
         }
 
         .info-value {
@@ -137,6 +184,11 @@
             font-size: 0.95rem;
             font-weight: 500;
             line-height: 1.6;
+            transition: text-shadow 0.3s ease;
+        }
+
+        .info-item:hover .info-value {
+            text-shadow: 0 0 20px rgba(0, 222, 89, 0.3);
         }
 
         /* Section */
@@ -320,10 +372,52 @@
 
         .feature-card {
             padding: 40px;
-            background-color: rgba(255, 255, 255, 0.02);
+            background-color: #121212;
             border: 1px solid #1a1a1a;
             border-radius: 12px;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 222, 89, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            left: var(--mouse-x);
+            top: var(--mouse-y);
+            transform: translate(-50%, -50%);
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            padding: 1px;
+            background: radial-gradient(150px circle at var(--mouse-x) var(--mouse-y), rgba(0, 222, 89, 0.4), transparent 80%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover::after {
+            opacity: 1;
         }
 
         .feature-card:hover {
@@ -336,12 +430,26 @@
             font-weight: 600;
             margin-bottom: 16px;
             letter-spacing: -0.01em;
+            transition: text-shadow 0.3s ease;
+        }
+
+        .feature-title .highlight {
+            color: #00DE59;
+        }
+
+        .feature-card:hover .feature-title {
+            text-shadow: 0 0 20px rgba(0, 222, 89, 0.3);
         }
 
         .feature-description {
             font-size: 0.95rem;
             line-height: 1.8;
             color: #aaaaaa;
+            transition: text-shadow 0.3s ease;
+        }
+
+        .feature-card:hover .feature-description {
+            text-shadow: 0 0 20px rgba(0, 222, 89, 0.2);
         }
 
         /* Navigation */
@@ -714,19 +822,19 @@
 
             <div class="key-features">
                 <div class="feature-card">
-                    <h3 class="feature-title">My PERSONAL Story - 브랜드를 나만의 것으로</h3>
+                    <h3 class="feature-title">My PERSONAL Story - <span class="highlight">브랜드를 나만의 것으로</span></h3>
                     <p class="feature-description">
                         스티커는 개인화를 상징합니다. 평범한 물건에 붙이는 것만으로도 나만의 것이 되고, 새로운 이야기가 시작됩니다. 브랜드에 스티커를 더하면 소비자가 자신의 개성을 표현하며, 브랜드는 함께 완성해가는 열린 캔버스가 됩니다.
                     </p>
                 </div>
                 <div class="feature-card">
-                    <h3 class="feature-title">Connection to Life - 평범함을 특별함으로</h3>
+                    <h3 class="feature-title">Connection to Life - <span class="highlight">평범함을 특별함으로</span></h3>
                     <p class="feature-description">
                         스티커는 익숙한 일상 속 물건이지만, 오브제와 결합될 때 평범함을 특별함으로 바꿉니다. 브랜드가 자연스럽게 일상에 스며들어 소비자의 기억에 남는 과정을 보여줍니다. 스티커는 브랜드와 소비자를 연결하는 작은 가교로, 특별한 순간과 일상을 이어주는 깊은 공감대를 형성합니다.
                     </p>
                 </div>
                 <div class="feature-card">
-                    <h3 class="feature-title">Touch and Feel - 시각을 넘어 감각적인 경험으로</h3>
+                    <h3 class="feature-title">Touch and Feel - <span class="highlight">시각을 넘어 감각적인 경험으로</span></h3>
                     <p class="feature-description">
                         스티커는 단순히 바라보는 것으로 끝나지 않습니다. 떼고 붙이는 과정에서 손끝에 기억을 남기며, 브랜드를 시각적 자극을 넘어 감각적인 경험으로 확장시킵니다. 스티커는 단순한 디자인 요소가 아닌, 브랜드와 사람 사이의 교감을 만들어내는 매개체입니다.
                     </p>
@@ -941,6 +1049,30 @@
         // 나머지 요소들 observe
         document.querySelectorAll('.section-header, .process-step, .feature-card, .image-item').forEach(el => {
             observer.observe(el);
+        });
+
+        // Feature card mouse follow effect
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Info item mouse follow effect
+        document.querySelectorAll('.info-item').forEach(item => {
+            item.addEventListener('mousemove', (e) => {
+                const rect = item.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                item.style.setProperty('--mouse-x', `${x}px`);
+                item.style.setProperty('--mouse-y', `${y}px`);
+            });
         });
     </script>
 </body>
