@@ -103,8 +103,7 @@
             flex-wrap: wrap;
             gap: 16px;
             margin-bottom: 0;
-            padding-bottom: 80px;
-            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 60px;
         }
 
         .info-item {
@@ -406,16 +405,6 @@
             .gif-row.three-cols {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-            /* 무한 스크롤 그래픽 크기 조정 */
-            .infinite-scroll-item {
-                height: 140px;
-            }
-
-            .infinite-scroll-wrapper {
-                margin-top: 0;
-                margin-bottom: 50px;
-            }
         }
 
         @media (max-width: 768px) {
@@ -432,16 +421,6 @@
             /* 모바일에서 이메일 숨김 */
             .contact-info {
                 display: none;
-            }
-
-            /* 무한 스크롤 그래픽 크기 조정 */
-            .infinite-scroll-wrapper {
-                margin-top: 0;
-                margin-bottom: 30px;
-            }
-
-            .infinite-scroll-item {
-                height: 80px;
             }
 
             .hero-section {
@@ -500,8 +479,8 @@
             margin-left: -50vw;
             margin-right: -50vw;
             overflow: hidden;
-            margin-top: 0;
-            margin-bottom: 60px;
+            margin-top: -20px;
+            margin-bottom: clamp(30px, 5vw, 60px);
         }
 
         .infinite-scroll-track {
@@ -512,7 +491,8 @@
 
         .infinite-scroll-item {
             flex-shrink: 0;
-            height: 200px;
+            /* 화면 크기에 따라 자동으로 줄어듦: 최소 100px, 최대 200px */
+            height: clamp(100px, 12vw, 200px);
             display: flex;
             align-items: center;
         }
