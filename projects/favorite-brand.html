@@ -83,7 +83,7 @@
 
         /* Hero Section */
         .hero-section {
-            padding: 80px 24px 80px;
+            padding: 0 24px 80px;
             max-width: 1920px;
             margin: 0 auto;
         }
@@ -154,13 +154,13 @@
 
         .section-label {
             display: inline-block;
-            color: #888888;
+            color: #b0b0b0;
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             margin-bottom: 16px;
             padding: 6px 12px;
-            background-color: rgba(255, 255, 255, 0.03);
+            background-color: rgba(255, 255, 255, 0.08);
             border-radius: 4px;
         }
 
@@ -423,7 +423,7 @@
             }
 
             .hero-section {
-                padding: 80px 16px 60px;
+                padding: 0 16px 60px;
             }
 
             .hero-image {
@@ -498,6 +498,7 @@
         .image-item {
             opacity: 0;
             transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
         /* 애니메이션이 적용된 후 보이기 */
@@ -508,6 +509,16 @@
         .image-item.fade-in-up {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* 사라질 때 */
+        .gif-item.fade-out,
+        .section-header.fade-out,
+        .feature-card.fade-out,
+        .process-step.fade-out,
+        .image-item.fade-out {
+            opacity: 0;
+            transform: translateY(30px);
         }
     </style>
 </head>
@@ -760,22 +771,38 @@
     </footer>
 
     <script>
-        // Fade in animation on scroll
+        // Fade in animation on scroll with stagger effect
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.15,
+            rootMargin: '0px 0px -80px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
+                    // 스크롤 내릴 때 - 순차적으로 나타남
+                    setTimeout(() => {
+                        entry.target.classList.remove('fade-out');
+                        entry.target.classList.add('fade-in-up');
+                    }, index * 50); // 각 아이템마다 50ms 지연
+                } else {
+                    // 스크롤 올릴 때 - 사라짐
+                    entry.target.classList.remove('fade-in-up');
+                    entry.target.classList.add('fade-out');
                 }
             });
         }, observerOptions);
 
-        // Observe all sections and gif items
-        document.querySelectorAll('.section-header, .gif-item, .process-step, .feature-card, .image-item').forEach(el => {
+        // GIF items에 순차 애니메이션 적용
+        const gifItems = document.querySelectorAll('.gif-item');
+        gifItems.forEach((item, index) => {
+            // 각 gif-item에 약간의 딜레이 추가
+            item.style.transitionDelay = `${index * 0.05}s`;
+            observer.observe(item);
+        });
+
+        // 나머지 요소들 observe
+        document.querySelectorAll('.section-header, .process-step, .feature-card, .image-item').forEach(el => {
             observer.observe(el);
         });
     </script>
