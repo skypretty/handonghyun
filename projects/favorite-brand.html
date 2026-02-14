@@ -67,7 +67,7 @@
 
         /* Hero Section */
         .hero-section {
-            padding: 140px 32px 80px;
+            padding: 80px 32px 80px;
             max-width: 1920px;
             margin: 0 auto;
         }
@@ -77,37 +77,49 @@
             max-width: 1920px;
             height: auto;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 0;
             margin-bottom: 60px;
             display: block;
         }
 
         .project-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
             margin-bottom: 80px;
             padding-bottom: 80px;
             border-bottom: 1px solid #1a1a1a;
         }
 
         .info-item {
-            display: flex;
+            display: inline-flex;
             flex-direction: column;
             gap: 8px;
+            padding: 20px 28px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .info-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: #2a2a2a;
         }
 
         .info-label {
             color: #666666;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 500;
+            letter-spacing: 0.12em;
+            font-weight: 600;
         }
 
         .info-value {
             color: #ffffff;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 500;
             line-height: 1.6;
         }
@@ -323,7 +335,21 @@
             }
 
             .hero-section {
-                padding: 120px 20px 60px;
+                padding: 70px 20px 60px;
+            }
+
+            .hero-image {
+                margin-bottom: 40px;
+            }
+
+            .project-info {
+                gap: 12px;
+            }
+
+            .info-item {
+                flex: 1 1 100%;
+                min-width: 100%;
+                padding: 16px 20px;
             }
 
             .section {
