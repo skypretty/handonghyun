@@ -102,7 +102,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 16px;
-            margin-bottom: 80px;
+            margin-bottom: 0;
             padding-bottom: 80px;
             border-bottom: 1px solid #1a1a1a;
         }
@@ -406,6 +406,16 @@
             .gif-row.three-cols {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            /* 무한 스크롤 그래픽 크기 조정 */
+            .infinite-scroll-item {
+                height: 140px;
+            }
+
+            .infinite-scroll-wrapper {
+                margin-top: 0;
+                margin-bottom: 50px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -422,6 +432,16 @@
             /* 모바일에서 이메일 숨김 */
             .contact-info {
                 display: none;
+            }
+
+            /* 무한 스크롤 그래픽 크기 조정 */
+            .infinite-scroll-wrapper {
+                margin-top: 0;
+                margin-bottom: 30px;
+            }
+
+            .infinite-scroll-item {
+                height: 80px;
             }
 
             .hero-section {
@@ -468,6 +488,47 @@
                 flex-direction: column;
                 gap: 16px;
                 padding: 40px 16px;
+            }
+        }
+
+        /* Infinite Scrolling Graphic */
+        .infinite-scroll-wrapper {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            overflow: hidden;
+            margin-top: 0;
+            margin-bottom: 60px;
+        }
+
+        .infinite-scroll-track {
+            display: flex;
+            width: fit-content;
+            animation: scroll-left 17s linear infinite;
+        }
+
+        .infinite-scroll-item {
+            flex-shrink: 0;
+            height: 200px;
+            display: flex;
+            align-items: center;
+        }
+
+        .infinite-scroll-item img {
+            height: 100%;
+            width: auto;
+            display: block;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
             }
         }
 
@@ -569,6 +630,18 @@
                 </div>
             </div>
         </section>
+
+        <!-- Infinite Scrolling Graphic -->
+        <div class="infinite-scroll-wrapper">
+            <div class="infinite-scroll-track">
+                <div class="infinite-scroll-item">
+                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/first-line-graphic.svg" alt="Brand Graphic">
+                </div>
+                <div class="infinite-scroll-item">
+                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/first-line-graphic.svg" alt="Brand Graphic">
+                </div>
+            </div>
+        </div>
 
         <!-- Overview Section -->
         <section class="section">
