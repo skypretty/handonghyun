@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Favorite Brand - Donghyun.Han</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,7 +13,7 @@
         }
 
         body {
-            font-family: 'Poppins', "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
             background-color: #0a0a0a;
             color: #ffffff;
             line-height: 1.7;
@@ -30,67 +27,54 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 16px 24px;
-            background-color: rgba(10, 10, 10, 0.95);
-            border-bottom: 1px solid #2a2a2a;
+            padding: 20px 32px;
+            background-color: rgba(10, 10, 10, 0.98);
+            border-bottom: 1px solid #1a1a1a;
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
         }
 
         .header-content {
-            max-width: 100%;
+            max-width: 1920px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
         }
 
         .back-button {
-            color: #999999;
+            color: #888888;
             text-decoration: none;
-            font-size: 1.04rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 6px;
         }
 
         .back-button:hover {
             color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
         .brand-name {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-size: 1.1rem;
             font-weight: 600;
             letter-spacing: -0.02em;
-        }
-        
-        .contact-info {
-            display: block;
-        }
-        
-        .contact-info a {
-            color: #999999;
-            text-decoration: none;
-            font-size: 1.04rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        .contact-info a:hover {
-            color: #ffffff;
         }
 
         /* Hero Section */
         .hero-section {
-            padding: 80px 24px 80px;
-            max-width: 100%;
+            padding: 80px 32px 80px;
+            max-width: 1920px;
             margin: 0 auto;
         }
 
         .hero-image {
             width: 100%;
-            max-width: 100%;
+            max-width: 1920px;
             height: auto;
             object-fit: cover;
             border-radius: 0;
@@ -142,9 +126,9 @@
 
         /* Section */
         .section {
-            max-width: 100%;
+            max-width: 1920px;
             margin: 0 auto;
-            padding: 80px 24px;
+            padding: 80px 32px;
         }
 
         .section-header {
@@ -175,29 +159,6 @@
             line-height: 1.8;
             color: #cccccc;
             max-width: 900px;
-        }
-
-        /* GIF Grid - Overview 하단에 GIF 영상 배치 */
-        .gif-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin-top: 60px;
-        }
-
-        .gif-item {
-            position: relative;
-            overflow: hidden;
-            background-color: #1a1a1a;
-            border-radius: 12px;
-            aspect-ratio: 1 / 1;
-        }
-
-        .gif-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
         }
 
         /* Image Grid */
@@ -319,9 +280,9 @@
 
         /* Navigation */
         .project-navigation {
-            max-width: 100%;
+            max-width: 1920px;
             margin: 80px auto 0;
-            padding: 40px 24px;
+            padding: 40px 32px;
             border-top: 1px solid #1a1a1a;
             display: flex;
             justify-content: space-between;
@@ -347,13 +308,13 @@
 
         /* Footer */
         footer {
-            max-width: 100%;
+            max-width: 1920px;
             margin: 0 auto;
-            border-top: 1px solid #2a2a2a;
-            padding: 40px 24px;
+            border-top: 1px solid #1a1a1a;
+            padding: 60px 32px;
             text-align: center;
             color: #666666;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         /* Responsive */
@@ -368,30 +329,13 @@
             }
         }
 
-        @media (max-width: 1024px) {
-            .gif-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
         @media (max-width: 768px) {
             header {
-                padding: 12px 16px;
-            }
-
-            .header-content {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-
-            /* 모바일에서 이메일 숨김 */
-            .contact-info {
-                display: none;
+                padding: 16px 20px;
             }
 
             .hero-section {
-                padding: 80px 16px 60px;
+                padding: 70px 20px 60px;
             }
 
             .hero-image {
@@ -409,11 +353,7 @@
             }
 
             .section {
-                padding: 60px 16px;
-            }
-
-            .gif-grid {
-                grid-template-columns: 1fr;
+                padding: 60px 20px;
             }
 
             .image-grid.cols-2,
@@ -432,7 +372,7 @@
             .project-navigation {
                 flex-direction: column;
                 gap: 16px;
-                padding: 40px 16px;
+                padding: 40px 20px;
             }
         }
 
@@ -461,17 +401,17 @@
 <body>
     <header>
         <div class="header-content">
-            <a href="../index.html" class="back-button">← Back to Portfolio</a>
-            <div class="contact-info">
-                <a href="mailto:magudol95@gmail.com">magudol95@gmail.com</a>
-            </div>
+            <a href="../index.html" class="back-button">
+                <span>←</span> Back to Portfolio
+            </a>
+            <div class="brand-name">Donghyun.Han</div>
         </div>
     </header>
 
     <main>
         <!-- Hero Section -->
         <section class="hero-section">
-            <img src="https://res.cloudinary.com/dv9pfybin/image/upload/v1771039866/hero_ili7jq.png" alt="Favorite Brand Hero" class="hero-image">
+            <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/hero.webp" alt="Favorite Brand Hero" class="hero-image">
             
             <div class="project-info">
                 <div class="info-item">
@@ -503,25 +443,18 @@
                 </p>
             </div>
 
-            <!-- GIF Grid - Overview 하단에 배치 -->
-            <div class="gif-grid">
-                <div class="gif-item">
-                    <img src="https://via.placeholder.com/600x600/222222/ffffff?text=GIF+1" alt="Brand Animation 1">
+            <div class="image-grid cols-2">
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/800x1000/222222/ffffff?text=Brand+Image+1" alt="Brand Image 1">
                 </div>
-                <div class="gif-item">
-                    <img src="https://via.placeholder.com/600x600/222222/ffffff?text=GIF+2" alt="Brand Animation 2">
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/800x1000/222222/ffffff?text=Brand+Image+2" alt="Brand Image 2">
                 </div>
-                <div class="gif-item">
-                    <img src="https://via.placeholder.com/600x600/222222/ffffff?text=GIF+3" alt="Brand Animation 3">
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/800x1000/222222/ffffff?text=Brand+Image+3" alt="Brand Image 3">
                 </div>
-                <div class="gif-item">
-                    <img src="https://via.placeholder.com/600x600/222222/ffffff?text=GIF+4" alt="Brand Animation 4">
-                </div>
-                <div class="gif-item">
-                    <img src="https://via.placeholder.com/600x600/222222/ffffff?text=GIF+5" alt="Brand Animation 5">
-                </div>
-                <div class="gif-item">
-                    <img src="https://via.placeholder.com/600x600/222222/ffffff?text=GIF+6" alt="Brand Animation 6">
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/800x1000/222222/ffffff?text=Brand+Image+4" alt="Brand Image 4">
                 </div>
             </div>
         </section>
