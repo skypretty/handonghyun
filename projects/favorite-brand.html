@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Brand - Donghyun.Han</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 32px;
+            background-color: rgba(10, 10, 10, 0.98);
+            border-bottom: 1px solid #1a1a1a;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-button {
+            color: #888888;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+
+        .back-button:hover {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .brand-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 140px 32px 80px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 60px;
+        }
+
+        .project-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+            padding-bottom: 80px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-label {
+            color: #666666;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #ffffff;
+            font-size: 1.05rem;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        /* Section */
+        .section {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 80px 32px;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: #888888;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+            padding: 6px 12px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #cccccc;
+            max-width: 900px;
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .image-grid.cols-1 {
+            grid-template-columns: 1fr;
+        }
+
+        .image-grid.cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .image-grid.cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .image-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #111111;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .image-item:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: grid;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .step-info {
+            position: sticky;
+            top: 140px;
+        }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #222222;
+            margin-bottom: 16px;
+            line-height: 1;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .step-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #999999;
+        }
+
+        .step-image {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* Key Features */
+        .key-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background-color: rgba(255, 255, 255, 0.04);
+            border-color: #2a2a2a;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #aaaaaa;
+        }
+
+        /* Navigation */
+        .project-navigation {
+            max-width: 1600px;
+            margin: 80px auto 0;
+            padding: 40px 32px;
+            border-top: 1px solid #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: #888888;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 6px;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Footer */
+        footer {
+            max-width: 1600px;
+            margin: 0 auto;
+            border-top: 1px solid #1a1a1a;
+            padding: 60px 32px;
+            text-align: center;
+            color: #666666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .process-step {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .step-info {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 20px;
+            }
+
+            .hero-section {
+                padding: 120px 20px 60px;
+            }
+
+            .hero-image {
+                height: 400px;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .image-grid.cols-2,
+            .image-grid.cols-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .key-features {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 30px;
+            }
+
+            .project-navigation {
+                flex-direction: column;
+                gap: 16px;
+                padding: 40px 20px;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="back-button">
+                <span>←</span> Back to Portfolio
+            </a>
+            <div class="brand-name">Donghyun.Han</div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <img src="https://via.placeholder.com/1600x600/1a1a1a/ffffff?text=Favorite+Brand+Hero+Image" alt="Favorite Brand Hero" class="hero-image">
+            
+            <div class="project-info">
+                <div class="info-item">
+                    <span class="info-label">Project Name</span>
+                    <span class="info-value">Favorite Brand</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Project Period</span>
+                    <span class="info-value">2025.01 - 2025.05</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Contribution</span>
+                    <span class="info-value">100% - Branding, 2D/3D Graphic, Key visuals</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Tools</span>
+                    <span class="info-value">Blender3D, After effect, Photoshop, Illustrator</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-label">Overview</span>
+                <h2 class="section-title">프로젝트 개요</h2>
+                <p class="section-description">
+                    전 세계 다양한 브랜드를 관찰하며, 그들만의 고유한 제품 특징과 감각을 나만의 스타일로 일관성 있게 표현하고자 프로젝트를 진행했습니다. 각 브랜드가 가진 아이덴티티를 유지하면서도, 어떻게 나만의 방식으로 재해석하고 표현할 수 있을지 상상해 보았습니다. 20개의 브랜드 제품을 다루었지만, 모두 하나의 통일된 스타일로 보일 수 있도록 그래픽의 일관성을 고려하여 제작했습니다.
+                </p>
+            </div>
+
+            <div class="image-grid cols-2">
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/800x1000/222222/ffffff?text=Brand+Image+1" alt="Brand Image 1">
+                </div>
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/800x1000/222222/ffffff?text=Brand+Image+2" alt="Brand Image 2">
+                </div>
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/800x1000/222222/ffffff?text=Brand+Image+3" alt="Brand Image 3">
+                </div>
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/800x1000/222222/ffffff?text=Brand+Image+4" alt="Brand Image 4">
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Object Section -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-label">Key Object</span>
+                <h2 class="section-title">Emotional Graphic Sticker</h2>
+            </div>
+
+            <div class="key-features">
+                <div class="feature-card">
+                    <h3 class="feature-title">My PERSONAL Story - 브랜드를 나만의 것으로</h3>
+                    <p class="feature-description">
+                        스티커는 개인화를 상징합니다. 평범한 물건에 붙이는 것만으로도 나만의 것이 되고, 새로운 이야기가 시작됩니다. 브랜드에 스티커를 더하면 소비자가 자신의 개성을 표현하며, 브랜드는 함께 완성해가는 열린 캔버스가 됩니다.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Connection to Life - 평범함을 특별함으로</h3>
+                    <p class="feature-description">
+                        스티커는 익숙한 일상 속 물건이지만, 오브제와 결합될 때 평범함을 특별함으로 바꿉니다. 브랜드가 자연스럽게 일상에 스며들어 소비자의 기억에 남는 과정을 보여줍니다. 스티커는 브랜드와 소비자를 연결하는 작은 가교로, 특별한 순간과 일상을 이어주는 깊은 공감대를 형성합니다.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Touch and Feel - 시각을 넘어 감각적인 경험으로</h3>
+                    <p class="feature-description">
+                        스티커는 단순히 바라보는 것으로 끝나지 않습니다. 떼고 붙이는 과정에서 손끝에 기억을 남기며, 브랜드를 시각적 자극을 넘어 감각적인 경험으로 확장시킵니다. 스티커는 단순한 디자인 요소가 아닌, 브랜드와 사람 사이의 교감을 만들어내는 매개체입니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="image-grid cols-3">
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/600x800/222222/ffffff?text=Sticker+1" alt="Sticker 1">
+                </div>
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/600x800/222222/ffffff?text=Sticker+2" alt="Sticker 2">
+                </div>
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/600x800/222222/ffffff?text=Sticker+3" alt="Sticker 3">
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Process Section -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-label">Design Process</span>
+                <h2 class="section-title">제작 과정</h2>
+                <p class="section-description">
+                    브랜드 오브젝트와 스티커는 여러 단계를 거쳐 제작되었습니다. 모든 프로젝트는 기본 도형을 토대로 디테일을 더해 나갔으며, 마지막 단계에서 스티커를 입히는 방식으로 완성되었습니다.
+                </p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-info">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">STEP 1 - 기본 도형으로 시작</h3>
+                        <p class="step-description">
+                            모든 그래픽은 기본 도형에서 출발합니다. 먼저 전체적인 틀을 잡아 작업의 방향성을 설정하고, 동시에 다른 브랜드 오브젝트들과 어떤 방식으로 스타일의 일관성을 유지할지 고민하며 진행합니다.
+                        </p>
+                    </div>
+                    <img src="https://via.placeholder.com/1200x800/222222/ffffff?text=Step+1+Process" alt="Step 1" class="step-image">
+                </div>
+
+                <div class="process-step">
+                    <div class="step-info">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">STEP 2 - 지속적인 디테일 추가</h3>
+                        <p class="step-description">
+                            캐릭터와 오브젝트에 디테일을 더하는 단계로, 라운드 값 조정부터 라이팅 테스트 등 다양한 실험을 거쳐 완성도를 높입니다. 각 브랜드의 개성을 최대한 살리면서도, 동시에 독창적인 특징을 어떻게 부여할지 고민합니다.
+                        </p>
+                    </div>
+                    <img src="https://via.placeholder.com/1200x800/222222/ffffff?text=Step+2+Process" alt="Step 2" class="step-image">
+                </div>
+
+                <div class="process-step">
+                    <div class="step-info">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">STEP 3 - 스토리텔링 요소와 결합한 스티커 추가</h3>
+                        <p class="step-description">
+                            디테일을 완성한 뒤에는 3D 그래픽 오브젝트에 2D 요소인 스티커를 결합하는 과정을 거칩니다. 이때 스티커의 위치와 배치를 조정하여 작업에 나만의 개성을 더할 수 있도록 제작을 진행합니다.
+                        </p>
+                    </div>
+                    <img src="https://via.placeholder.com/1200x800/222222/ffffff?text=Step+3+Process" alt="Step 3" class="step-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Visuals Section -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-label">Key Visuals</span>
+                <h2 class="section-title">최종 결과물</h2>
+                <p class="section-description">
+                    이번 프로젝트는 단순한 시각적 요소의 조합을 넘어, 브랜드의 정체성과 제가 추구하는 디자인 철학을 담아낸 작업입니다. 기본 도형에서 출발한 3D 오브젝트에 디테일을 더하고, 여기에 2D 스티커를 결합하는 과정을 통해 저만의 그래픽 스타일을 일관되게 구축하고자 했습니다.
+                </p>
+            </div>
+
+            <div class="image-grid cols-1">
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/1600x900/222222/ffffff?text=Key+Visual+1" alt="Key Visual 1">
+                </div>
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/1600x900/222222/ffffff?text=Key+Visual+2" alt="Key Visual 2">
+                </div>
+            </div>
+
+            <div class="image-grid cols-2">
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/800x1000/222222/ffffff?text=Detail+1" alt="Detail 1">
+                </div>
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/800x1000/222222/ffffff?text=Detail+2" alt="Detail 2">
+                </div>
+            </div>
+        </section>
+
+        <!-- Concept to Reality Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Concept to Reality</h2>
+                <p class="section-description">
+                    디자인을 실제 생산으로 확장하는 것을 목표로 하여, 항상 실질적인 적용을 고려합니다. 단순히 창작하는 데 그치지 않고, 그래픽 모션과 스티커를 결합하여 새로운 가능성을 탐구하며, 역동적이고 조화로운 결과물을 선보이고자 합니다.
+                </p>
+            </div>
+
+            <div class="image-grid cols-3">
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/600x800/222222/ffffff?text=Application+1" alt="Application 1">
+                </div>
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/600x800/222222/ffffff?text=Application+2" alt="Application 2">
+                </div>
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/600x800/222222/ffffff?text=Application+3" alt="Application 3">
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <nav class="project-navigation">
+            <a href="project-2.html" class="nav-link">
+                <span>←</span> Previous Project
+            </a>
+            <a href="project-4.html" class="nav-link">
+                Next Project <span>→</span>
+            </a>
+        </nav>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Donghyun.Han. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section, .process-step, .feature-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
