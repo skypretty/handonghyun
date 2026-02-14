@@ -112,7 +112,7 @@
             flex-direction: column;
             gap: 8px;
             padding: 20px 28px;
-            background-color: rgba(255, 255, 255, 0.03);
+            background-color: rgba(255, 255, 255, 0.05);
             border: 1px solid #1a1a1a;
             border-radius: 12px;
             transition: all 0.3s ease;
@@ -121,7 +121,7 @@
         }
 
         .info-item:hover {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 0.08);
             border-color: #2a2a2a;
         }
 
@@ -149,6 +149,7 @@
 
         .section-header {
             margin-bottom: 60px;
+            text-align: center;
         }
 
         .section-label {
@@ -175,6 +176,7 @@
             line-height: 1.8;
             color: #cccccc;
             max-width: 900px;
+            margin: 0 auto;
         }
 
         /* GIF Grid - Overview 하단에 GIF 영상 배치 */
@@ -487,6 +489,26 @@
         .fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
         }
+
+        /* 초기 상태: 애니메이션 시작 전 숨김 */
+        .gif-item,
+        .section-header,
+        .feature-card,
+        .process-step,
+        .image-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* 애니메이션이 적용된 후 보이기 */
+        .gif-item.fade-in-up,
+        .section-header.fade-in-up,
+        .feature-card.fade-in-up,
+        .process-step.fade-in-up,
+        .image-item.fade-in-up {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -566,6 +588,19 @@
                     </div>
                     <div class="gif-item">
                         <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/coke.webp" alt="Brand Animation 7">
+                    </div>
+                </div>
+                
+                <!-- 4번째 줄: 3개 (426.67:500 비율) -->
+                <div class="gif-row three-cols">
+                    <div class="gif-item">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/clock.webp" alt="Brand Animation 8">
+                    </div>
+                    <div class="gif-item">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/snack.webp" alt="Brand Animation 9">
+                    </div>
+                    <div class="gif-item">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/tennis.webp" alt="Brand Animation 10">
                     </div>
                 </div>
             </div>
@@ -739,8 +774,8 @@
             });
         }, observerOptions);
 
-        // Observe all sections
-        document.querySelectorAll('.section, .process-step, .feature-card').forEach(el => {
+        // Observe all sections and gif items
+        document.querySelectorAll('.section-header, .gif-item, .process-step, .feature-card, .image-item').forEach(el => {
             observer.observe(el);
         });
     </script>
