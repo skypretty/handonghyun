@@ -24,7 +24,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Header - 메인 홈과 동일한 스타일 */
+        /* Header */
         header {
             position: fixed;
             top: 0;
@@ -45,6 +45,18 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 16px;
+        }
+
+        .back-button {
+            color: #999999;
+            text-decoration: none;
+            font-size: 1.04rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: #ffffff;
         }
 
         .brand-name {
@@ -449,7 +461,7 @@
 <body>
     <header>
         <div class="header-content">
-            <div class="brand-name">Donghyun.Han</div>
+            <a href="../index.html" class="back-button">← Back to Portfolio</a>
             <div class="contact-info">
                 <a href="mailto:magudol95@gmail.com">magudol95@gmail.com</a>
             </div>
