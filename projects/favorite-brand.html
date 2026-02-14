@@ -493,34 +493,45 @@
         }
 
         /* 초기 상태: 애니메이션 시작 전 숨김 */
-        .gif-item,
+        .gif-item {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        /* 텍스트 영역들은 심플한 페이드인만 */
         .section-header,
         .feature-card,
         .process-step,
         .image-item {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.3s ease-out;
         }
 
         /* 애니메이션이 적용된 후 보이기 */
-        .gif-item.fade-in-up,
+        .gif-item.fade-in-up {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .section-header.fade-in-up,
         .feature-card.fade-in-up,
         .process-step.fade-in-up,
         .image-item.fade-in-up {
             opacity: 1;
-            transform: translateY(0);
         }
 
         /* 사라질 때 */
-        .gif-item.fade-out,
+        .gif-item.fade-out {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
         .section-header.fade-out,
         .feature-card.fade-out,
         .process-step.fade-out,
         .image-item.fade-out {
             opacity: 0;
-            transform: translateY(30px);
         }
     </style>
 </head>
@@ -573,35 +584,35 @@
             <div class="gif-grid">
                 <!-- 1번째 줄: 2개 (640:500 비율) -->
                 <div class="gif-row two-cols">
-                    <div class="gif-item">
+                    <div class="gif-item" data-index="0">
                         <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/spray.webp" alt="Brand Animation 1">
                     </div>
-                    <div class="gif-item">
+                    <div class="gif-item" data-index="1">
                         <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/carrier.webp" alt="Brand Animation 2">
                     </div>
                 </div>
                 
                 <!-- 2번째 줄: 3개 (426.67:500 비율) -->
                 <div class="gif-row three-cols">
-                    <div class="gif-item">
+                    <div class="gif-item" data-index="2">
                         <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/nintendo.webp" alt="Brand Animation 3">
                     </div>
-                    <div class="gif-item">
+                    <div class="gif-item" data-index="3">
                         <video autoplay loop muted playsinline>
                             <source src="https://pub-03388915be204147a593bb532492c209.r2.dev/pencil.mp4" type="video/mp4">
                         </video>
                     </div>
-                    <div class="gif-item">
+                    <div class="gif-item" data-index="4">
                         <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/coffee.webp" alt="Brand Animation 5">
                     </div>
                 </div>
                 
                 <!-- 3번째 줄: 2개 (640:500 비율) -->
                 <div class="gif-row two-cols">
-                    <div class="gif-item">
+                    <div class="gif-item" data-index="5">
                         <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/airplane.webp" alt="Brand Animation 6">
                     </div>
-                    <div class="gif-item">
+                    <div class="gif-item" data-index="6">
                         <video autoplay loop muted playsinline>
                             <source src="https://pub-03388915be204147a593bb532492c209.r2.dev/coke.mp4" type="video/mp4">
                         </video>
@@ -610,15 +621,15 @@
                 
                 <!-- 4번째 줄: 3개 (426.67:500 비율) -->
                 <div class="gif-row three-cols">
-                    <div class="gif-item">
+                    <div class="gif-item" data-index="7">
                         <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/clock.webp" alt="Brand Animation 8">
                     </div>
-                    <div class="gif-item">
+                    <div class="gif-item" data-index="8">
                         <video autoplay loop muted playsinline>
                             <source src="https://pub-03388915be204147a593bb532492c209.r2.dev/snack.mp4" type="video/mp4">
                         </video>
                     </div>
-                    <div class="gif-item">
+                    <div class="gif-item" data-index="9">
                         <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/tennis.webp" alt="Brand Animation 10">
                     </div>
                 </div>
@@ -779,33 +790,49 @@
     </footer>
 
     <script>
-        // Fade in animation on scroll with stagger effect
+        // Fade in animation on scroll with real stagger effect
         const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -80px 0px'
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         };
 
+        let isAnimating = false;
+
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    // 스크롤 내릴 때 - 순차적으로 나타남
-                    setTimeout(() => {
-                        entry.target.classList.remove('fade-out');
-                        entry.target.classList.add('fade-in-up');
-                    }, index * 50); // 각 아이템마다 50ms 지연
+            entries.forEach((entry) => {
+                if (entry.isIntersecting && entry.target.classList.contains('gif-item')) {
+                    const allGifItems = Array.from(document.querySelectorAll('.gif-item'));
+                    const visibleItems = allGifItems.filter(item => {
+                        const rect = item.getBoundingClientRect();
+                        return rect.top < window.innerHeight && rect.bottom > 0;
+                    });
+
+                    // 화면에 보이는 gif-item들을 data-index 순서대로 애니메이션
+                    visibleItems.forEach((item) => {
+                        const index = parseInt(item.getAttribute('data-index') || 0);
+                        setTimeout(() => {
+                            item.classList.remove('fade-out');
+                            item.classList.add('fade-in-up');
+                        }, index * 60); // 60ms씩 차이 (더 빠르게)
+                    });
+                } else if (!entry.isIntersecting && entry.target.classList.contains('gif-item')) {
+                    // 스크롤 올릴 때 - 즉시 사라짐
+                    entry.target.classList.remove('fade-in-up');
+                    entry.target.classList.add('fade-out');
+                } else if (entry.isIntersecting) {
+                    // 다른 요소들은 바로 나타남
+                    entry.target.classList.remove('fade-out');
+                    entry.target.classList.add('fade-in-up');
                 } else {
-                    // 스크롤 올릴 때 - 사라짐
                     entry.target.classList.remove('fade-in-up');
                     entry.target.classList.add('fade-out');
                 }
             });
         }, observerOptions);
 
-        // GIF items에 순차 애니메이션 적용
+        // GIF items observe
         const gifItems = document.querySelectorAll('.gif-item');
-        gifItems.forEach((item, index) => {
-            // 각 gif-item에 약간의 딜레이 추가
-            item.style.transitionDelay = `${index * 0.05}s`;
+        gifItems.forEach((item) => {
             observer.observe(item);
         });
 
