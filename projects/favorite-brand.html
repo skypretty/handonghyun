@@ -178,19 +178,48 @@
         }
 
         /* GIF Grid - Overview 하단에 GIF 영상 배치 */
+        /* 원본 비율: 
+           - 1번째 줄 (2개): 640 x 500 비율 (1.28:1)
+           - 2번째 줄 (3개): 426.67 x 500 비율 (약 0.85:1)
+           
+           1920px 기준 계산 (gap 없음):
+           - 1번째 줄: 각 960px 너비, 높이 750px (960 / 1.28)
+           - 2번째 줄: 각 640px 너비, 높이 753px (640 / 0.85)
+        */
         .gif-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
+            gap: 0;
             margin-top: 60px;
+        }
+
+        .gif-row {
+            display: grid;
+            gap: 0;
+        }
+
+        .gif-row.two-cols {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .gif-row.three-cols {
+            grid-template-columns: repeat(3, 1fr);
         }
 
         .gif-item {
             position: relative;
             overflow: hidden;
             background-color: #1a1a1a;
-            border-radius: 12px;
-            aspect-ratio: 1 / 1;
+            border-radius: 0;
+        }
+
+        /* 1번째, 3번째 줄 - 2개 큰 사이즈 (640:500 비율) */
+        .gif-row.two-cols .gif-item {
+            aspect-ratio: 1.28 / 1;
+        }
+
+        /* 2번째 줄 - 3개 작은 사이즈 (426.67:500 비율) */
+        .gif-row.three-cols .gif-item {
+            aspect-ratio: 0.85 / 1;
         }
 
         .gif-item img {
@@ -369,7 +398,8 @@
         }
 
         @media (max-width: 1024px) {
-            .gif-grid {
+            .gif-row.two-cols,
+            .gif-row.three-cols {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -412,7 +442,8 @@
                 padding: 60px 16px;
             }
 
-            .gif-grid {
+            .gif-row.two-cols,
+            .gif-row.three-cols {
                 grid-template-columns: 1fr;
             }
 
@@ -505,23 +536,37 @@
 
             <!-- GIF Grid - Overview 하단에 배치 -->
             <div class="gif-grid">
-                <div class="gif-item">
-                    <img src="https://via.placeholder.com/600x600/222222/ffffff?text=GIF+1" alt="Brand Animation 1">
+                <!-- 1번째 줄: 2개 (640:500 비율) -->
+                <div class="gif-row two-cols">
+                    <div class="gif-item">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/spray.webp" alt="Brand Animation 1">
+                    </div>
+                    <div class="gif-item">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/carrier.webp" alt="Brand Animation 2">
+                    </div>
                 </div>
-                <div class="gif-item">
-                    <img src="https://via.placeholder.com/600x600/222222/ffffff?text=GIF+2" alt="Brand Animation 2">
+                
+                <!-- 2번째 줄: 3개 (426.67:500 비율) -->
+                <div class="gif-row three-cols">
+                    <div class="gif-item">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/nintendo.webp" alt="Brand Animation 3">
+                    </div>
+                    <div class="gif-item">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/pencil.webp" alt="Brand Animation 4">
+                    </div>
+                    <div class="gif-item">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/coffee.webp" alt="Brand Animation 5">
+                    </div>
                 </div>
-                <div class="gif-item">
-                    <img src="https://via.placeholder.com/600x600/222222/ffffff?text=GIF+3" alt="Brand Animation 3">
-                </div>
-                <div class="gif-item">
-                    <img src="https://via.placeholder.com/600x600/222222/ffffff?text=GIF+4" alt="Brand Animation 4">
-                </div>
-                <div class="gif-item">
-                    <img src="https://via.placeholder.com/600x600/222222/ffffff?text=GIF+5" alt="Brand Animation 5">
-                </div>
-                <div class="gif-item">
-                    <img src="https://via.placeholder.com/600x600/222222/ffffff?text=GIF+6" alt="Brand Animation 6">
+                
+                <!-- 3번째 줄: 2개 (640:500 비율) -->
+                <div class="gif-row two-cols">
+                    <div class="gif-item">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/airplane.webp" alt="Brand Animation 6">
+                    </div>
+                    <div class="gif-item">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/coke.webp" alt="Brand Animation 7">
+                    </div>
                 </div>
             </div>
         </section>
