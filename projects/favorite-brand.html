@@ -512,6 +512,15 @@
             }
         }
 
+        @keyframes scroll-right {
+            0% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
         /* Smooth Scroll */
         html {
             scroll-behavior: smooth;
@@ -688,6 +697,18 @@
                 </div>
             </div>
         </section>
+
+        <!-- Second Infinite Scrolling Graphic -->
+        <div class="infinite-scroll-wrapper" style="margin-top: 60px; margin-bottom: 60px;">
+            <div class="infinite-scroll-track" style="animation: scroll-right 17s linear infinite;">
+                <div class="infinite-scroll-item">
+                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/second-line-graphic.svg" alt="Brand Graphic 2">
+                </div>
+                <div class="infinite-scroll-item">
+                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/second-line-graphic.svg" alt="Brand Graphic 2">
+                </div>
+            </div>
+        </div>
 
         <!-- Key Object Section -->
         <section class="section">
