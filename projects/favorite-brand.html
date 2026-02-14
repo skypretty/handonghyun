@@ -189,14 +189,15 @@
            - 2번째 줄: 각 640px 너비, 높이 753px (640 / 0.85)
         */
         .gif-grid {
-            display: grid;
-            gap: 0;
+            display: block;
             margin-top: 60px;
         }
 
         .gif-row {
             display: grid;
             gap: 0;
+            margin: 0;
+            padding: 0;
         }
 
         .gif-row.two-cols {
@@ -214,14 +215,13 @@
             border-radius: 0;
         }
 
-        /* 1번째, 3번째 줄 - 2개 큰 사이즈 (640:500 비율) */
         .gif-row.two-cols .gif-item {
-            aspect-ratio: 1.28 / 1;
+            /* aspect-ratio 제거 */
         }
 
         /* 2번째 줄 - 3개 작은 사이즈 (426.67:500 비율) */
         .gif-row.three-cols .gif-item {
-            aspect-ratio: 0.85 / 1;
+            /* aspect-ratio 제거 */
         }
 
         .gif-item img,
@@ -261,13 +261,8 @@
         .image-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .image-item:hover img {
-            transform: scale(1.02);
         }
 
         /* Process Steps */
@@ -747,6 +742,39 @@
                 </div>
                 <div class="image-item">
                     <img src="https://via.placeholder.com/600x800/222222/ffffff?text=Sticker+3" alt="Sticker 3">
+                </div>
+            </div>
+
+            <!-- New Image Grid - EXACTLY like GIF grid -->
+            <div class="gif-grid" style="margin-top: 60px;">
+                <!-- 1번째 줄: 1개 -->
+                <div class="gif-row" style="display: grid; grid-template-columns: 1fr; gap: 0;">
+                    <div class="gif-item" data-index="0">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/sportscar.webp" alt="Sports Car">
+                    </div>
+                </div>
+                
+                <!-- 2번째 줄: 2개 -->
+                <div class="gif-row two-cols">
+                    <div class="gif-item" data-index="1">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/gun.webp" alt="Gun">
+                    </div>
+                    <div class="gif-item" data-index="2">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/watch.webp" alt="Watch">
+                    </div>
+                </div>
+                
+                <!-- 3번째 줄: 3개 -->
+                <div class="gif-row three-cols">
+                    <div class="gif-item" data-index="3">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/dragon.webp" alt="Dragon">
+                    </div>
+                    <div class="gif-item" data-index="4">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/kettybox.webp" alt="Ketty Box">
+                    </div>
+                    <div class="gif-item" data-index="5">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/camera.webp" alt="Camera">
+                    </div>
                 </div>
             </div>
         </section>
