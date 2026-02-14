@@ -89,6 +89,21 @@
             display: block;
         }
 
+        /* Inactive Project Styling */
+        .inactive-project {
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .inactive-project .project-card {
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .inactive-project:hover .project-card {
+            opacity: 0.6;
+        }
+
         .project-card {
             position: relative;
             cursor: pointer;
@@ -96,7 +111,7 @@
             transition: transform 0.3s ease;
         }
 
-        .project-link:hover .project-card {
+        .project-link:not(.inactive-project):hover .project-card {
             transform: translateY(-2px);
         }
 
@@ -118,7 +133,7 @@
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .project-link:hover .project-image {
+        .project-link:not(.inactive-project):hover .project-image {
             transform: scale(1.02);
         }
 
@@ -207,38 +222,8 @@
 
         <main class="projects">
             <div class="project-grid">
-                <!-- Project 1 -->
-                <a href="projects/project-1.html" class="project-link">
-                    <article class="project-card">
-                        <div class="project-image-wrapper">
-                            <img src="https://res.cloudinary.com/dv9pfybin/image/upload/v1770986982/thumb-6.png" 
-                                 alt="여기어때 컴퍼니 : Visual System" 
-                                 class="project-image">
-                        </div>
-                        <div class="project-info">
-                            <h2 class="project-title">여기어때 컴퍼니 : Visual System</h2>
-                            <div class="project-year">2025</div>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Project 2 -->
-                <a href="projects/project-2.html" class="project-link">
-                    <article class="project-card">
-                        <div class="project-image-wrapper">
-                            <img src="https://res.cloudinary.com/dv9pfybin/image/upload/thumb-3.png" 
-                                 alt="여기어때 컴퍼니 : Product Brand" 
-                                 class="project-image">
-                        </div>
-                        <div class="project-info">
-                            <h2 class="project-title">여기어때 컴퍼니 : Product Brand</h2>
-                            <div class="project-year">2025</div>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Project 3 -->
-                <a href="projects/project-3.html" class="project-link">
+                <!-- Favorite Brand - Active Project -->
+                <a href="projects/favorite-brand.html" class="project-link">
                     <article class="project-card">
                         <div class="project-image-wrapper">
                             <img src="https://res.cloudinary.com/dv9pfybin/image/upload/v1770986232/thumb-2.png" 
@@ -252,8 +237,36 @@
                     </article>
                 </a>
 
-                <!-- Project 4 -->
-                <a href="projects/project-4.html" class="project-link">
+                <!-- Inactive Projects - Display Only -->
+                <div class="project-link inactive-project">
+                    <article class="project-card">
+                        <div class="project-image-wrapper">
+                            <img src="https://res.cloudinary.com/dv9pfybin/image/upload/v1770986982/thumb-6.png" 
+                                 alt="여기어때 컴퍼니 : Visual System" 
+                                 class="project-image">
+                        </div>
+                        <div class="project-info">
+                            <h2 class="project-title">여기어때 컴퍼니 : Visual System</h2>
+                            <div class="project-year">2025</div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="project-link inactive-project">
+                    <article class="project-card">
+                        <div class="project-image-wrapper">
+                            <img src="https://res.cloudinary.com/dv9pfybin/image/upload/thumb-3.png" 
+                                 alt="여기어때 컴퍼니 : Product Brand" 
+                                 class="project-image">
+                        </div>
+                        <div class="project-info">
+                            <h2 class="project-title">여기어때 컴퍼니 : Product Brand</h2>
+                            <div class="project-year">2025</div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="project-link inactive-project">
                     <article class="project-card">
                         <div class="project-image-wrapper">
                             <img src="https://res.cloudinary.com/dv9pfybin/image/upload/v1770986970/thumb-5.png" 
@@ -265,10 +278,9 @@
                             <div class="project-year">2023</div>
                         </div>
                     </article>
-                </a>
+                </div>
 
-                <!-- Project 5 -->
-                <a href="projects/project-5.html" class="project-link">
+                <div class="project-link inactive-project">
                     <article class="project-card">
                         <div class="project-image-wrapper">
                             <img src="https://res.cloudinary.com/dv9pfybin/image/upload/v1770986957/thumb-4.png" 
@@ -280,10 +292,9 @@
                             <div class="project-year">2023</div>
                         </div>
                     </article>
-                </a>
+                </div>
 
-                <!-- Project 6 -->
-                <a href="projects/project-6.html" class="project-link">
+                <div class="project-link inactive-project">
                     <article class="project-card">
                         <div class="project-image-wrapper">
                             <img src="https://res.cloudinary.com/dv9pfybin/image/upload/v1770987175/thumb-8.png" 
@@ -295,10 +306,9 @@
                             <div class="project-year">2022</div>
                         </div>
                     </article>
-                </a>
+                </div>
 
-                <!-- Project 7 -->
-                <a href="projects/project-7.html" class="project-link">
+                <div class="project-link inactive-project">
                     <article class="project-card">
                         <div class="project-image-wrapper">
                             <img src="https://res.cloudinary.com/dv9pfybin/image/upload/v1770987151/thumb-7.png" 
@@ -310,10 +320,9 @@
                             <div class="project-year">2022</div>
                         </div>
                     </article>
-                </a>
+                </div>
 
-                <!-- Project 8 -->
-                <a href="projects/project-8.html" class="project-link">
+                <div class="project-link inactive-project">
                     <article class="project-card">
                         <div class="project-image-wrapper">
                             <img src="https://res.cloudinary.com/dv9pfybin/image/upload/v1770987188/thumb-9.png" 
@@ -325,10 +334,9 @@
                             <div class="project-year">2022</div>
                         </div>
                     </article>
-                </a>
+                </div>
 
-                <!-- Project 9 -->
-                <a href="projects/project-9.html" class="project-link">
+                <div class="project-link inactive-project">
                     <article class="project-card">
                         <div class="project-image-wrapper">
                             <img src="https://res.cloudinary.com/dv9pfybin/image/upload/v1770987198/Project-3_hnkmfv.png" 
@@ -340,10 +348,9 @@
                             <div class="project-year">2022</div>
                         </div>
                     </article>
-                </a>
+                </div>
 
-                <!-- Project 10 -->
-                <a href="projects/project-10.html" class="project-link">
+                <div class="project-link inactive-project">
                     <article class="project-card">
                         <div class="project-image-wrapper">
                             <img src="https://res.cloudinary.com/dv9pfybin/image/upload/v1770987210/Project-2_ol85ou.png" 
@@ -355,10 +362,9 @@
                             <div class="project-year">2022</div>
                         </div>
                     </article>
-                </a>
+                </div>
 
-                <!-- Project 11 -->
-                <a href="projects/project-11.html" class="project-link">
+                <div class="project-link inactive-project">
                     <article class="project-card">
                         <div class="project-image-wrapper">
                             <img src="https://res.cloudinary.com/dv9pfybin/image/upload/v1770987219/thumb-10.png" 
@@ -370,7 +376,7 @@
                             <div class="project-year">2021</div>
                         </div>
                     </article>
-                </a>
+                </div>
 
             </div>
         </main>
