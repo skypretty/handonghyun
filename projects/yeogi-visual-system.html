@@ -93,12 +93,12 @@
 
         /* Main Content */
         .main-content {
-            padding-top: 80px;
+            padding-top: 61px;
         }
 
         /* Project Info Section */
         .project-info {
-            padding: 60px 40px;
+            padding: 40px 40px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -142,10 +142,12 @@
             background-color: #fafafa;
             border-top: 1px solid #e5e5e5;
             border-bottom: 1px solid #e5e5e5;
+            position: relative;
         }
 
         .gallery-container {
-            height: 600px;
+            height: calc(100vh - 61px - 180px);
+            min-height: 400px;
             overflow: hidden;
             position: relative;
             cursor: grab;
@@ -160,26 +162,32 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            transition: transform 0.1s ease-out;
+            will-change: transform;
+            backface-visibility: hidden;
+            perspective: 1000px;
         }
 
         .gallery-grid {
             position: absolute;
             display: grid;
-            grid-template-columns: repeat(auto-fill, 280px);
+            grid-template-columns: repeat(30, 100px);
             gap: 20px;
             padding: 40px;
+            width: max-content;
         }
 
         .gallery-item {
-            width: 280px;
-            height: 280px;
+            width: 100px;
+            height: 100px;
             background-color: #ffffff;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             position: relative;
+            pointer-events: none;
+            user-select: none;
+            contain: layout style paint;
         }
 
         .gallery-item:hover {
@@ -191,6 +199,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .gallery-item-3d {
@@ -202,13 +213,81 @@
             transform: rotateY(5deg) rotateX(5deg) translateY(-4px);
         }
 
-        /* Gallery Controls */
+        /* Gallery Controls - Floating */
         .gallery-controls {
-            padding: 20px 40px;
-            background-color: #fafafa;
-            text-align: center;
-            font-size: 0.85rem;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 10px;
+            border-radius: 100px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            pointer-events: auto;
+        }
+
+        .control-toggle-button {
+            padding: 14px 36px;
+            border: 2px solid transparent;
+            background-color: transparent;
             color: #666666;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .control-toggle-button.active {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            border-color: #0a0a0a;
+        }
+
+        .control-toggle-button:hover:not(.active) {
+            background-color: #f5f5f5;
+            color: #0a0a0a;
+        }
+
+        /* Drag Tooltip */
+        .drag-tooltip {
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            transform: translate(-50%, -200%);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .drag-tooltip.show {
+            opacity: 1;
+        }
+
+        .drag-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid rgba(0, 0, 0, 0.85);
         }
 
         /* Additional Content Section */
@@ -279,7 +358,7 @@
             }
 
             .project-info {
-                padding: 40px 24px;
+                padding: 30px 24px;
             }
 
             .project-info h1 {
@@ -292,18 +371,29 @@
             }
 
             .gallery-container {
-                height: 400px;
+                height: calc(100vh - 60px - 120px);
+                min-height: 300px;
+            }
+
+            .gallery-controls {
+                bottom: 20px;
+                padding: 8px;
+            }
+
+            .control-toggle-button {
+                padding: 12px 28px;
+                font-size: 0.9rem;
             }
 
             .gallery-grid {
-                grid-template-columns: repeat(auto-fill, 220px);
+                grid-template-columns: repeat(10, 100px);
                 gap: 16px;
                 padding: 24px;
             }
 
             .gallery-item {
-                width: 220px;
-                height: 220px;
+                width: 100px;
+                height: 100px;
             }
 
             .content-section {
@@ -313,26 +403,15 @@
             .content-grid {
                 grid-template-columns: 1fr;
             }
-        }
 
-        /* Zoom indicator */
-        .zoom-indicator {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+            .gallery-controls {
+                padding: 16px 24px;
+            }
 
-        .zoom-indicator.show {
-            opacity: 1;
+            .control-toggle-button {
+                padding: 8px 20px;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
@@ -342,13 +421,28 @@
             <a href="index.html" class="back-button">←</a>
             <h1 class="header-title">Visual System</h1>
             <div class="view-toggle">
-                <button class="toggle-button active" data-mode="2d">2D</button>
-                <button class="toggle-button" data-mode="3d">3D</button>
+                <!-- 토글 버튼 제거됨 -->
             </div>
         </div>
     </header>
 
     <main class="main-content">
+        <!-- Infinite Scroll Gallery Section -->
+        <section class="gallery-section">
+            <div class="gallery-container" id="galleryContainer">
+                <div class="gallery-canvas" id="galleryCanvas">
+                    <div class="gallery-grid" id="galleryGrid">
+                        <!-- Gallery items will be generated by JavaScript -->
+                    </div>
+                </div>
+                <div class="drag-tooltip" id="dragTooltip">Drag to explore</div>
+                <div class="gallery-controls">
+                    <button class="control-toggle-button active" data-mode="2d">2D</button>
+                    <button class="control-toggle-button" data-mode="3d">3D</button>
+                </div>
+            </div>
+        </section>
+
         <!-- Project Info Section -->
         <section class="project-info">
             <h1>여기어때 컴퍼니 : Visual System</h1>
@@ -371,21 +465,6 @@
                 브랜드 아이덴티티를 강화하고 다양한 터치포인트에서 일관된 경험을 제공하기 위한 
                 포괄적인 디자인 언어와 그래픽 요소들을 개발했습니다.
             </p>
-        </section>
-
-        <!-- Infinite Scroll Gallery Section -->
-        <section class="gallery-section">
-            <div class="gallery-container" id="galleryContainer">
-                <div class="gallery-canvas" id="galleryCanvas">
-                    <div class="gallery-grid" id="galleryGrid">
-                        <!-- Gallery items will be generated by JavaScript -->
-                    </div>
-                </div>
-                <div class="zoom-indicator" id="zoomIndicator">Zoom: 100%</div>
-            </div>
-            <div class="gallery-controls">
-                wheel = zoom · drag = pan · click = view detail · infinite grid
-            </div>
         </section>
 
         <!-- Additional Content Section -->
@@ -425,7 +504,7 @@
     </footer>
 
     <script>
-        // Sample images - 실제로는 여기어때 프로젝트의 실제 이미지들로 교체해야 합니다
+        // Sample images
         const sampleImages = [
             'https://res.cloudinary.com/dv9pfybin/image/upload/v1770986982/thumb-6.png',
             'https://res.cloudinary.com/dv9pfybin/image/upload/thumb-3.png',
@@ -442,16 +521,24 @@
                 this.container = document.getElementById('galleryContainer');
                 this.canvas = document.getElementById('galleryCanvas');
                 this.grid = document.getElementById('galleryGrid');
-                this.zoomIndicator = document.getElementById('zoomIndicator');
+                this.tooltip = document.getElementById('dragTooltip');
                 
                 this.isDragging = false;
                 this.startX = 0;
                 this.startY = 0;
+                
+                // 초기 위치는 0,0 
                 this.translateX = 0;
                 this.translateY = 0;
-                this.scale = 1;
                 this.velocity = { x: 0, y: 0 };
                 this.viewMode = '2d';
+                this.isHovering = false;
+                this.autoScrollSpeed = 1.5; // 자동 스크롤 속도 (픽셀/프레임)
+                this.isDragged = false; // 드래그 여부 확인용
+                this.dragThreshold = 5; // 드래그로 간주할 최소 이동 거리
+                this.tooltipShown = false; // 툴팁 표시 여부
+                this.showTooltip = false; // 툴팁 표시 플래그
+                this.hasEverDragged = false; // 한 번이라도 드래그했는지 여부
                 
                 this.init();
             }
@@ -459,24 +546,34 @@
             init() {
                 this.generateGalleryItems();
                 this.setupEventListeners();
-                this.startInertia();
+                this.startAnimation();
             }
 
             generateGalleryItems() {
-                // Generate infinite grid items
-                const totalItems = 40; // Adjust as needed
+                // 진정한 무한 스크롤: 7x7 타일 구조 (총 4900개 아이템)
+                // 중앙 타일이 실제 콘텐츠, 주변 타일은 복제
+                const totalItems = 100; // 10x10 그리드
+                const tilesX = 7; // 좌우 7개 타일
+                const tilesY = 7; // 상하 7개 타일
                 this.grid.innerHTML = '';
                 
-                for (let i = 0; i < totalItems; i++) {
-                    const item = document.createElement('div');
-                    item.className = 'gallery-item';
-                    
-                    const img = document.createElement('img');
-                    img.src = sampleImages[i % sampleImages.length];
-                    img.alt = `Visual System ${i + 1}`;
-                    
-                    item.appendChild(img);
-                    this.grid.appendChild(item);
+                // 49개 타일 모두 동일한 이미지 순서로 채움
+                for (let ty = 0; ty < tilesY; ty++) {
+                    for (let tx = 0; tx < tilesX; tx++) {
+                        for (let i = 0; i < totalItems; i++) {
+                            const item = document.createElement('div');
+                            item.className = 'gallery-item';
+                            
+                            const img = document.createElement('img');
+                            img.src = sampleImages[i % sampleImages.length];
+                            img.alt = `Visual System ${(i % sampleImages.length) + 1}`;
+                            img.draggable = false;
+                            img.loading = 'lazy';
+                            
+                            item.appendChild(img);
+                            this.grid.appendChild(item);
+                        }
+                    }
                 }
             }
 
@@ -487,22 +584,72 @@
                 this.container.addEventListener('mouseup', this.onMouseUp.bind(this));
                 this.container.addEventListener('mouseleave', this.onMouseUp.bind(this));
                 
-                // Wheel event for zoom
-                this.container.addEventListener('wheel', this.onWheel.bind(this));
+                // Hover detection for auto-scroll and tooltip
+                this.container.addEventListener('mouseenter', (e) => {
+                    // 버튼 영역이 아닐 때만 호버로 인식
+                    if (!e.target.closest('.gallery-controls')) {
+                        this.isHovering = true;
+                        
+                        // 한 번이라도 드래그했다면 툴팁 표시 안 함
+                        if (!this.hasEverDragged) {
+                            this.showTooltip = true;
+                        }
+                    }
+                });
+                
+                this.container.addEventListener('mousemove', (e) => {
+                    // 버튼 영역에서는 호버 해제 및 툴팁 숨김
+                    if (e.target.closest('.gallery-controls')) {
+                        this.isHovering = false;
+                        this.showTooltip = false;
+                        this.tooltip.classList.remove('show');
+                        return;
+                    }
+                    
+                    // 드래그 중이 아니고, 한 번도 드래그 안 했을 때만 툴팁 위치 업데이트
+                    if (!this.isDragging && this.showTooltip && !this.hasEverDragged) {
+                        this.tooltip.style.left = e.clientX + 'px';
+                        this.tooltip.style.top = e.clientY + 'px';
+                        this.tooltip.classList.add('show');
+                        this.isHovering = true;
+                    }
+                });
+                
+                this.container.addEventListener('mouseleave', () => {
+                    this.isHovering = false;
+                    this.showTooltip = false;
+                    this.tooltip.classList.remove('show');
+                });
                 
                 // Touch events
                 this.container.addEventListener('touchstart', this.onTouchStart.bind(this));
                 this.container.addEventListener('touchmove', this.onTouchMove.bind(this));
                 this.container.addEventListener('touchend', this.onTouchEnd.bind(this));
                 
-                // View mode toggle
-                document.querySelectorAll('.toggle-button').forEach(button => {
+                // View mode toggle - 갤러리 컨트롤 버튼
+                document.querySelectorAll('.control-toggle-button').forEach(button => {
                     button.addEventListener('click', this.toggleViewMode.bind(this));
                 });
+                
+                // 클릭 이벤트 차단
+                this.container.addEventListener('click', (e) => {
+                    if (this.isDragged) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }, true);
             }
 
             onMouseDown(e) {
+                // 툴팁 즉시 숨김
+                this.tooltip.classList.remove('show');
+                this.showTooltip = false;
+                this.hasEverDragged = true; // 드래그 기록
+                
                 this.isDragging = true;
+                this.isDragged = false;
+                this.mouseDownX = e.clientX;
+                this.mouseDownY = e.clientY;
                 this.startX = e.clientX - this.translateX;
                 this.startY = e.clientY - this.translateY;
                 this.velocity = { x: 0, y: 0 };
@@ -514,6 +661,16 @@
                 const deltaX = e.clientX - this.startX;
                 const deltaY = e.clientY - this.startY;
                 
+                // 드래그 거리 계산
+                const dragDistance = Math.sqrt(
+                    Math.pow(e.clientX - this.mouseDownX, 2) + 
+                    Math.pow(e.clientY - this.mouseDownY, 2)
+                );
+                
+                if (dragDistance > this.dragThreshold) {
+                    this.isDragged = true;
+                }
+                
                 this.velocity.x = deltaX - this.translateX;
                 this.velocity.y = deltaY - this.translateY;
                 
@@ -524,32 +681,47 @@
             }
 
             onMouseUp() {
+                if (this.isDragging) {
+                    const itemSize = 100;
+                    const gap = 20;
+                    const columns = 10;
+                    const rows = 10;
+                    const tileWidth = columns * itemSize + (columns - 1) * gap;
+                    const tileHeight = rows * itemSize + (rows - 1) * gap;
+                    
+                    // 수평 방향 리셋
+                    while (this.translateX <= -tileWidth) {
+                        this.translateX += tileWidth;
+                        this.startX -= tileWidth;
+                    }
+                    while (this.translateX >= tileWidth) {
+                        this.translateX -= tileWidth;
+                        this.startX += tileWidth;
+                    }
+                    
+                    // 수직 방향 리셋
+                    while (this.translateY <= -tileHeight) {
+                        this.translateY += tileHeight;
+                        this.startY -= tileHeight;
+                    }
+                    while (this.translateY >= tileHeight) {
+                        this.translateY -= tileHeight;
+                        this.startY += tileHeight;
+                    }
+                    
+                    this.updateTransform();
+                }
+                
                 this.isDragging = false;
-            }
-
-            onWheel(e) {
-                e.preventDefault();
-                
-                const delta = e.deltaY > 0 ? -0.1 : 0.1;
-                const newScale = Math.max(0.5, Math.min(2, this.scale + delta));
-                
-                // Zoom towards mouse position
-                const rect = this.container.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
-                
-                const scaleDiff = newScale - this.scale;
-                this.translateX -= (mouseX - rect.width / 2) * scaleDiff;
-                this.translateY -= (mouseY - rect.height / 2) * scaleDiff;
-                
-                this.scale = newScale;
-                this.updateTransform();
-                this.showZoomIndicator();
+                if (!this.hasEverDragged) {
+                    this.showTooltip = true;
+                }
             }
 
             onTouchStart(e) {
                 if (e.touches.length === 1) {
                     this.isDragging = true;
+                    this.isHovering = true; // 터치 시 자동 스크롤 중지
                     this.startX = e.touches[0].clientX - this.translateX;
                     this.startY = e.touches[0].clientY - this.translateY;
                 }
@@ -570,28 +742,64 @@
 
             onTouchEnd() {
                 this.isDragging = false;
+                this.isHovering = false; // 터치 종료 시 자동 스크롤 재개
             }
 
             updateTransform() {
-                this.canvas.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+                this.canvas.style.transform = `translate(${this.translateX}px, ${this.translateY}px)`;
             }
 
-            startInertia() {
-                const inertiaLoop = () => {
+            startAnimation() {
+                const itemSize = 100;
+                const gap = 20;
+                const columns = 10;
+                const rows = 10;
+                const tileWidth = columns * itemSize + (columns - 1) * gap;
+                const tileHeight = rows * itemSize + (rows - 1) * gap;
+                
+                const animationLoop = () => {
+                    // 자동 스크롤: 호버 중이 아니고 드래그 중이 아닐 때
+                    if (!this.isHovering && !this.isDragging) {
+                        this.translateX -= this.autoScrollSpeed;
+                    }
+                    
+                    // 관성 효과
                     if (!this.isDragging && (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1)) {
                         this.velocity.x *= 0.95;
                         this.velocity.y *= 0.95;
                         
                         this.translateX += this.velocity.x;
                         this.translateY += this.velocity.y;
-                        
-                        this.updateTransform();
                     }
                     
-                    requestAnimationFrame(inertiaLoop);
+                    // 무한 루프 - 드래그 중이 아닐 때 항상 체크
+                    if (!this.isDragging) {
+                        // 수평 방향
+                        if (this.translateX <= -tileWidth) {
+                            this.translateX += tileWidth;
+                            this.startX -= tileWidth;
+                        } 
+                        else if (this.translateX >= tileWidth) {
+                            this.translateX -= tileWidth;
+                            this.startX += tileWidth;
+                        }
+                        
+                        // 수직 방향
+                        if (this.translateY <= -tileHeight) {
+                            this.translateY += tileHeight;
+                            this.startY -= tileHeight;
+                        } 
+                        else if (this.translateY >= tileHeight) {
+                            this.translateY -= tileHeight;
+                            this.startY += tileHeight;
+                        }
+                    }
+                    
+                    this.updateTransform();
+                    requestAnimationFrame(animationLoop);
                 };
                 
-                inertiaLoop();
+                animationLoop();
             }
 
             toggleViewMode(e) {
@@ -601,7 +809,7 @@
                 if (mode === this.viewMode) return;
                 
                 // Update button states
-                document.querySelectorAll('.toggle-button').forEach(btn => {
+                document.querySelectorAll('.control-toggle-button').forEach(btn => {
                     btn.classList.remove('active');
                 });
                 button.classList.add('active');
@@ -618,17 +826,6 @@
                         item.classList.remove('gallery-item-3d');
                     }
                 });
-            }
-
-            showZoomIndicator() {
-                const percentage = Math.round(this.scale * 100);
-                this.zoomIndicator.textContent = `Zoom: ${percentage}%`;
-                this.zoomIndicator.classList.add('show');
-                
-                clearTimeout(this.zoomTimeout);
-                this.zoomTimeout = setTimeout(() => {
-                    this.zoomIndicator.classList.remove('show');
-                }, 1000);
             }
         }
 
