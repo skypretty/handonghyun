@@ -170,8 +170,8 @@
         .gallery-grid {
             position: absolute;
             display: grid;
-            grid-template-columns: repeat(30, 100px);
-            gap: 20px;
+            grid-template-columns: repeat(70, 100px);
+            gap: 50px;
             padding: 40px;
             width: max-content;
         }
@@ -179,10 +179,10 @@
         .gallery-item {
             width: 100px;
             height: 100px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            background-color: transparent;
+            border-radius: 0;
+            overflow: visible;
+            box-shadow: none;
             transition: all 0.3s ease;
             position: relative;
             pointer-events: none;
@@ -504,17 +504,163 @@
     </footer>
 
     <script>
-        // Sample images
-        const sampleImages = [
-            'https://res.cloudinary.com/dv9pfybin/image/upload/v1770986982/thumb-6.png',
-            'https://res.cloudinary.com/dv9pfybin/image/upload/thumb-3.png',
-            'https://res.cloudinary.com/dv9pfybin/image/upload/v1770986232/thumb-2.png',
-            'https://res.cloudinary.com/dv9pfybin/image/upload/v1770986970/thumb-5.png',
-            'https://res.cloudinary.com/dv9pfybin/image/upload/v1770986957/thumb-4.png',
-            'https://res.cloudinary.com/dv9pfybin/image/upload/v1770987175/thumb-8.png',
-            'https://res.cloudinary.com/dv9pfybin/image/upload/v1770987151/thumb-7.png',
-            'https://res.cloudinary.com/dv9pfybin/image/upload/v1770987188/thumb-9.png',
-        ];
+        // 2D/3D 이미지 매핑 (총 117개)
+        const imageMapping = {
+            '2d': [
+                // 음식 (60개)
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-acorn-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-apple-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-baguette-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-beer-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-bibimbap-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-blueberry-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-bungeoppang-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-cake-brown-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-cake-orange-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-cake-pink-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-chestnut-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-chicken-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-chocolateicecream-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-coconut-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-coffee-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-croissant-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-cupcake-small-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-dimsum-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-donut-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-fishcake-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-gingerbreadman-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-hamburger-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-hotdog-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-hotteok-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-icetea-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-juice-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-kimbap-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-mangosteen-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-martini-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-mojito-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-nasigoreng-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-noodle-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-padthai-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-peach.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-pear-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-persimmon-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-pinecone-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-pizza-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-popcorn-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-potatochips-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-pretzel-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-rice-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-salmonsushi-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-samgyetang-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-sandwich-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-shrimpsalad-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-slicedbread-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-songpyeon-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-strawberry-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-strawberrymochi-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-sweetpotato-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-takoyaki-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-tomato-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-tropicalcocktail-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-tteokguk-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-vanillaicecream-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-watermelon-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-wine-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-yakgwa-2d.png',
+                // 여행/레저 (57개)
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-airlineseat-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-airplaneticket-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-bag-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-babytoy-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-beachball-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-beachumbrellachair-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-beachumbrella-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-bicycle-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-blocktoy-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-bus-blue_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-bus-green_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-cablecar-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-camera-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-campfire-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-camping-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-car-red_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-car-white_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-carrier-blue_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-carrier-geen_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-carrier-red_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-chair-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-compass-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-cruise-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-duckdoll-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-earth-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-flowerpetal-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-healthpt-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-hotairballoon-color_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-hotelkey-gray_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-hotelkey-red_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-lock-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-map-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-onebed-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-passport-blue_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-passport-red_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-practiceroom-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-reciept-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-rickshaw-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-sandcastle-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-shoes-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-shoppingbag-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-snorkeling-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-snowman-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-stroller-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-suncream-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-taxi-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-toothbrush-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-train-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-travelbackpack-blue_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-travelbackpack-red_2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-tree-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-tube-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-twobed-2d.png',
+            ],
+            '3d': [
+                // 향후 3D 이미지 추가 예정 (2D와 동일한 순서로)
+                // 현재는 2D 이미지를 임시로 사용
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-acorn-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-apple-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-baguette-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-beer-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-bibimbap-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-blueberry-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-bungeoppang-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-cake-brown-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-cake-orange-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-cake-pink-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-chestnut-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-chicken-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-chocolateicecream-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-coconut-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-coffee-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-croissant-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-cupcake-small-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-dimsum-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-donut-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-fishcake-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-gingerbreadman-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-hamburger-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-hotdog-2d.png',
+                'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/image-hotteok-2d.png',
+            ]
+        };
+        
+        // 배열을 랜덤하게 섞는 함수 (Fisher-Yates shuffle)
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
 
         class InfiniteGallery {
             constructor() {
@@ -527,13 +673,22 @@
                 this.startX = 0;
                 this.startY = 0;
                 
-                // 초기 위치는 0,0 
-                this.translateX = 0;
-                this.translateY = 0;
+                // 초기 위치를 그리드 중앙으로 (7x7 구조의 3번째 타일)
+                // 이렇게 하면 위/아래/좌/우 모든 방향에 콘텐츠 존재
+                const itemSize = 100;
+                const gap = 50; // 간격 50px
+                const columns = 10;
+                const rows = 10;
+                const tileWidth = columns * itemSize + (columns - 1) * gap;
+                const tileHeight = rows * itemSize + (rows - 1) * gap;
+                
+                // 3번째 타일 위치로 시작
+                this.translateX = -tileWidth * 3;
+                this.translateY = -tileHeight * 3;
                 this.velocity = { x: 0, y: 0 };
                 this.viewMode = '2d';
                 this.isHovering = false;
-                this.autoScrollSpeed = 1.5; // 자동 스크롤 속도 (픽셀/프레임)
+                this.autoScrollSpeed = 0.5; // 자동 스크롤 속도 (이전: 1.5px/frame, 현재: 0.5px/frame)
                 this.isDragged = false; // 드래그 여부 확인용
                 this.dragThreshold = 5; // 드래그로 간주할 최소 이동 거리
                 this.tooltipShown = false; // 툴팁 표시 여부
@@ -551,13 +706,16 @@
 
             generateGalleryItems() {
                 // 진정한 무한 스크롤: 7x7 타일 구조 (총 4900개 아이템)
-                // 중앙 타일이 실제 콘텐츠, 주변 타일은 복제
                 const totalItems = 100; // 10x10 그리드
-                const tilesX = 7; // 좌우 7개 타일
-                const tilesY = 7; // 상하 7개 타일
+                const tilesX = 7;
+                const tilesY = 7;
                 this.grid.innerHTML = '';
                 
-                // 49개 타일 모두 동일한 이미지 순서로 채움
+                // 현재 모드에 맞는 이미지 배열 가져오기 및 랜덤 섞기
+                const images = imageMapping[this.viewMode];
+                const shuffledImages = shuffleArray(images);
+                
+                // 49개 타일 모두 동일한 랜덤 순서로 채움
                 for (let ty = 0; ty < tilesY; ty++) {
                     for (let tx = 0; tx < tilesX; tx++) {
                         for (let i = 0; i < totalItems; i++) {
@@ -565,10 +723,11 @@
                             item.className = 'gallery-item';
                             
                             const img = document.createElement('img');
-                            img.src = sampleImages[i % sampleImages.length];
-                            img.alt = `Visual System ${(i % sampleImages.length) + 1}`;
+                            img.src = shuffledImages[i % shuffledImages.length];
+                            img.alt = `Visual System ${(i % shuffledImages.length) + 1}`;
                             img.draggable = false;
                             img.loading = 'lazy';
+                            img.dataset.index = i % shuffledImages.length;
                             
                             item.appendChild(img);
                             this.grid.appendChild(item);
@@ -683,28 +842,31 @@
             onMouseUp() {
                 if (this.isDragging) {
                     const itemSize = 100;
-                    const gap = 20;
+                    const gap = 50; // 간격 50px
                     const columns = 10;
                     const rows = 10;
                     const tileWidth = columns * itemSize + (columns - 1) * gap;
                     const tileHeight = rows * itemSize + (rows - 1) * gap;
                     
-                    // 수평 방향 리셋
-                    while (this.translateX <= -tileWidth) {
+                    // 중앙 위치
+                    const centerX = -tileWidth * 3;
+                    const centerY = -tileHeight * 3;
+                    
+                    // 중앙 기준 ±1타일 범위로 리셋
+                    while (this.translateX <= centerX - tileWidth) {
                         this.translateX += tileWidth;
                         this.startX -= tileWidth;
                     }
-                    while (this.translateX >= tileWidth) {
+                    while (this.translateX >= centerX + tileWidth) {
                         this.translateX -= tileWidth;
                         this.startX += tileWidth;
                     }
                     
-                    // 수직 방향 리셋
-                    while (this.translateY <= -tileHeight) {
+                    while (this.translateY <= centerY - tileHeight) {
                         this.translateY += tileHeight;
                         this.startY -= tileHeight;
                     }
-                    while (this.translateY >= tileHeight) {
+                    while (this.translateY >= centerY + tileHeight) {
                         this.translateY -= tileHeight;
                         this.startY += tileHeight;
                     }
@@ -751,14 +913,18 @@
 
             startAnimation() {
                 const itemSize = 100;
-                const gap = 20;
+                const gap = 50; // 간격 50px
                 const columns = 10;
                 const rows = 10;
                 const tileWidth = columns * itemSize + (columns - 1) * gap;
                 const tileHeight = rows * itemSize + (rows - 1) * gap;
                 
+                // 중앙 위치 (3번째 타일)
+                const centerX = -tileWidth * 3;
+                const centerY = -tileHeight * 3;
+                
                 const animationLoop = () => {
-                    // 자동 스크롤: 호버 중이 아니고 드래그 중이 아닐 때
+                    // 자동 스크롤
                     if (!this.isHovering && !this.isDragging) {
                         this.translateX -= this.autoScrollSpeed;
                     }
@@ -772,24 +938,26 @@
                         this.translateY += this.velocity.y;
                     }
                     
-                    // 무한 루프 - 드래그 중이 아닐 때 항상 체크
+                    // 무한 루프 - 중앙 기준 ±1타일 범위에서 리셋
                     if (!this.isDragging) {
-                        // 수평 방향
-                        if (this.translateX <= -tileWidth) {
+                        // 왼쪽으로 1타일 넘어가면 리셋
+                        if (this.translateX <= centerX - tileWidth) {
                             this.translateX += tileWidth;
                             this.startX -= tileWidth;
                         } 
-                        else if (this.translateX >= tileWidth) {
+                        // 오른쪽으로 1타일 넘어가면 리셋
+                        else if (this.translateX >= centerX + tileWidth) {
                             this.translateX -= tileWidth;
                             this.startX += tileWidth;
                         }
                         
-                        // 수직 방향
-                        if (this.translateY <= -tileHeight) {
+                        // 위로 1타일 넘어가면 리셋
+                        if (this.translateY <= centerY - tileHeight) {
                             this.translateY += tileHeight;
                             this.startY -= tileHeight;
                         } 
-                        else if (this.translateY >= tileHeight) {
+                        // 아래로 1타일 넘어가면 리셋
+                        else if (this.translateY >= centerY + tileHeight) {
                             this.translateY -= tileHeight;
                             this.startY += tileHeight;
                         }
@@ -817,7 +985,16 @@
                 // Update view mode
                 this.viewMode = mode;
                 
-                // Apply 3D effects
+                // 이미지 전환: 같은 인덱스의 2D/3D 이미지로 교체
+                const images = imageMapping[mode];
+                const allImages = document.querySelectorAll('.gallery-item img');
+                
+                allImages.forEach(img => {
+                    const index = parseInt(img.dataset.index);
+                    img.src = images[index % images.length];
+                });
+                
+                // 3D 모드일 때 시각적 효과 추가 (선택사항)
                 const items = document.querySelectorAll('.gallery-item');
                 items.forEach(item => {
                     if (mode === '3d') {
