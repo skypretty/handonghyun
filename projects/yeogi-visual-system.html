@@ -28,72 +28,70 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 20px 40px;
-            background-color: rgba(255, 255, 255, 0.98);
-            border-bottom: 1px solid #e5e5e5;
+            padding: 16px 24px;
+            background-color: rgba(255, 255, 255, 0.6); /* 불투명도 증가 (0.3 → 0.6) */
+            border-bottom: 1px solid rgba(229, 229, 229, 0.3);
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px) saturate(180%); /* 블러 줄임 */
+            -webkit-backdrop-filter: blur(12px) saturate(180%); /* Safari 지원 */
+            transition: backdrop-filter 0.3s ease, background-color 0.3s ease; /* 블러 전환 애니메이션 */
+        }
+
+        /* 갤러리 영역 벗어나면 블러 제거 + 완전 불투명 */
+        header.no-blur {
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            background-color: rgba(255, 255, 255, 1); /* 완전 불투명 */
+            border-bottom: 1px solid #e5e5e5;
         }
 
         .header-content {
-            max-width: 100%;
+            max-width: 1920px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
         .back-button {
-            font-size: 1.5rem;
-            color: #0a0a0a;
+            color: #999999;
             text-decoration: none;
-            transition: opacity 0.3s ease;
-            cursor: pointer;
+            font-size: 1.04rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
         .back-button:hover {
-            opacity: 0.6;
+            color: #0a0a0a;
         }
 
         .header-title {
-            font-size: 1.1rem;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
             font-weight: 600;
             letter-spacing: -0.02em;
         }
-
-        .view-toggle {
-            display: flex;
-            gap: 12px;
-            align-items: center;
+        
+        .contact-info {
+            display: block;
         }
-
-        .toggle-button {
-            padding: 8px 16px;
-            border: 1px solid #e5e5e5;
-            background-color: #ffffff;
-            color: #666666;
-            font-size: 0.9rem;
+        
+        .contact-info a {
+            color: #999999;
+            text-decoration: none;
+            font-size: 1.04rem;
             font-weight: 500;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
+            transition: color 0.3s ease;
         }
-
-        .toggle-button.active {
-            background-color: #0a0a0a;
-            color: #ffffff;
-            border-color: #0a0a0a;
-        }
-
-        .toggle-button:hover:not(.active) {
-            border-color: #0a0a0a;
+        
+        .contact-info a:hover {
             color: #0a0a0a;
         }
 
         /* Main Content */
         .main-content {
-            padding-top: 61px;
+            padding-top: 61px; /* 헤더 높이만 */
         }
 
         /* Project Info Section */
@@ -140,14 +138,17 @@
         .gallery-section {
             width: 100%;
             background-color: #fafafa;
-            border-top: 1px solid #e5e5e5;
+            border-top: none;
             border-bottom: 1px solid #e5e5e5;
-            position: relative;
+            position: relative; /* 스크롤 시 함께 이동 */
+            z-index: 1;
+            margin-top: -80px; /* 더 위로 올려서 헤더와 많이 겹치게 */
+            height: calc(100vh - 220px + 80px); /* 높이 증가 (250 → 220) */
         }
 
         .gallery-container {
-            height: calc(100vh - 61px - 180px);
-            min-height: 400px;
+            height: 100%; /* gallery-section의 높이에 맞춤 */
+            min-height: 500px;
             overflow: hidden;
             position: relative;
             cursor: grab;
@@ -345,16 +346,18 @@
         /* Responsive */
         @media (max-width: 768px) {
             header {
-                padding: 16px 24px;
+                padding: 12px 16px;
             }
 
-            .header-title {
-                font-size: 0.95rem;
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
             }
 
-            .toggle-button {
-                padding: 6px 12px;
-                font-size: 0.85rem;
+            /* 모바일에서 이메일 숨김 */
+            .contact-info {
+                display: none;
             }
 
             .project-info {
@@ -370,9 +373,14 @@
                 gap: 20px;
             }
 
+            .gallery-section {
+                margin-top: -60px; /* 모바일에서도 더 위로 */
+                height: calc(100vh - 150px + 60px); /* 모바일도 높이 증가 (180 → 150) */
+            }
+
             .gallery-container {
-                height: calc(100vh - 60px - 120px);
-                min-height: 300px;
+                height: 100%;
+                min-height: 400px;
             }
 
             .gallery-controls {
@@ -385,16 +393,7 @@
                 font-size: 0.9rem;
             }
 
-            .gallery-grid {
-                grid-template-columns: repeat(10, 100px);
-                gap: 16px;
-                padding: 24px;
-            }
-
-            .gallery-item {
-                width: 100px;
-                height: 100px;
-            }
+            /* 모바일에서도 그리드 구조 유지 - 삭제됨 */
 
             .content-section {
                 padding: 60px 24px;
@@ -418,10 +417,9 @@
 <body>
     <header>
         <div class="header-content">
-            <a href="index.html" class="back-button">←</a>
-            <h1 class="header-title">Visual System</h1>
-            <div class="view-toggle">
-                <!-- 토글 버튼 제거됨 -->
+            <a href="../index.html" class="back-button">← Back to Portfolio</a>
+            <div class="contact-info">
+                <a href="mailto:magudol95@gmail.com">magudol95@gmail.com</a>
             </div>
         </div>
     </header>
@@ -1150,6 +1148,22 @@
 
         // Initialize gallery
         const gallery = new InfiniteGallery();
+
+        // 스크롤 이벤트: 갤러리 영역 벗어나면 블러 제거
+        const header = document.querySelector('header');
+        const gallerySection = document.querySelector('.gallery-section');
+        
+        window.addEventListener('scroll', () => {
+            const galleryBottom = gallerySection.offsetTop + gallerySection.offsetHeight;
+            const scrollPosition = window.scrollY;
+            
+            // 갤러리 영역을 벗어나면 블러 제거
+            if (scrollPosition > galleryBottom) {
+                header.classList.add('no-blur');
+            } else {
+                header.classList.remove('no-blur');
+            }
+        });
     </script>
 </body>
 </html>
