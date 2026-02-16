@@ -297,13 +297,13 @@
             overflow: hidden;
             background-color: #0a0a0a;
             border-radius: 0;
-            height: clamp(300px, 25vw, 500px);
-            width: clamp(300px, 25vw, 500px);
+            height: clamp(350px, 30vw, 550px);
+            width: clamp(350px, 30vw, 550px);
         }
 
         .gif-item.wide {
-            width: clamp(600px, 50vw, 1000px);
-            height: clamp(300px, 25vw, 500px);
+            width: clamp(700px, 60vw, 1100px);
+            height: clamp(350px, 30vw, 550px);
         }
 
         .gif-row.two-cols .gif-item {
@@ -595,6 +595,19 @@
             .gif-row.two-cols,
             .gif-row.three-cols {
                 grid-template-columns: 1fr;
+                justify-content: center;
+                justify-items: center;
+            }
+
+            /* 모바일에서 이미지 크기 조정 */
+            .gif-item {
+                height: clamp(280px, 70vw, 400px);
+                width: clamp(280px, 70vw, 400px);
+            }
+
+            .gif-item.wide {
+                width: clamp(300px, 80vw, 500px);
+                height: clamp(150px, 35vw, 250px);
             }
 
             .image-grid.cols-2,
