@@ -9,6 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="//firebasestorage.googleapis.com">
     <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+    
+    <!-- SVG 라인 그래픽 우선 로딩 -->
+    <link rel="preload" as="image" href="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Ffirst-line-graphic.svg?alt=media&token=3139d220-39f9-4e33-8ae6-292bee947270">
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -103,18 +107,6 @@
             border-radius: 0;
             margin-bottom: 60px;
             display: block;
-        }
-
-        /* 로딩 상태 표시 */
-        .hero-image[loading] {
-            background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%);
-            background-size: 200% 100%;
-            animation: loading-shimmer 1.5s infinite;
-        }
-
-        @keyframes loading-shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
         }
 
         /* 이미지 로딩 최적화 */
