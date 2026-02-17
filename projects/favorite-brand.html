@@ -443,59 +443,114 @@
             display: block;
         }
 
-        /* Process Steps */
+        /* Process Steps - 지그재그 레이아웃 */
         .process-steps {
-            display: grid;
-            gap: 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
             margin-top: 60px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .process-step {
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 60px;
-            align-items: start;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            background: #121212;
+            border: 1px solid #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 홀수 스텝: 이미지 왼쪽 */
+        .process-step:nth-child(odd) .step-image-container {
+            order: 1;
+        }
+
+        .process-step:nth-child(odd) .step-info {
+            order: 2;
+        }
+
+        /* 짝수 스텝: 이미지 오른쪽 */
+        .process-step:nth-child(even) .step-image-container {
+            order: 2;
+        }
+
+        .process-step:nth-child(even) .step-info {
+            order: 1;
+        }
+
+        .step-image-container {
+            position: relative;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+            min-height: 400px;
         }
 
         .step-info {
-            position: sticky;
-            top: 140px;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
         }
 
         .step-number {
-            font-size: 3rem;
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 222, 89, 0.1);
+            border: 2px solid rgba(0, 222, 89, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #222222;
-            margin-bottom: 16px;
+            color: #00DE59;
             line-height: 1;
         }
 
         .step-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             letter-spacing: -0.01em;
-            max-width: 840px;
+            color: #ffffff;
+            padding-top: 20px;
         }
 
         .step-description {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: #999999;
-            max-width: 840px;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #aaaaaa;
         }
 
         .step-image {
             width: 100%;
-            border-radius: 8px;
+            max-width: 500px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
         }
 
         /* Key Features */
         .key-features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             margin-top: 60px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .feature-card {
@@ -625,11 +680,25 @@
         @media (max-width: 1200px) {
             .process-step {
                 grid-template-columns: 1fr;
-                gap: 30px;
+            }
+
+            .process-step:nth-child(odd) .step-image-container,
+            .process-step:nth-child(even) .step-image-container {
+                order: 1;
+            }
+
+            .process-step:nth-child(odd) .step-info,
+            .process-step:nth-child(even) .step-info {
+                order: 2;
             }
 
             .step-info {
-                position: static;
+                padding: 40px 30px;
+            }
+
+            .step-image-container {
+                padding: 40px 30px;
+                min-height: 300px;
             }
         }
 
@@ -637,6 +706,10 @@
 
             .gif-row.two-cols,
             .gif-row.three-cols {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .key-features {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -713,6 +786,31 @@
 
             .feature-card {
                 padding: 30px;
+            }
+
+            .step-info {
+                padding: 30px 20px;
+            }
+
+            .step-image-container {
+                padding: 30px 20px;
+                min-height: 250px;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                top: 20px;
+                left: 20px;
+            }
+
+            .step-title {
+                font-size: 1.2rem;
+            }
+
+            .step-description {
+                font-size: 0.95rem;
             }
 
             .project-navigation {
@@ -844,6 +942,7 @@
             height: 300px;
             opacity: 0;
             animation: stickerLoop 8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+            z-index: 10;
         }
 
         .sticker-item img {
@@ -945,89 +1044,18 @@
             }
         }
 
-        /* 파티클 효과 */
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0;
-            pointer-events: none;
-            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
-            z-index: -1;
+        /* Concept to Reality 섹션 max-width */
+        .section.concept-section {
+            max-width: 1200px !important;
+            padding: 80px 0 !important;
         }
 
-        /* 각 파티클 위치와 애니메이션 */
-        .particle:nth-child(14) {
-            left: 20%;
-            top: 15%;
-            animation: burst 1.8s infinite 0s;
-        }
-
-        .particle:nth-child(15) {
-            left: 70%;
-            top: 25%;
-            animation: burst 2s infinite 0.4s;
-        }
-
-        .particle:nth-child(16) {
-            left: 40%;
-            top: 70%;
-            animation: burst 1.9s infinite 0.8s;
-        }
-
-        .particle:nth-child(17) {
-            left: 80%;
-            top: 60%;
-            animation: burst 2.1s infinite 1.2s;
-        }
-
-        .particle:nth-child(18) {
-            left: 15%;
-            top: 80%;
-            animation: burst 1.7s infinite 1.6s;
-        }
-
-        .particle:nth-child(19) {
-            left: 60%;
-            top: 40%;
-            animation: burst 2.2s infinite 0.6s;
-        }
-
-        .particle:nth-child(20) {
-            left: 85%;
-            top: 85%;
-            animation: burst 1.85s infinite 1s;
-        }
-
-        .particle:nth-child(21) {
-            left: 30%;
-            top: 30%;
-            animation: burst 2.05s infinite 0.2s;
-        }
-
-
-        @keyframes burst {
-            0% {
-                opacity: 0;
-                transform: scale(0);
-            }
-
-            20% {
-                opacity: 0.5;
-                transform: scale(1.8);
-            }
-
-            40% {
-                opacity: 0;
-                transform: scale(2.5);
-            }
-
-            100% {
-                opacity: 0;
-                transform: scale(2.5);
-            }
+        .concept-section-content {
+            max-width: 1200px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            width: 100%;
+            padding: 0 24px;
         }
     </style>
 </head>
@@ -1226,21 +1254,12 @@
                     <div class="sticker-item"><img
                             src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-13.svg?alt=media&token=0a32f77d-37ad-461c-85d2-5b0432c8083a"
                             alt="Sticker 13"></div>
-                    <!-- Particles -->
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
                 </div>
             </div>
 
             <div class="key-features">
                 <div class="feature-card">
-                    <h3 class="feature-title">My PERSONAL Story - <span class="highlight">브랜드를 나만의 것으로</span></h3>
+                    <h3 class="feature-title">My Personal Story - <span class="highlight">브랜드를 나만의 것으로</span></h3>
                     <p class="feature-description">
                         스티커는 개인화를 상징합니다. 평범한 물건에 붙이는 것만으로도 나만의 것이 되고, 새로운 이야기가 시작됩니다. 브랜드에 스티커를 더하면 소비자가 자신의 개성을 표현하며,
                         브랜드는 함께 완성해가는 열린 캔버스가 됩니다.
@@ -1338,6 +1357,10 @@
 
             <div class="process-steps">
                 <div class="process-step">
+                    <div class="step-image-container">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step1.webp" alt="Step 1"
+                            class="step-image">
+                    </div>
                     <div class="step-info">
                         <div class="step-number">1</div>
                         <h3 class="step-title">STEP 1 - 기본 도형으로 시작</h3>
@@ -1346,11 +1369,13 @@
                             고민하며 진행합니다.
                         </p>
                     </div>
-                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step1.webp" alt="Step 1"
-                        class="step-image">
                 </div>
 
                 <div class="process-step">
+                    <div class="step-image-container">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step2.webp" alt="Step 2"
+                            class="step-image">
+                    </div>
                     <div class="step-info">
                         <div class="step-number">2</div>
                         <h3 class="step-title">STEP 2 - 지속적인 디테일 추가</h3>
@@ -1359,11 +1384,13 @@
                             동시에 독창적인 특징을 어떻게 부여할지 고민합니다.
                         </p>
                     </div>
-                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step2.webp" alt="Step 2"
-                        class="step-image">
                 </div>
 
                 <div class="process-step">
+                    <div class="step-image-container">
+                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step3.webp" alt="Step 3"
+                            class="step-image">
+                    </div>
                     <div class="step-info">
                         <div class="step-number">3</div>
                         <h3 class="step-title">STEP 3 - 스토리텔링 요소와 결합한 스티커 추가</h3>
@@ -1372,8 +1399,6 @@
                             있도록 제작을 진행합니다.
                         </p>
                     </div>
-                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step3.webp" alt="Step 3"
-                        class="step-image">
                 </div>
             </div>
         </section>
@@ -1409,16 +1434,15 @@
         </section>
 
         <!-- Concept to Reality Section -->
-        <section class="section">
-            <div class="section-header">
+        <section class="section concept-section">
+            <div class="section-header concept-section-content">
                 <h2 class="section-title">Concept to Reality</h2>
                 <p class="section-description">
-                    디자인을 실제 생산으로 확장하는 것을 목표로 하여, 항상 실질적인 적용을 고려합니다. 단순히 창작하는 데 그치지 않고, 그래픽 모션과 스티커를 결합하여 새로운 가능성을 탐구하며,
-                    역동적이고 조화로운 결과물을 선보이고자 합니다.
+                    디자인을 실제 생산으로 확장하여 실질적인 적용 가능성을 탐구합니다. 그래픽 모션과 스티커를 결합한 역동적인 결과물을 선보입니다.
                 </p>
             </div>
 
-            <div class="image-grid cols-3">
+            <div class="image-grid cols-3 concept-section-content">
                 <div class="image-item">
                     <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/application1.webp"
                         alt="Application 1">
