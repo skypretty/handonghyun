@@ -10,6 +10,9 @@
     <link rel="dns-prefetch" href="//firebasestorage.googleapis.com">
     <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
     
+    <!-- 히어로 이미지 최우선 로딩 - 가장 중요! -->
+    <link rel="preload" as="image" href="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fhero.webp?alt=media&token=a43033e4-e771-4de6-95f6-2e5718f48337" fetchpriority="high">
+    
     <!-- SVG 라인 그래픽 우선 로딩 -->
     <link rel="preload" as="image" href="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Ffirst-line-graphic.svg?alt=media&token=3139d220-39f9-4e33-8ae6-292bee947270">
     
@@ -87,7 +90,7 @@
             color: #ffffff;
         }
 
-        /* Hero Section */
+        /* Hero Section - 최우선 렌더링 */
         .hero-section {
             padding: 0 24px 0;
             margin-top: -50px;
@@ -97,6 +100,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            /* 렌더링 우선순위 최고 */
+            contain: layout style;
+            will-change: auto;
         }
 
         .hero-image {
@@ -107,6 +113,10 @@
             border-radius: 0;
             margin-bottom: 60px;
             display: block;
+            /* 최우선 디코딩 */
+            decoding: sync;
+            /* 중요도 최고 설정 */
+            importance: high;
         }
 
         /* 이미지 로딩 최적화 */
@@ -120,7 +130,12 @@
             height: 100%;
             object-fit: contain;
             display: block;
-            loading: lazy; /* 지연 로딩 */
+            loading: lazy; /* 모든 그리드 이미지 지연 로딩 */
+        }
+
+        /* 히어로 이미지만 즉시 로딩 */
+        .hero-image {
+            loading: eager !important;
         }
 
         .project-info {
@@ -1036,15 +1051,41 @@
     </footer>
 
     <script>
-        // 성능 최적화된 애니메이션
+        // 히어로 이미지 우선 로딩 완료 후 애니메이션 시작
+        let heroImageLoaded = false;
         const animatedElements = new Set();
         let observer;
 
-        // 지연된 관찰자 초기화
-        function initObserver() {
+        // 히어로 이미지 로드 체크
+        function checkHeroImageLoad() {
+            const heroImage = document.querySelector('.hero-image');
+            
+            if (heroImage.complete && heroImage.naturalHeight !== 0) {
+                heroImageLoaded = true;
+                initScrollAnimations();
+            } else {
+                heroImage.addEventListener('load', () => {
+                    heroImageLoaded = true;
+                    initScrollAnimations();
+                });
+                
+                // 5초 후에도 로딩이 안되면 강제 시작
+                setTimeout(() => {
+                    if (!heroImageLoaded) {
+                        heroImageLoaded = true;
+                        initScrollAnimations();
+                    }
+                }, 5000);
+            }
+        }
+
+        // 스크롤 애니메이션 초기화 (히어로 로딩 후)
+        function initScrollAnimations() {
+            if (!heroImageLoaded) return;
+
             const observerOptions = {
-                threshold: 0.05, // 더 낮은 threshold
-                rootMargin: '50px' // 간소화
+                threshold: 0.05,
+                rootMargin: '50px'
             };
 
             observer = new IntersectionObserver((entries) => {
@@ -1055,31 +1096,33 @@
                             setTimeout(() => {
                                 entry.target.classList.add('animate-in');
                                 animatedElements.add(entry.target);
-                                observer.unobserve(entry.target); // 최적화: 관찰 중단
-                            }, index * 80); // 더 빠른 스태거
+                                observer.unobserve(entry.target);
+                            }, index * 100); // 히어로 로딩 후 순차 애니메이션
                         } else {
                             entry.target.classList.add('animate-in');
                             animatedElements.add(entry.target);
-                            observer.unobserve(entry.target); // 최적화: 관찰 중단
+                            observer.unobserve(entry.target);
                         }
                     }
                 });
             }, observerOptions);
 
-            // 관찰 시작
-            document.querySelectorAll('.gif-item, .section-header, .feature-card, .process-step, .image-item').forEach(el => {
-                observer.observe(el);
-            });
+            // 히어로 이미지 로딩 완료 후 다른 요소들 관찰 시작
+            setTimeout(() => {
+                document.querySelectorAll('.gif-item, .section-header, .feature-card, .process-step, .image-item').forEach(el => {
+                    observer.observe(el);
+                });
+            }, 500); // 0.5초 추가 딜레이
         }
 
-        // DOM 로드 후 초기화
+        // DOM 로드 후 히어로 이미지 체크 시작
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initObserver);
+            document.addEventListener('DOMContentLoaded', checkHeroImageLoad);
         } else {
-            initObserver();
+            checkHeroImageLoad();
         }
 
-        // Feature card mouse follow effect (최적화된 버전)
+        // Feature card mouse follow effect
         let mouseTimeout;
         document.querySelectorAll('.feature-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -1092,11 +1135,11 @@
                     card.style.setProperty('--mouse-x', `${x}px`);
                     card.style.setProperty('--mouse-y', `${y}px`);
                     mouseTimeout = null;
-                }, 16); // 60fps throttling
+                }, 16);
             });
         });
 
-        // Info item mouse follow effect (최적화된 버전)
+        // Info item mouse follow effect
         document.querySelectorAll('.info-item').forEach(item => {
             item.addEventListener('mousemove', (e) => {
                 const rect = item.getBoundingClientRect();
