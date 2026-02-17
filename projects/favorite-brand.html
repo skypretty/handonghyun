@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Favorite Brand - Donghyun.Han</title>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="//firebasestorage.googleapis.com">
     <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
-    
+
     <!-- 히어로 이미지 최우선 로딩 - 가장 중요! -->
-    <link rel="preload" as="image" href="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fhero.webp?alt=media&token=a43033e4-e771-4de6-95f6-2e5718f48337" fetchpriority="high">
-    
+    <link rel="preload" as="image"
+        href="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fhero.webp?alt=media&token=a43033e4-e771-4de6-95f6-2e5718f48337"
+        fetchpriority="high">
+
     <!-- SVG 라인 그래픽 우선 로딩 -->
-    <link rel="preload" as="image" href="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Ffirst-line-graphic.svg?alt=media&token=3139d220-39f9-4e33-8ae6-292bee947270">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="image"
+        href="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Ffirst-line-graphic.svg?alt=media&token=3139d220-39f9-4e33-8ae6-292bee947270">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -73,11 +79,11 @@
             font-weight: 600;
             letter-spacing: -0.02em;
         }
-        
+
         .contact-info {
             display: block;
         }
-        
+
         .contact-info a {
             color: #999999;
             text-decoration: none;
@@ -85,7 +91,7 @@
             font-weight: 500;
             transition: color 0.3s ease;
         }
-        
+
         .contact-info a:hover {
             color: #ffffff;
         }
@@ -120,7 +126,8 @@
         }
 
         /* 이미지 로딩 최적화 */
-        img, video {
+        img,
+        video {
             will-change: transform;
         }
 
@@ -130,7 +137,8 @@
             height: 100%;
             object-fit: contain;
             display: block;
-            loading: lazy; /* 모든 그리드 이미지 지연 로딩 */
+            loading: lazy;
+            /* 모든 그리드 이미지 지연 로딩 */
         }
 
         /* 히어로 이미지만 즉시 로딩 */
@@ -176,11 +184,11 @@
                 flex-wrap: nowrap;
                 width: max-content;
             }
-            
+
             .info-item {
                 flex: 0 0 auto;
             }
-            
+
             .info-value {
                 white-space: nowrap;
             }
@@ -193,11 +201,11 @@
                 width: 100%;
                 max-width: 1200px;
             }
-            
+
             .info-item {
                 flex: 1 1 calc(50% - 8px);
             }
-            
+
             .info-value {
                 white-space: normal;
             }
@@ -206,7 +214,8 @@
         /* 대형 화면: 한 줄로 배치 (1200px 이상) */
         @media (min-width: 1200px) {
             .info-item {
-                flex: 1 1 calc(25% - 12px);  /* 4개가 한 줄에 */
+                flex: 1 1 calc(25% - 12px);
+                /* 4개가 한 줄에 */
                 max-width: none;
             }
         }
@@ -214,7 +223,8 @@
         /* 중형 화면: 2x2 배치 (768px~1199px) */
         @media (min-width: 768px) and (max-width: 1199px) {
             .info-item {
-                flex: 1 1 calc(50% - 8px);   /* 2개씩 2줄 */
+                flex: 1 1 calc(50% - 8px);
+                /* 2개씩 2줄 */
             }
         }
 
@@ -279,11 +289,13 @@
         /* 작은 화면에서는 줄바꿈 허용 */
         @media (max-width: 1199px) {
             .info-value {
-                white-space: normal;  /* 작은 화면에서 줄바꿈 허용 */
+                white-space: normal;
+                /* 작은 화면에서 줄바꿈 허용 */
             }
-            
+
             .info-item:last-child {
-                min-width: auto;  /* 작은 화면에서 너비 제한 해제 */
+                min-width: auto;
+                /* 작은 화면에서 너비 제한 해제 */
             }
         }
 
@@ -622,6 +634,7 @@
         }
 
         @media (max-width: 1024px) {
+
             .gif-row.two-cols,
             .gif-row.three-cols {
                 grid-template-columns: repeat(2, 1fr);
@@ -655,11 +668,13 @@
 
             .project-info {
                 gap: 12px;
-                padding: 0 16px 40px 16px;  /* 페이지 마진 유지 */
+                padding: 0 16px 40px 16px;
+                /* 페이지 마진 유지 */
             }
 
             .info-item {
-                flex: 1 1 100%;  /* 모바일에서 세로 배치 */
+                flex: 1 1 100%;
+                /* 모바일에서 세로 배치 */
                 min-width: 100%;
                 max-width: none;
                 padding: 16px 20px;
@@ -744,6 +759,7 @@
             0% {
                 transform: translateX(0);
             }
+
             100% {
                 transform: translateX(-50%);
             }
@@ -753,6 +769,7 @@
             0% {
                 transform: translateX(-50%);
             }
+
             100% {
                 transform: translateX(0);
             }
@@ -769,6 +786,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -799,8 +817,221 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* 스티커 애니메이션 */
+        .sticker-animation {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        .sticker-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            perspective: 1000px;
+        }
+
+        .sticker-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            opacity: 0;
+            animation: stickerLoop 8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+        }
+
+        .sticker-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .sticker-item:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .sticker-item:nth-child(2) {
+            animation-delay: 0.6s;
+        }
+
+        .sticker-item:nth-child(3) {
+            animation-delay: 1.2s;
+        }
+
+        .sticker-item:nth-child(4) {
+            animation-delay: 1.8s;
+        }
+
+        .sticker-item:nth-child(5) {
+            animation-delay: 2.4s;
+        }
+
+        .sticker-item:nth-child(6) {
+            animation-delay: 3.0s;
+        }
+
+        .sticker-item:nth-child(7) {
+            animation-delay: 3.6s;
+        }
+
+        .sticker-item:nth-child(8) {
+            animation-delay: 4.2s;
+        }
+
+        .sticker-item:nth-child(9) {
+            animation-delay: 4.8s;
+        }
+
+        .sticker-item:nth-child(10) {
+            animation-delay: 5.4s;
+        }
+
+        .sticker-item:nth-child(11) {
+            animation-delay: 6.0s;
+        }
+
+        .sticker-item:nth-child(12) {
+            animation-delay: 6.6s;
+        }
+
+        .sticker-item:nth-child(13) {
+            animation-delay: 7.2s;
+        }
+
+        @keyframes stickerLoop {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotateX(0deg) scale(1);
+                filter: blur(0px);
+            }
+
+            1% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg) scale(1);
+                filter: blur(0px);
+            }
+
+            /* 바로 나타남 */
+            7% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg) scale(1);
+                filter: blur(0px);
+            }
+
+            /* 사라지기 시작 - 부드러운 전환 */
+            7.5% {
+                opacity: 0.8;
+                transform: translateY(-10px) rotateX(-10deg) scale(0.98);
+                filter: blur(1px);
+            }
+
+            /* 완전히 사라짐 (600ms 동안 표시) */
+            9% {
+                opacity: 0;
+                transform: translateY(-40px) rotateX(-35deg) scale(0.95);
+                filter: blur(6px);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-40px) rotateX(-35deg) scale(0.95);
+                filter: blur(6px);
+            }
+        }
+
+        /* 파티클 효과 */
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+            z-index: -1;
+        }
+
+        /* 각 파티클 위치와 애니메이션 */
+        .particle:nth-child(14) {
+            left: 20%;
+            top: 15%;
+            animation: burst 1.8s infinite 0s;
+        }
+
+        .particle:nth-child(15) {
+            left: 70%;
+            top: 25%;
+            animation: burst 2s infinite 0.4s;
+        }
+
+        .particle:nth-child(16) {
+            left: 40%;
+            top: 70%;
+            animation: burst 1.9s infinite 0.8s;
+        }
+
+        .particle:nth-child(17) {
+            left: 80%;
+            top: 60%;
+            animation: burst 2.1s infinite 1.2s;
+        }
+
+        .particle:nth-child(18) {
+            left: 15%;
+            top: 80%;
+            animation: burst 1.7s infinite 1.6s;
+        }
+
+        .particle:nth-child(19) {
+            left: 60%;
+            top: 40%;
+            animation: burst 2.2s infinite 0.6s;
+        }
+
+        .particle:nth-child(20) {
+            left: 85%;
+            top: 85%;
+            animation: burst 1.85s infinite 1s;
+        }
+
+        .particle:nth-child(21) {
+            left: 30%;
+            top: 30%;
+            animation: burst 2.05s infinite 0.2s;
+        }
+
+
+        @keyframes burst {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            20% {
+                opacity: 0.5;
+                transform: scale(1.8);
+            }
+
+            40% {
+                opacity: 0;
+                transform: scale(2.5);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(2.5);
+            }
+        }
     </style>
 </head>
+
 <body>
     <header>
         <div class="header-content">
@@ -814,8 +1045,9 @@
     <main>
         <!-- Hero Section -->
         <section class="hero-section">
-            <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fhero.webp?alt=media&token=a43033e4-e771-4de6-95f6-2e5718f48337" alt="Favorite Brand Hero" class="hero-image" loading="eager" fetchpriority="high" decoding="async">
-            
+            <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fhero.webp?alt=media&token=a43033e4-e771-4de6-95f6-2e5718f48337"
+                alt="Favorite Brand Hero" class="hero-image" loading="eager" fetchpriority="high" decoding="async">
+
             <div class="project-info">
                 <div class="info-item">
                     <span class="info-label">Project Name</span>
@@ -840,10 +1072,12 @@
         <div class="infinite-scroll-wrapper">
             <div class="infinite-scroll-track">
                 <div class="infinite-scroll-item">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Ffirst-line-graphic.svg?alt=media&token=3139d220-39f9-4e33-8ae6-292bee947270" alt="Brand Graphic">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Ffirst-line-graphic.svg?alt=media&token=3139d220-39f9-4e33-8ae6-292bee947270"
+                        alt="Brand Graphic">
                 </div>
                 <div class="infinite-scroll-item">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Ffirst-line-graphic.svg?alt=media&token=3139d220-39f9-4e33-8ae6-292bee947270" alt="Brand Graphic">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Ffirst-line-graphic.svg?alt=media&token=3139d220-39f9-4e33-8ae6-292bee947270"
+                        alt="Brand Graphic">
                 </div>
             </div>
         </div>
@@ -854,7 +1088,9 @@
                 <span class="section-label">Overview</span>
                 <h2 class="section-title">프로젝트 개요</h2>
                 <p class="section-description">
-                    전 세계 다양한 브랜드를 관찰하며, 그들만의 고유한 제품 특징과 감각을 나만의 스타일로 일관성 있게 표현하고자 프로젝트를 진행했습니다. 각 브랜드가 가진 아이덴티티를 유지하면서도, 어떻게 나만의 방식으로 재해석하고 표현할 수 있을지 상상해 보았습니다. 20개의 브랜드 제품을 다루었지만, 모두 하나의 통일된 스타일로 보일 수 있도록 그래픽의 일관성을 고려하여 제작했습니다.
+                    전 세계 다양한 브랜드를 관찰하며, 그들만의 고유한 제품 특징과 감각을 나만의 스타일로 일관성 있게 표현하고자 프로젝트를 진행했습니다. 각 브랜드가 가진 아이덴티티를 유지하면서도,
+                    어떻게 나만의 방식으로 재해석하고 표현할 수 있을지 상상해 보았습니다. 20개의 브랜드 제품을 다루었지만, 모두 하나의 통일된 스타일로 보일 수 있도록 그래픽의 일관성을 고려하여
+                    제작했습니다.
                 </p>
             </div>
 
@@ -863,52 +1099,65 @@
                 <!-- 1번째 줄: 2개 (640:500 비율) -->
                 <div class="gif-row two-cols">
                     <div class="gif-item" data-index="0">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fspray.webp?alt=media&token=a2d63488-c33a-4898-b4f8-9d4108e2b7af" alt="Brand Animation 1">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fspray.webp?alt=media&token=a2d63488-c33a-4898-b4f8-9d4108e2b7af"
+                            alt="Brand Animation 1">
                     </div>
                     <div class="gif-item" data-index="1">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fcarrier.webp?alt=media&token=5afb8671-efbd-4e87-b21e-34a4dcf7f07d" alt="Brand Animation 2">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fcarrier.webp?alt=media&token=5afb8671-efbd-4e87-b21e-34a4dcf7f07d"
+                            alt="Brand Animation 2">
                     </div>
                 </div>
-                
+
                 <!-- 2번째 줄: 3개 (426.67:500 비율) -->
                 <div class="gif-row three-cols">
                     <div class="gif-item" data-index="2">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fnintendo.webp?alt=media&token=5d8255a0-da55-4dc0-bf7b-df3b45edaaf4" alt="Brand Animation 3">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fnintendo.webp?alt=media&token=5d8255a0-da55-4dc0-bf7b-df3b45edaaf4"
+                            alt="Brand Animation 3">
                     </div>
                     <div class="gif-item" data-index="3">
                         <video autoplay loop muted playsinline>
-                            <source src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fpencil.mp4?alt=media&token=f97d3666-5ead-4bee-9429-87b5794fd25b" type="video/mp4">
+                            <source
+                                src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fpencil.mp4?alt=media&token=f97d3666-5ead-4bee-9429-87b5794fd25b"
+                                type="video/mp4">
                         </video>
                     </div>
                     <div class="gif-item" data-index="4">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fcoffee.webp?alt=media&token=6c5fd177-4fe3-447b-b007-2b50c6ed49da" alt="Brand Animation 5">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fcoffee.webp?alt=media&token=6c5fd177-4fe3-447b-b007-2b50c6ed49da"
+                            alt="Brand Animation 5">
                     </div>
                 </div>
-                
+
                 <!-- 3번째 줄: 2개 (640:500 비율) -->
                 <div class="gif-row two-cols">
                     <div class="gif-item" data-index="5">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fairplane.webp?alt=media&token=98a7e9c9-2f8e-4fd2-abad-1515e0c4c134" alt="Brand Animation 6">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fairplane.webp?alt=media&token=98a7e9c9-2f8e-4fd2-abad-1515e0c4c134"
+                            alt="Brand Animation 6">
                     </div>
                     <div class="gif-item" data-index="6">
                         <video autoplay loop muted playsinline>
-                            <source src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fcoke.mp4?alt=media&token=853e5e77-341b-4800-a7c5-0ba1cd85fc24" type="video/mp4">
+                            <source
+                                src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fcoke.mp4?alt=media&token=853e5e77-341b-4800-a7c5-0ba1cd85fc24"
+                                type="video/mp4">
                         </video>
                     </div>
                 </div>
-                
+
                 <!-- 4번째 줄: 3개 (426.67:500 비율) -->
                 <div class="gif-row three-cols">
                     <div class="gif-item" data-index="7">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fclock.webp?alt=media&token=00aa9d77-cfbf-43a9-9f42-b233a1fe6fda" alt="Brand Animation 8">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fclock.webp?alt=media&token=00aa9d77-cfbf-43a9-9f42-b233a1fe6fda"
+                            alt="Brand Animation 8">
                     </div>
                     <div class="gif-item" data-index="8">
                         <video autoplay loop muted playsinline>
-                            <source src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fsnack.mp4?alt=media&token=4d08e542-2d60-4445-a594-77ee818739f9" type="video/mp4">
+                            <source
+                                src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Fsnack.mp4?alt=media&token=4d08e542-2d60-4445-a594-77ee818739f9"
+                                type="video/mp4">
                         </video>
                     </div>
                     <div class="gif-item" data-index="9">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Ftennis.webp?alt=media&token=72a249ce-0bd2-4cbc-bc9d-2f1ae3a19398" alt="Brand Animation 10">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage01%2Ftennis.webp?alt=media&token=72a249ce-0bd2-4cbc-bc9d-2f1ae3a19398"
+                            alt="Brand Animation 10">
                     </div>
                 </div>
             </div>
@@ -918,10 +1167,12 @@
         <div class="infinite-scroll-wrapper" style="margin-top: 60px; margin-bottom: 60px;">
             <div class="infinite-scroll-track" style="animation: scroll-right 25s linear infinite;">
                 <div class="infinite-scroll-item">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fsecond-line-graphic.svg?alt=media&token=6f82c7d8-876b-4ba1-a3c9-726cd6c93ebf" alt="Brand Graphic 2">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fsecond-line-graphic.svg?alt=media&token=6f82c7d8-876b-4ba1-a3c9-726cd6c93ebf"
+                        alt="Brand Graphic 2">
                 </div>
                 <div class="infinite-scroll-item">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fsecond-line-graphic.svg?alt=media&token=6f82c7d8-876b-4ba1-a3c9-726cd6c93ebf" alt="Brand Graphic 2">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fsecond-line-graphic.svg?alt=media&token=6f82c7d8-876b-4ba1-a3c9-726cd6c93ebf"
+                        alt="Brand Graphic 2">
                 </div>
             </div>
         </div>
@@ -933,23 +1184,80 @@
                 <h2 class="section-title">Emotional Graphic Sticker</h2>
             </div>
 
+            <!-- 스티커 애니메이션 (카드들 위에) -->
+            <div class="sticker-animation">
+                <div class="sticker-container">
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-01.svg?alt=media&token=c618cf73-9092-4f47-915b-79eded417992"
+                            alt="Sticker 1"></div>
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-02.svg?alt=media&token=45c23ae5-2f5e-4c32-af5e-3415d116ae60"
+                            alt="Sticker 2"></div>
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-03.svg?alt=media&token=56563f86-63c6-4c11-848b-d36478c1e26a"
+                            alt="Sticker 3"></div>
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-04.svg?alt=media&token=22343361-4be7-4777-bd50-dc4a80402489"
+                            alt="Sticker 4"></div>
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-05.svg?alt=media&token=6c7239c8-deac-477b-8b50-dbbf8792ed87"
+                            alt="Sticker 5"></div>
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-06.svg?alt=media&token=0b6e30de-2f91-4902-98fc-bbed78535766"
+                            alt="Sticker 6"></div>
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-07.svg?alt=media&token=078ba75c-2441-4ffd-a8bb-5d42a5f53660"
+                            alt="Sticker 7"></div>
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-08.svg?alt=media&token=b3e2920c-cde9-445b-8a80-79047ea479be"
+                            alt="Sticker 8"></div>
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-09.svg?alt=media&token=a44d53ba-3cb3-4854-9bf1-3210bf6f50ef"
+                            alt="Sticker 9"></div>
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-10.svg?alt=media&token=08b5cfea-0fed-4863-8a1e-d3baf601e01f"
+                            alt="Sticker 10"></div>
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-11.svg?alt=media&token=f047bae0-f6d3-4ee7-a8a7-de0f3a4a1ec1"
+                            alt="Sticker 11"></div>
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-12.svg?alt=media&token=51ce9dea-31d3-43af-ba4b-707becd82f7b"
+                            alt="Sticker 12"></div>
+                    <div class="sticker-item"><img
+                            src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fsticker-loop%2Fsticker-13.svg?alt=media&token=0a32f77d-37ad-461c-85d2-5b0432c8083a"
+                            alt="Sticker 13"></div>
+                    <!-- Particles -->
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                </div>
+            </div>
+
             <div class="key-features">
                 <div class="feature-card">
                     <h3 class="feature-title">My PERSONAL Story - <span class="highlight">브랜드를 나만의 것으로</span></h3>
                     <p class="feature-description">
-                        스티커는 개인화를 상징합니다. 평범한 물건에 붙이는 것만으로도 나만의 것이 되고, 새로운 이야기가 시작됩니다. 브랜드에 스티커를 더하면 소비자가 자신의 개성을 표현하며, 브랜드는 함께 완성해가는 열린 캔버스가 됩니다.
+                        스티커는 개인화를 상징합니다. 평범한 물건에 붙이는 것만으로도 나만의 것이 되고, 새로운 이야기가 시작됩니다. 브랜드에 스티커를 더하면 소비자가 자신의 개성을 표현하며,
+                        브랜드는 함께 완성해가는 열린 캔버스가 됩니다.
                     </p>
                 </div>
                 <div class="feature-card">
                     <h3 class="feature-title">Connection to Life - <span class="highlight">평범함을 특별함으로</span></h3>
                     <p class="feature-description">
-                        스티커는 익숙한 일상 속 물건이지만, 오브제와 결합될 때 평범함을 특별함으로 바꿉니다. 브랜드가 자연스럽게 일상에 스며들어 소비자의 기억에 남는 과정을 보여줍니다. 스티커는 브랜드와 소비자를 연결하는 작은 가교로, 특별한 순간과 일상을 이어주는 깊은 공감대를 형성합니다.
+                        스티커는 익숙한 일상 속 물건이지만, 오브제와 결합될 때 평범함을 특별함으로 바꿉니다. 브랜드가 자연스럽게 일상에 스며들어 소비자의 기억에 남는 과정을 보여줍니다. 스티커는
+                        브랜드와 소비자를 연결하는 작은 가교로, 특별한 순간과 일상을 이어주는 깊은 공감대를 형성합니다.
                     </p>
                 </div>
                 <div class="feature-card">
                     <h3 class="feature-title">Touch and Feel - <span class="highlight">시각을 넘어 감각적인 경험으로</span></h3>
                     <p class="feature-description">
-                        스티커는 단순히 바라보는 것으로 끝나지 않습니다. 떼고 붙이는 과정에서 손끝에 기억을 남기며, 브랜드를 시각적 자극을 넘어 감각적인 경험으로 확장시킵니다. 스티커는 단순한 디자인 요소가 아닌, 브랜드와 사람 사이의 교감을 만들어내는 매개체입니다.
+                        스티커는 단순히 바라보는 것으로 끝나지 않습니다. 떼고 붙이는 과정에서 손끝에 기억을 남기며, 브랜드를 시각적 자극을 넘어 감각적인 경험으로 확장시킵니다. 스티커는 단순한
+                        디자인 요소가 아닌, 브랜드와 사람 사이의 교감을 만들어내는 매개체입니다.
                     </p>
                 </div>
             </div>
@@ -957,32 +1265,48 @@
             <!-- New Image Grid - EXACTLY like GIF grid -->
             <div class="gif-grid" style="margin-top: 60px;">
                 <!-- 1번째 줄: 1개 -->
-                <div class="gif-row" style="display: grid; grid-template-columns: auto; justify-content: center; gap: 0;">
+                <div class="gif-row"
+                    style="display: grid; grid-template-columns: auto; justify-content: center; gap: 0;">
                     <div class="gif-item wide" data-index="0">
-                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/sportscar.webp" alt="Sports Car">
+                        <video autoplay loop muted playsinline>
+                            <source
+                                src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage02%2Fsportscar.mp4?alt=media&token=b7bef6e8-0789-43b0-9efa-d352603558f9"
+                                type="video/mp4">
+                        </video>
                     </div>
                 </div>
-                
+
                 <!-- 2번째 줄: 2개 -->
                 <div class="gif-row two-cols">
                     <div class="gif-item" data-index="1">
-                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/gun.webp" alt="Gun">
+                        <video autoplay loop muted playsinline>
+                            <source
+                                src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage02%2Fgun.mp4?alt=media&token=9ca8b932-e1d5-405b-9b83-4ade77f1401f"
+                                type="video/mp4">
+                        </video>
                     </div>
                     <div class="gif-item" data-index="2">
-                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/watch.webp" alt="Watch">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage02%2Fwatch.webp?alt=media&token=fb428516-eef3-4548-87b7-06daecdcc5fb"
+                            alt="Watch">
                     </div>
                 </div>
-                
+
                 <!-- 3번째 줄: 3개 -->
                 <div class="gif-row three-cols">
                     <div class="gif-item" data-index="3">
-                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/dragon.webp" alt="Dragon">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage02%2Fdragon.webp?alt=media&token=98e38752-1cb0-46ea-9d37-cde3cb43df6c"
+                            alt="Dragon">
                     </div>
                     <div class="gif-item" data-index="4">
-                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/kettybox.webp" alt="Ketty Box">
+                        <video autoplay loop muted playsinline>
+                            <source
+                                src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage02%2Fkettybox.mp4?alt=media&token=77c1d32d-dc25-42ce-9c44-9abceb9cbcb4"
+                                type="video/mp4">
+                        </video>
                     </div>
                     <div class="gif-item" data-index="5">
-                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/camera.webp" alt="Camera">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fpackage02%2Fcamera.webp?alt=media&token=f3d86fe4-e5c0-4800-a02e-f4d1114bcbe4"
+                            alt="Camera">
                     </div>
                 </div>
             </div>
@@ -992,10 +1316,12 @@
         <div class="infinite-scroll-wrapper" style="margin-top: 60px; margin-bottom: 60px;">
             <div class="infinite-scroll-track" style="animation: scroll-left 25s linear infinite;">
                 <div class="infinite-scroll-item">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fthird-line-graphic.svg?alt=media&token=d4e2bfd0-1a74-46dd-97ee-e9b18ae17450" alt="Brand Graphic 3">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fthird-line-graphic.svg?alt=media&token=d4e2bfd0-1a74-46dd-97ee-e9b18ae17450"
+                        alt="Brand Graphic 3">
                 </div>
                 <div class="infinite-scroll-item">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fthird-line-graphic.svg?alt=media&token=d4e2bfd0-1a74-46dd-97ee-e9b18ae17450" alt="Brand Graphic 3">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Fthird-line-graphic.svg?alt=media&token=d4e2bfd0-1a74-46dd-97ee-e9b18ae17450"
+                        alt="Brand Graphic 3">
                 </div>
             </div>
         </div>
@@ -1016,10 +1342,12 @@
                         <div class="step-number">1</div>
                         <h3 class="step-title">STEP 1 - 기본 도형으로 시작</h3>
                         <p class="step-description">
-                            모든 그래픽은 기본 도형에서 출발합니다. 먼저 전체적인 틀을 잡아 작업의 방향성을 설정하고, 동시에 다른 브랜드 오브젝트들과 어떤 방식으로 스타일의 일관성을 유지할지 고민하며 진행합니다.
+                            모든 그래픽은 기본 도형에서 출발합니다. 먼저 전체적인 틀을 잡아 작업의 방향성을 설정하고, 동시에 다른 브랜드 오브젝트들과 어떤 방식으로 스타일의 일관성을 유지할지
+                            고민하며 진행합니다.
                         </p>
                     </div>
-                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step1.webp" alt="Step 1" class="step-image">
+                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step1.webp" alt="Step 1"
+                        class="step-image">
                 </div>
 
                 <div class="process-step">
@@ -1027,10 +1355,12 @@
                         <div class="step-number">2</div>
                         <h3 class="step-title">STEP 2 - 지속적인 디테일 추가</h3>
                         <p class="step-description">
-                            캐릭터와 오브젝트에 디테일을 더하는 단계로, 라운드 값 조정부터 라이팅 테스트 등 다양한 실험을 거쳐 완성도를 높입니다. 각 브랜드의 개성을 최대한 살리면서도, 동시에 독창적인 특징을 어떻게 부여할지 고민합니다.
+                            캐릭터와 오브젝트에 디테일을 더하는 단계로, 라운드 값 조정부터 라이팅 테스트 등 다양한 실험을 거쳐 완성도를 높입니다. 각 브랜드의 개성을 최대한 살리면서도,
+                            동시에 독창적인 특징을 어떻게 부여할지 고민합니다.
                         </p>
                     </div>
-                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step2.webp" alt="Step 2" class="step-image">
+                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step2.webp" alt="Step 2"
+                        class="step-image">
                 </div>
 
                 <div class="process-step">
@@ -1038,10 +1368,12 @@
                         <div class="step-number">3</div>
                         <h3 class="step-title">STEP 3 - 스토리텔링 요소와 결합한 스티커 추가</h3>
                         <p class="step-description">
-                            디테일을 완성한 뒤에는 3D 그래픽 오브젝트에 2D 요소인 스티커를 결합하는 과정을 거칩니다. 이때 스티커의 위치와 배치를 조정하여 작업에 나만의 개성을 더할 수 있도록 제작을 진행합니다.
+                            디테일을 완성한 뒤에는 3D 그래픽 오브젝트에 2D 요소인 스티커를 결합하는 과정을 거칩니다. 이때 스티커의 위치와 배치를 조정하여 작업에 나만의 개성을 더할 수
+                            있도록 제작을 진행합니다.
                         </p>
                     </div>
-                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step3.webp" alt="Step 3" class="step-image">
+                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step3.webp" alt="Step 3"
+                        class="step-image">
                 </div>
             </div>
         </section>
@@ -1052,7 +1384,8 @@
                 <span class="section-label">Key Visuals</span>
                 <h2 class="section-title">최종 결과물</h2>
                 <p class="section-description">
-                    이번 프로젝트는 단순한 시각적 요소의 조합을 넘어, 브랜드의 정체성과 제가 추구하는 디자인 철학을 담아낸 작업입니다. 기본 도형에서 출발한 3D 오브젝트에 디테일을 더하고, 여기에 2D 스티커를 결합하는 과정을 통해 저만의 그래픽 스타일을 일관되게 구축하고자 했습니다.
+                    이번 프로젝트는 단순한 시각적 요소의 조합을 넘어, 브랜드의 정체성과 제가 추구하는 디자인 철학을 담아낸 작업입니다. 기본 도형에서 출발한 3D 오브젝트에 디테일을 더하고, 여기에
+                    2D 스티커를 결합하는 과정을 통해 저만의 그래픽 스타일을 일관되게 구축하고자 했습니다.
                 </p>
             </div>
 
@@ -1080,19 +1413,23 @@
             <div class="section-header">
                 <h2 class="section-title">Concept to Reality</h2>
                 <p class="section-description">
-                    디자인을 실제 생산으로 확장하는 것을 목표로 하여, 항상 실질적인 적용을 고려합니다. 단순히 창작하는 데 그치지 않고, 그래픽 모션과 스티커를 결합하여 새로운 가능성을 탐구하며, 역동적이고 조화로운 결과물을 선보이고자 합니다.
+                    디자인을 실제 생산으로 확장하는 것을 목표로 하여, 항상 실질적인 적용을 고려합니다. 단순히 창작하는 데 그치지 않고, 그래픽 모션과 스티커를 결합하여 새로운 가능성을 탐구하며,
+                    역동적이고 조화로운 결과물을 선보이고자 합니다.
                 </p>
             </div>
 
             <div class="image-grid cols-3">
                 <div class="image-item">
-                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/application1.webp" alt="Application 1">
+                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/application1.webp"
+                        alt="Application 1">
                 </div>
                 <div class="image-item">
-                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/application2.webp" alt="Application 2">
+                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/application2.webp"
+                        alt="Application 2">
                 </div>
                 <div class="image-item">
-                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/application3.webp" alt="Application 3">
+                    <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/application3.webp"
+                        alt="Application 3">
                 </div>
             </div>
         </section>
@@ -1121,7 +1458,7 @@
         // 히어로 이미지 로드 체크
         function checkHeroImageLoad() {
             const heroImage = document.querySelector('.hero-image');
-            
+
             if (heroImage.complete && heroImage.naturalHeight !== 0) {
                 heroImageLoaded = true;
                 initScrollAnimations();
@@ -1130,7 +1467,7 @@
                     heroImageLoaded = true;
                     initScrollAnimations();
                 });
-                
+
                 // 5초 후에도 로딩이 안되면 강제 시작
                 setTimeout(() => {
                     if (!heroImageLoaded) {
@@ -1193,7 +1530,7 @@
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
-                    
+
                     card.style.setProperty('--mouse-x', `${x}px`);
                     card.style.setProperty('--mouse-y', `${y}px`);
                     mouseTimeout = null;
@@ -1207,11 +1544,12 @@
                 const rect = item.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 item.style.setProperty('--mouse-x', `${x}px`);
                 item.style.setProperty('--mouse-y', `${y}px`);
             });
         });
     </script>
 </body>
+
 </html>
