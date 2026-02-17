@@ -140,10 +140,11 @@
 
         .project-info {
             display: flex;
-            flex-wrap: wrap;
             gap: 16px;
             margin-bottom: 0;
-            padding-bottom: 60px;
+            padding: 0 24px 60px 24px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .info-item {
@@ -155,12 +156,66 @@
             border: 1px solid #1a1a1a;
             border-radius: 12px;
             transition: all 0.3s ease;
-            flex: 1;
-            min-width: 200px;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             --mouse-x: 50%;
             --mouse-y: 50%;
+        }
+
+        .info-value {
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.6;
+            transition: text-shadow 0.3s ease;
+        }
+
+        /* 큰 화면: 컨테이너 확장 + 한 줄 + 텍스트 한 줄 */
+        @media (min-width: 1200px) {
+            .project-info {
+                flex-wrap: nowrap;
+                width: max-content;
+            }
+            
+            .info-item {
+                flex: 0 0 auto;
+            }
+            
+            .info-value {
+                white-space: nowrap;
+            }
+        }
+
+        /* 작은 화면: 2줄 + 페이지 마진 유지 + 텍스트 줄바꿈 */
+        @media (max-width: 1199px) {
+            .project-info {
+                flex-wrap: wrap;
+                width: 100%;
+                max-width: 1200px;
+            }
+            
+            .info-item {
+                flex: 1 1 calc(50% - 8px);
+            }
+            
+            .info-value {
+                white-space: normal;
+            }
+        }
+
+        /* 대형 화면: 한 줄로 배치 (1200px 이상) */
+        @media (min-width: 1200px) {
+            .info-item {
+                flex: 1 1 calc(25% - 12px);  /* 4개가 한 줄에 */
+                max-width: none;
+            }
+        }
+
+        /* 중형 화면: 2x2 배치 (768px~1199px) */
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .info-item {
+                flex: 1 1 calc(50% - 8px);   /* 2개씩 2줄 */
+            }
         }
 
         .info-item::before {
@@ -219,12 +274,17 @@
             text-shadow: 0 0 20px rgba(0, 222, 89, 0.3);
         }
 
-        .info-value {
-            color: #ffffff;
-            font-size: 0.95rem;
-            font-weight: 500;
-            line-height: 1.6;
-            transition: text-shadow 0.3s ease;
+
+
+        /* 작은 화면에서는 줄바꿈 허용 */
+        @media (max-width: 1199px) {
+            .info-value {
+                white-space: normal;  /* 작은 화면에서 줄바꿈 허용 */
+            }
+            
+            .info-item:last-child {
+                min-width: auto;  /* 작은 화면에서 너비 제한 해제 */
+            }
         }
 
         .info-item:hover .info-value {
@@ -595,11 +655,13 @@
 
             .project-info {
                 gap: 12px;
+                padding: 0 16px 40px 16px;  /* 페이지 마진 유지 */
             }
 
             .info-item {
-                flex: 1 1 100%;
+                flex: 1 1 100%;  /* 모바일에서 세로 배치 */
                 min-width: 100%;
+                max-width: none;
                 padding: 16px 20px;
             }
 
