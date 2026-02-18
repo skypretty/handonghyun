@@ -452,7 +452,7 @@
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-            padding: 0 24px 20px;
+            padding: 10px 24px 20px;
             scrollbar-width: none;
             justify-content: center;
         }
@@ -470,7 +470,7 @@
             border-radius: 16px;
             overflow: hidden;
             position: relative;
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease-out, background-color 0.2s ease, border-color 0.2s ease;
             scroll-snap-align: start;
             --mouse-x: 50%;
             --mouse-y: 50%;
@@ -519,6 +519,7 @@
         .process-step:hover {
             background-color: rgba(255, 255, 255, 0.04);
             border-color: #2a2a2a;
+            transform: translateY(-6px);
         }
 
         .step-image-container {
@@ -974,6 +975,10 @@
         .image-item.animate-in {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        .process-step.animate-in:hover {
+            transform: translateY(-6px);
         }
 
         /* 스티커 애니메이션 */
