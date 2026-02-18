@@ -161,7 +161,7 @@
             gap: 8px;
             padding: 20px 28px;
             background-color: #121212;
-            border: 1px solid #1a1a1a;
+            border: 1px solid #252525;
             border-radius: 12px;
             transition: all 0.3s ease;
             position: relative;
@@ -443,27 +443,35 @@
             display: block;
         }
 
-        /* Process Steps - 지그재그 레이아웃 */
+        /* Process Steps - 가로 스크롤 레이아웃 */
         .process-steps {
             display: flex;
-            flex-direction: column;
-            gap: 40px;
+            flex-direction: row;
+            gap: 24px;
             margin-top: 60px;
-            max-width: 840px;
-            margin-left: auto;
-            margin-right: auto;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 0 24px 20px;
+            scrollbar-width: none;
+            justify-content: center;
+        }
+
+        .process-steps::-webkit-scrollbar {
+            display: none;
         }
 
         .process-step {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
+            display: flex;
+            flex-direction: column;
+            flex: 0 0 clamp(280px, 30vw, 380px);
             background: #121212;
-            border: 1px solid #1a1a1a;
+            border: 1px solid #252525;
             border-radius: 16px;
             overflow: hidden;
             position: relative;
             transition: all 0.3s ease;
+            scroll-snap-align: start;
             --mouse-x: 50%;
             --mouse-y: 50%;
         }
@@ -513,39 +521,22 @@
             border-color: #2a2a2a;
         }
 
-        /* 홀수 스텝: 이미지 왼쪽 */
-        .process-step:nth-child(odd) .step-image-container {
-            order: 1;
-        }
-
-        .process-step:nth-child(odd) .step-info {
-            order: 2;
-        }
-
-        /* 짝수 스텝: 이미지 오른쪽 */
-        .process-step:nth-child(even) .step-image-container {
-            order: 2;
-        }
-
-        .process-step:nth-child(even) .step-info {
-            order: 1;
-        }
-
         .step-image-container {
             position: relative;
             background: #0a0a0a;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px;
+            padding: 30px;
+            order: 1;
         }
 
         .step-info {
-            padding: 60px 50px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             position: relative;
+            order: 2;
         }
 
         .step-number {
@@ -566,25 +557,61 @@
         }
 
         .step-title {
-            font-size: 1.4rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
             letter-spacing: -0.01em;
             color: #ffffff;
         }
 
         .step-description {
-            font-size: 1rem;
+            font-size: 0.92rem;
             line-height: 1.8;
             color: #aaaaaa;
         }
 
         .step-image {
-            width: clamp(200px, 100%, 300px);
+            width: 100%;
+            max-width: 260px;
             height: auto;
             object-fit: contain;
             border-radius: 12px;
             aspect-ratio: 1 / 1;
+        }
+
+        /* Step Visuals */
+        .step-visuals {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 60px;
+            max-width: calc(clamp(280px, 30vw, 380px) * 3 + 24px * 2);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .step-visual-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .step-visual-item {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .step-visual-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .step-visual-row {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Key Features */
@@ -601,7 +628,7 @@
         .feature-card {
             padding: 40px;
             background-color: #121212;
-            border: 1px solid #1a1a1a;
+            border: 1px solid #252525;
             border-radius: 12px;
             transition: all 0.3s ease;
             position: relative;
@@ -687,7 +714,7 @@
             max-width: 1920px;
             margin: 80px auto 0;
             padding: 40px 24px;
-            border-top: 1px solid #1a1a1a;
+            border-top: 1px solid #252525;
             display: flex;
             justify-content: space-between;
             gap: 20px;
@@ -724,25 +751,7 @@
         /* Responsive */
         @media (max-width: 1200px) {
             .process-step {
-                grid-template-columns: 1fr;
-            }
-
-            .process-step:nth-child(odd) .step-image-container,
-            .process-step:nth-child(even) .step-image-container {
-                order: 1;
-            }
-
-            .process-step:nth-child(odd) .step-info,
-            .process-step:nth-child(even) .step-info {
-                order: 2;
-            }
-
-            .step-info {
-                padding: 40px 30px;
-            }
-
-            .step-image-container {
-                padding: 30px 20px;
+                flex: 0 0 clamp(260px, 70vw, 340px);
             }
         }
 
@@ -832,26 +841,36 @@
                 padding: 30px;
             }
 
+            .process-step {
+                flex: 0 0 clamp(240px, 75vw, 300px);
+            }
+
             .step-info {
-                padding: 30px 20px;
+                padding: 24px 20px;
             }
 
             .step-image-container {
-                padding: 24px 16px;
+                padding: 20px 16px;
             }
 
             .step-number {
                 width: 36px;
                 height: 36px;
                 font-size: 1rem;
+                margin-bottom: 12px;
             }
 
             .step-title {
-                font-size: 1.2rem;
+                font-size: 1.05rem;
+                margin-bottom: 10px;
             }
 
             .step-description {
-                font-size: 0.95rem;
+                font-size: 0.88rem;
+            }
+
+            .step-image {
+                max-width: 200px;
             }
 
             .project-navigation {
@@ -1399,8 +1418,8 @@
             <div class="process-steps">
                 <div class="process-step">
                     <div class="step-image-container">
-                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step1.webp" alt="Step 1"
-                            class="step-image">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fstep%2Fstep1.webp?alt=media&token=389edfc0-e373-4458-b36a-e30eaa13a323"
+                            alt="Step 1" class="step-image">
                     </div>
                     <div class="step-info">
                         <div class="step-number">1</div>
@@ -1414,8 +1433,8 @@
 
                 <div class="process-step">
                     <div class="step-image-container">
-                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step2.webp" alt="Step 2"
-                            class="step-image">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fstep%2Fstep2.webp?alt=media&token=3ad2d92b-7c5a-49fb-bbf9-0eb4a90bfc61"
+                            alt="Step 2" class="step-image">
                     </div>
                     <div class="step-info">
                         <div class="step-number">2</div>
@@ -1429,12 +1448,12 @@
 
                 <div class="process-step">
                     <div class="step-image-container">
-                        <img src="https://pub-03388915be204147a593bb532492c209.r2.dev/process-step3.webp" alt="Step 3"
-                            class="step-image">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fstep%2Fstep3.webp?alt=media&token=9f61c5e0-0abc-4f52-9429-27679bc65a5f"
+                            alt="Step 3" class="step-image">
                     </div>
                     <div class="step-info">
                         <div class="step-number">3</div>
-                        <h3 class="step-title">STEP 3 - 스토리텔링 요소와 결합한 스티커 추가</h3>
+                        <h3 class="step-title">STEP 3 - 스토리텔링과 결합한 스티커</h3>
                         <p class="step-description">
                             디테일을 완성한 뒤에는 3D 그래픽 오브젝트에 2D 요소인 스티커를 결합하는 과정을 거칩니다. 이때 스티커의 위치와 배치를 조정하여 작업에 나만의 개성을 더할 수
                             있도록 제작을 진행합니다.
@@ -1442,7 +1461,37 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Step Visual Images -->
+            <div class="step-visuals">
+                <div class="step-visual-item">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fstep%2Fstepvisual01.webp?alt=media&token=2cc952b3-2fe6-40f3-bade-9b4674010447" alt="Step Visual 1" loading="lazy">
+                </div>
+                <div class="step-visual-row">
+                    <div class="step-visual-item">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fstep%2Fstepvisual02.webp?alt=media&token=2dfd9fbe-90aa-48e4-9572-860979679a31" alt="Step Visual 2" loading="lazy">
+                    </div>
+                    <div class="step-visual-item">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fstep%2Fstepvisual03.webp?alt=media&token=bc1d9244-a966-4dba-9149-adb13d66f4e3" alt="Step Visual 3" loading="lazy">
+                    </div>
+                </div>
+                <div class="step-visual-item">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fstep%2Fstepvisual04.webp?alt=media&token=aee5f532-19f5-4569-b0c4-e4f4980303ec" alt="Step Visual 4" loading="lazy">
+                </div>
+            </div>
         </section>
+
+        <!-- Fourth Infinite Scrolling Graphic -->
+        <div class="infinite-scroll-wrapper" style="margin-top: 60px; margin-bottom: 60px;">
+            <div class="infinite-scroll-track" style="animation: scroll-right 25s linear infinite;">
+                <div class="infinite-scroll-item">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Ffourth-line-graphic.svg?alt=media&token=92d9a905-3bc3-4afb-b703-7b1289f2f072" alt="Brand Graphic 4">
+                </div>
+                <div class="infinite-scroll-item">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/favorate-brand%2Fimages%2Ffourth-line-graphic.svg?alt=media&token=92d9a905-3bc3-4afb-b703-7b1289f2f072" alt="Brand Graphic 4">
+                </div>
+            </div>
+        </div>
 
         <!-- Key Visuals Section -->
         <section class="section">
