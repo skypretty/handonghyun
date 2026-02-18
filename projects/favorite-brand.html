@@ -449,7 +449,7 @@
             flex-direction: column;
             gap: 40px;
             margin-top: 60px;
-            max-width: 1400px;
+            max-width: 840px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -463,6 +463,54 @@
             border-radius: 16px;
             overflow: hidden;
             position: relative;
+            transition: all 0.3s ease;
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+        }
+
+        .process-step::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 222, 89, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            left: var(--mouse-x);
+            top: var(--mouse-y);
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .process-step::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: radial-gradient(150px circle at var(--mouse-x) var(--mouse-y), rgba(0, 222, 89, 0.4), transparent 80%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .process-step:hover::before {
+            opacity: 1;
+        }
+
+        .process-step:hover::after {
+            opacity: 1;
+        }
+
+        .process-step:hover {
+            background-color: rgba(255, 255, 255, 0.04);
+            border-color: #2a2a2a;
         }
 
         /* 홀수 스텝: 이미지 왼쪽 */
@@ -489,8 +537,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 60px 40px;
-            min-height: 400px;
+            padding: 40px;
         }
 
         .step-info {
@@ -502,21 +549,20 @@
         }
 
         .step-number {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            width: 50px;
-            height: 50px;
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
             background: rgba(0, 222, 89, 0.1);
             border: 2px solid rgba(0, 222, 89, 0.3);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: #00DE59;
             line-height: 1;
+            margin-bottom: 16px;
         }
 
         .step-title {
@@ -525,7 +571,6 @@
             margin-bottom: 20px;
             letter-spacing: -0.01em;
             color: #ffffff;
-            padding-top: 20px;
         }
 
         .step-description {
@@ -535,11 +580,11 @@
         }
 
         .step-image {
-            width: 100%;
-            max-width: 500px;
+            width: clamp(200px, 100%, 300px);
             height: auto;
             object-fit: contain;
             border-radius: 12px;
+            aspect-ratio: 1 / 1;
         }
 
         /* Key Features */
@@ -697,8 +742,7 @@
             }
 
             .step-image-container {
-                padding: 40px 30px;
-                min-height: 300px;
+                padding: 30px 20px;
             }
         }
 
@@ -793,16 +837,13 @@
             }
 
             .step-image-container {
-                padding: 30px 20px;
-                min-height: 250px;
+                padding: 24px 16px;
             }
 
             .step-number {
-                width: 40px;
-                height: 40px;
-                font-size: 1.1rem;
-                top: 20px;
-                left: 20px;
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
             }
 
             .step-title {
@@ -920,7 +961,7 @@
         .sticker-animation {
             position: relative;
             width: 100%;
-            height: 300px;
+            height: clamp(200px, 40vw, 280px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -929,8 +970,8 @@
 
         .sticker-container {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: clamp(200px, 40vw, 280px);
+            height: clamp(200px, 40vw, 280px);
             perspective: 1000px;
         }
 
@@ -938,8 +979,8 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 300px;
-            height: 300px;
+            width: 100%;
+            height: 100%;
             opacity: 0;
             animation: stickerLoop 8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
             z-index: 10;
@@ -1559,6 +1600,18 @@
                     card.style.setProperty('--mouse-y', `${y}px`);
                     mouseTimeout = null;
                 }, 16);
+            });
+        });
+
+        // Process step mouse follow effect
+        document.querySelectorAll('.process-step').forEach(step => {
+            step.addEventListener('mousemove', (e) => {
+                const rect = step.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                step.style.setProperty('--mouse-x', `${x}px`);
+                step.style.setProperty('--mouse-y', `${y}px`);
             });
         });
 
