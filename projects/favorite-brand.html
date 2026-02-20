@@ -757,21 +757,10 @@
         }
 
         @media (max-width: 1024px) {
-            /* 태블릿에서 gif-grid를 2개씩 균등 배치 */
-            .gif-grid {
-                display: grid;
+            /* 태블릿에서 two-cols와 three-cols만 2개씩 배치 */
+            .gif-row.two-cols,
+            .gif-row.three-cols {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 24px;
-            }
-
-            .gif-row {
-                display: contents;
-            }
-
-            /* wide 아이템도 일반 크기로 조정 */
-            .gif-item.wide {
-                width: clamp(350px, 30vw, 550px);
-                height: clamp(350px, 30vw, 550px);
             }
 
             .key-features {
@@ -822,14 +811,12 @@
                 padding: 60px 16px;
             }
 
-            /* 모바일에서 gif-grid를 1개씩 배치 */
-            .gif-grid {
+            /* 모바일에서 gif-row를 1개씩 배치 */
+            .gif-row.two-cols,
+            .gif-row.three-cols {
                 grid-template-columns: 1fr;
+                justify-content: center;
                 justify-items: center;
-            }
-
-            .gif-row {
-                display: contents;
             }
 
             /* 모바일에서 이미지 크기 조정 */
@@ -978,7 +965,7 @@
         .image-item {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
         }
 
         /* 애니메이션 적용 후 */
@@ -1638,7 +1625,7 @@
                                 entry.target.classList.add('animate-in');
                                 animatedElements.add(entry.target);
                                 observer.unobserve(entry.target);
-                            }, index * 100); // 히어로 로딩 후 순차 애니메이션
+                            }, index * 10); // 최소 순차 지연
                         } else {
                             entry.target.classList.add('animate-in');
                             animatedElements.add(entry.target);
