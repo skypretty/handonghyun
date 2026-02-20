@@ -757,10 +757,21 @@
         }
 
         @media (max-width: 1024px) {
-
-            .gif-row.two-cols,
-            .gif-row.three-cols {
+            /* 태블릿에서 gif-grid를 2개씩 균등 배치 */
+            .gif-grid {
+                display: grid;
                 grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+
+            .gif-row {
+                display: contents;
+            }
+
+            /* wide 아이템도 일반 크기로 조정 */
+            .gif-item.wide {
+                width: clamp(350px, 30vw, 550px);
+                height: clamp(350px, 30vw, 550px);
             }
 
             .key-features {
@@ -811,11 +822,14 @@
                 padding: 60px 16px;
             }
 
-            .gif-row.two-cols,
-            .gif-row.three-cols {
+            /* 모바일에서 gif-grid를 1개씩 배치 */
+            .gif-grid {
                 grid-template-columns: 1fr;
-                justify-content: center;
                 justify-items: center;
+            }
+
+            .gif-row {
+                display: contents;
             }
 
             /* 모바일에서 이미지 크기 조정 */
