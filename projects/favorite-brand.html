@@ -757,7 +757,18 @@
         }
 
         @media (max-width: 1024px) {
-            /* 태블릿에서 two-cols와 three-cols만 2개씩 배치 */
+            /* 태블릿에서 프로젝트 개요 섹션만 2개씩 일관되게 배치 */
+            .overview-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .overview-grid .gif-row {
+                display: contents;
+            }
+
+            /* 태블릿에서 Key Object 섹션 - two-cols와 three-cols만 2개씩 배치 */
             .gif-row.two-cols,
             .gif-row.three-cols {
                 grid-template-columns: repeat(2, 1fr);
@@ -765,6 +776,17 @@
 
             .key-features {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* 태블릿에서 히어로 이미지 위치 및 높이 조정 */
+            .hero-section {
+                margin-top: -20px;
+            }
+
+            .hero-image {
+                height: 500px;
+                object-fit: cover;
+                object-position: center;
             }
         }
 
@@ -786,11 +808,15 @@
 
             .hero-section {
                 padding: 0 16px 0;
-                margin-top: -40px;
+                margin-top: 0;
             }
 
             .hero-image {
                 margin-bottom: 40px;
+                width: 100%;
+                height: 450px;
+                object-fit: cover;
+                object-position: center;
             }
 
             .project-info {
@@ -809,6 +835,15 @@
 
             .section {
                 padding: 60px 16px;
+            }
+
+            /* 모바일에서 프로젝트 개요 섹션 1개씩 배치로 되돌리기 */
+            .overview-grid {
+                display: block;
+            }
+
+            .overview-grid .gif-row {
+                display: grid;
             }
 
             /* 모바일에서 gif-row를 1개씩 배치 */
@@ -1189,7 +1224,7 @@
             </div>
 
             <!-- GIF Grid - Overview 하단에 배치 -->
-            <div class="gif-grid">
+            <div class="gif-grid overview-grid">
                 <!-- 1번째 줄: 2개 (640:500 비율) -->
                 <div class="gif-row two-cols">
                     <div class="gif-item" data-index="0">
