@@ -414,6 +414,91 @@
             line-height: 1.7;
         }
 
+        /* Section Label */
+        .section-label {
+            display: inline-block;
+            color: #999999;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .content-section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+        }
+
+        .section-description {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #666666;
+            max-width: 680px;
+            margin-bottom: 0;
+        }
+
+        /* Floating Navigation */
+        .floating-nav {
+            position: fixed;
+            left: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 500;
+        }
+
+        .floating-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            cursor: pointer;
+            padding: 7px 0;
+            text-decoration: none;
+            color: #cccccc;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .floating-nav-line {
+            width: 3px;
+            height: 20px;
+            background-color: #d5d5d5;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .floating-nav-item.active {
+            color: #0a0a0a;
+        }
+
+        .floating-nav-item.active .floating-nav-line {
+            background-color: #0a0a0a;
+            height: 40px;
+        }
+
+        .floating-nav-item:hover {
+            color: #555555;
+        }
+
+        .floating-nav-item:hover .floating-nav-line {
+            background-color: #555555;
+        }
+
+        @media (max-width: 1280px) {
+            .floating-nav {
+                display: none;
+            }
+        }
+
         /* Footer */
         footer {
             border-top: 1px solid #e5e5e5;
@@ -504,6 +589,30 @@
         </div>
     </header>
 
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+        <a href="#section-overview" class="floating-nav-item" data-target="section-overview">
+            <span class="floating-nav-line"></span>
+            Overview
+        </a>
+        <a href="#section-2d" class="floating-nav-item" data-target="section-2d">
+            <span class="floating-nav-line"></span>
+            2D Visuals & Guide
+        </a>
+        <a href="#section-3d" class="floating-nav-item" data-target="section-3d">
+            <span class="floating-nav-line"></span>
+            3D Visuals & Guide
+        </a>
+        <a href="#section-illustrations" class="floating-nav-item" data-target="section-illustrations">
+            <span class="floating-nav-line"></span>
+            Illustrations
+        </a>
+        <a href="#section-onboarding" class="floating-nav-item" data-target="section-onboarding">
+            <span class="floating-nav-line"></span>
+            Design System Onboarding
+        </a>
+    </nav>
+
     <main class="main-content">
         <!-- Infinite Scroll Gallery Section -->
         <section class="gallery-section">
@@ -522,7 +631,7 @@
         </section>
 
         <!-- Project Info Section -->
-        <section class="project-info">
+        <section class="project-info" id="section-overview">
             <h1>여기어때 컴퍼니 : Visual System</h1>
             <div class="project-meta">
                 <div class="project-meta-item">
@@ -545,35 +654,116 @@
             </p>
         </section>
 
-        <!-- Additional Content Section -->
-        <section class="content-section">
-            <h2>Design System Overview</h2>
+        <!-- 2D Visuals & Guide Section -->
+        <section class="content-section" id="section-2d">
+            <span class="section-label">2D Visuals & Guide</span>
+            <h2>2D 그래픽 비주얼 시스템</h2>
+            <p class="section-description">
+                여기어때 컴퍼니의 2D 그래픽 아이콘 시스템입니다. 음식, 여행, 레저 등 다양한 카테고리에 걸쳐
+                일관된 스타일로 제작된 2D 오브젝트들로, 서비스 전반의 비주얼 언어를 정의합니다.
+            </p>
             <div class="content-grid">
                 <div class="content-card">
-                    <h3>Color Palette</h3>
-                    <p>브랜드 고유의 컬러 시스템을 개발하여 모든 비주얼 커뮤니케이션에 일관성을 부여했습니다.</p>
+                    <h3>Style Guide</h3>
+                    <p>플랫한 형태와 명확한 실루엣을 기반으로 제작된 2D 그래픽 스타일 가이드. 색상, 선 굵기, 여백 비율을 정의합니다.</p>
                 </div>
                 <div class="content-card">
-                    <h3>Typography</h3>
-                    <p>가독성과 브랜드 개성을 모두 반영한 타이포그래피 시스템을 구축했습니다.</p>
+                    <h3>Color System</h3>
+                    <p>카테고리별 색상 팔레트와 컬러 사용 원칙. 브랜드 컬러와의 조화를 고려한 오브젝트 색상 시스템입니다.</p>
                 </div>
                 <div class="content-card">
-                    <h3>Iconography</h3>
-                    <p>직관적이고 친근한 아이콘 세트로 사용자 경험을 향상시켰습니다.</p>
+                    <h3>Grid & Sizing</h3>
+                    <p>100×100px 기준 그리드 시스템과 다양한 해상도 대응을 위한 사이즈 가이드라인입니다.</p>
                 </div>
                 <div class="content-card">
-                    <h3>Motion Design</h3>
-                    <p>브랜드 경험을 더욱 생동감 있게 만드는 모션 가이드라인을 설정했습니다.</p>
+                    <h3>Usage Rules</h3>
+                    <p>UI 컴포넌트, 마케팅 소재, 서비스 화면 내 2D 오브젝트 활용 규칙과 금지 사항입니다.</p>
                 </div>
             </div>
         </section>
 
-        <section class="content-section">
-            <h2>Application Examples</h2>
-            <p class="project-description">
-                개발된 비주얼 시스템은 웹사이트, 모바일 앱, 마케팅 자료, 오프라인 공간 등 
-                다양한 채널에서 활용되어 통합된 브랜드 경험을 제공합니다.
+        <!-- 3D Visuals & Guide Section -->
+        <section class="content-section" id="section-3d">
+            <span class="section-label">3D Visuals & Guide</span>
+            <h2>3D 그래픽 비주얼 시스템</h2>
+            <p class="section-description">
+                2D 오브젝트와 동일한 아이덴티티를 유지하면서 입체감과 깊이를 더한 3D 그래픽 시스템입니다.
+                캠페인, 랜딩페이지, 고관여 콘텐츠에서 더 풍부한 시각적 임팩트를 제공합니다.
             </p>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>3D Style Guide</h3>
+                    <p>재질감, 조명 방향, 그림자 처리 등 3D 그래픽 전반에 적용되는 스타일 원칙을 정의합니다.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Light & Shadow</h3>
+                    <p>일관된 광원 방향과 그림자 표현 방식. 모든 3D 오브젝트에 통일된 조명 규칙을 적용합니다.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Material System</h3>
+                    <p>오브젝트 유형에 따른 재질 표현 가이드. 매트, 글로시, 반투명 소재별 렌더링 기준입니다.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Usage Rules</h3>
+                    <p>3D 비주얼이 활용되는 컨텍스트와 2D와의 혼용 가이드. 해상도 및 포맷 기준을 포함합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Illustrations Section -->
+        <section class="content-section" id="section-illustrations">
+            <span class="section-label">Illustrations</span>
+            <h2>일러스트레이션 시스템</h2>
+            <p class="section-description">
+                서비스의 감성적 순간들을 위한 일러스트레이션 가이드입니다. 빈 상태, 에러 화면, 온보딩 등
+                사용자와 정서적으로 연결되는 지점에서 여기어때만의 따뜻한 시각 언어를 전달합니다.
+            </p>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Illustration Style</h3>
+                    <p>캐릭터 비율, 선 표현, 채색 방식 등 일러스트레이션 전반의 스타일 기준을 정의합니다.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Scene Composition</h3>
+                    <p>배경, 오브젝트, 캐릭터의 배치 원칙과 여백 처리. 다양한 화면 비율에 대응하는 컴포지션 가이드입니다.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Emotion Tone</h3>
+                    <p>각 상황별 감정 톤 가이드. 즐거움, 안심, 공감 등 서비스 맥락에 맞는 감성 표현 원칙입니다.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Application</h3>
+                    <p>Empty state, 에러 페이지, 온보딩, 이벤트 배너 등 실제 서비스 화면 내 일러스트 적용 사례입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design System Onboarding Section -->
+        <section class="content-section" id="section-onboarding">
+            <span class="section-label">Design System Onboarding</span>
+            <h2>디자인 시스템 온보딩</h2>
+            <p class="section-description">
+                여기어때 비주얼 시스템을 처음 접하는 디자이너와 개발자를 위한 온보딩 가이드입니다.
+                시스템의 철학과 원칙부터 실제 적용 방법까지, 빠르게 이해하고 활용할 수 있도록 안내합니다.
+            </p>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Design Principles</h3>
+                    <p>여기어때 비주얼 시스템이 추구하는 핵심 가치와 디자인 철학. 모든 의사결정의 기준이 되는 원칙입니다.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Quick Start</h3>
+                    <p>Figma 라이브러리 연결부터 첫 번째 컴포넌트 사용까지. 온보딩 체크리스트로 빠르게 시작하세요.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Contribution Guide</h3>
+                    <p>시스템에 새로운 컴포넌트나 패턴을 기여하는 방법. 리뷰 프로세스와 버전 관리 규칙을 안내합니다.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Release Notes</h3>
+                    <p>비주얼 시스템의 변경 이력과 버전별 업데이트 내용. 주요 변경 사항과 마이그레이션 가이드를 포함합니다.</p>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -1225,6 +1415,36 @@
                 // 3D 효과는 제거 (불필요한 성능 저하)
             }
         }
+
+        // Floating nav - smooth scroll
+        document.querySelectorAll('.floating-nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = item.dataset.target;
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) {
+                    const offset = 80; // 헤더 높이 오프셋
+                    const top = targetEl.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Floating nav - active state (Intersection Observer)
+        const navSections = document.querySelectorAll('#section-overview, #section-2d, #section-3d, #section-illustrations, #section-onboarding');
+        const navItems = document.querySelectorAll('.floating-nav-item');
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navItems.forEach(item => item.classList.remove('active'));
+                    const active = document.querySelector(`.floating-nav-item[data-target="${entry.target.id}"]`);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { threshold: 0.25, rootMargin: '-10% 0px -60% 0px' });
+
+        navSections.forEach(section => navObserver.observe(section));
 
         // 마우스 트래킹 - info 카드 글로우 효과
         document.querySelectorAll('.project-meta-item').forEach(card => {
