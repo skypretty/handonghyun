@@ -104,27 +104,107 @@
         .project-info h1 {
             font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 32px;
             letter-spacing: -0.03em;
         }
 
+        /* Info 카드 - Favorite Brand 스타일 */
         .project-meta {
             display: flex;
-            gap: 40px;
+            gap: 16px;
             margin-bottom: 40px;
-            font-size: 0.95rem;
-            color: #666666;
+            flex-wrap: wrap;
         }
 
         .project-meta-item {
-            display: flex;
+            display: inline-flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
+            padding: 20px 28px;
+            background-color: #f5f5f5;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+        }
+
+        .project-meta-item::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            left: var(--mouse-x);
+            top: var(--mouse-y);
+            transform: translate(-50%, -50%);
+        }
+
+        .project-meta-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            padding: 1px;
+            background: radial-gradient(150px circle at var(--mouse-x) var(--mouse-y), rgba(0, 0, 0, 0.25), transparent 80%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-meta-item:hover::before,
+        .project-meta-item:hover::after {
+            opacity: 1;
+        }
+
+        .project-meta-item:hover {
+            background-color: #efefef;
+            border-color: #d5d5d5;
         }
 
         .meta-label {
+            color: #999999;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
             font-weight: 600;
+        }
+
+        .meta-value {
             color: #0a0a0a;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.6;
+            white-space: nowrap;
+        }
+
+        /* 반응형 */
+        @media (max-width: 1199px) {
+            .project-meta {
+                flex-wrap: wrap;
+            }
+            .project-meta-item {
+                flex: 1 1 calc(50% - 8px);
+            }
+            .meta-value {
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .project-meta-item {
+                flex: 1 1 100%;
+            }
         }
 
         .project-description {
@@ -447,15 +527,15 @@
             <div class="project-meta">
                 <div class="project-meta-item">
                     <span class="meta-label">Year</span>
-                    <span>2025</span>
+                    <span class="meta-value">2025</span>
                 </div>
                 <div class="project-meta-item">
                     <span class="meta-label">Role</span>
-                    <span>Visual Design, Art Direction</span>
+                    <span class="meta-value">Visual Design, Art Direction</span>
                 </div>
                 <div class="project-meta-item">
                     <span class="meta-label">Client</span>
-                    <span>여기어때 컴퍼니</span>
+                    <span class="meta-value">여기어때 컴퍼니</span>
                 </div>
             </div>
             <p class="project-description">
@@ -1145,6 +1225,17 @@
                 // 3D 효과는 제거 (불필요한 성능 저하)
             }
         }
+
+        // 마우스 트래킹 - info 카드 글로우 효과
+        document.querySelectorAll('.project-meta-item').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
 
         // Initialize gallery
         const gallery = new InfiniteGallery();
