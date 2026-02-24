@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>여기어때 컴퍼니 : Visual System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -29,19 +31,24 @@
             left: 0;
             right: 0;
             padding: 16px 24px;
-            background-color: rgba(255, 255, 255, 0.6); /* 불투명도 증가 (0.3 → 0.6) */
+            background-color: rgba(255, 255, 255, 0.6);
+            /* 불투명도 증가 (0.3 → 0.6) */
             border-bottom: 1px solid rgba(229, 229, 229, 0.3);
             z-index: 1000;
-            backdrop-filter: blur(12px) saturate(180%); /* 블러 줄임 */
-            -webkit-backdrop-filter: blur(12px) saturate(180%); /* Safari 지원 */
-            transition: backdrop-filter 0.3s ease, background-color 0.3s ease; /* 블러 전환 애니메이션 */
+            backdrop-filter: blur(12px) saturate(180%);
+            /* 블러 줄임 */
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            /* Safari 지원 */
+            transition: backdrop-filter 0.3s ease, background-color 0.3s ease;
+            /* 블러 전환 애니메이션 */
         }
 
         /* 갤러리 영역 벗어나면 블러 제거 + 완전 불투명 */
         header.no-blur {
             backdrop-filter: blur(0px);
             -webkit-backdrop-filter: blur(0px);
-            background-color: rgba(255, 255, 255, 1); /* 완전 불투명 */
+            background-color: rgba(255, 255, 255, 1);
+            /* 완전 불투명 */
             border-bottom: 1px solid #e5e5e5;
         }
 
@@ -72,11 +79,11 @@
             font-weight: 600;
             letter-spacing: -0.02em;
         }
-        
+
         .contact-info {
             display: block;
         }
-        
+
         .contact-info a {
             color: #999999;
             text-decoration: none;
@@ -84,14 +91,15 @@
             font-weight: 500;
             transition: color 0.3s ease;
         }
-        
+
         .contact-info a:hover {
             color: #0a0a0a;
         }
 
         /* Main Content */
         .main-content {
-            padding-top: 61px; /* 헤더 높이만 */
+            padding-top: 61px;
+            /* 헤더 높이만 */
         }
 
         /* Project Info Section */
@@ -104,6 +112,7 @@
         .project-info h1 {
             font-size: 3rem;
             font-weight: 700;
+            margin-top: 80px;
             margin-bottom: 32px;
             letter-spacing: -0.03em;
         }
@@ -113,7 +122,7 @@
             display: flex;
             gap: 16px;
             margin-bottom: 40px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
 
         .project-meta-item {
@@ -127,6 +136,8 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            flex: 1 1 0;
+            min-width: 0;
             --mouse-x: 50%;
             --mouse-y: 50%;
         }
@@ -185,23 +196,21 @@
             font-size: 0.95rem;
             font-weight: 500;
             line-height: 1.6;
-            white-space: nowrap;
+            white-space: normal;
         }
 
         /* 반응형 */
-        @media (max-width: 1199px) {
+        @media (max-width: 767px) {
             .project-meta {
                 flex-wrap: wrap;
             }
+
             .project-meta-item {
                 flex: 1 1 calc(50% - 8px);
             }
-            .meta-value {
-                white-space: normal;
-            }
         }
 
-        @media (max-width: 767px) {
+        @media (max-width: 480px) {
             .project-meta-item {
                 flex: 1 1 100%;
             }
@@ -220,14 +229,18 @@
             background-color: #fafafa;
             border-top: none;
             border-bottom: 1px solid #e5e5e5;
-            position: relative; /* 스크롤 시 함께 이동 */
+            position: relative;
+            /* 스크롤 시 함께 이동 */
             z-index: 1;
-            margin-top: -80px; /* 더 위로 올려서 헤더와 많이 겹치게 */
-            height: calc(100vh - 220px + 80px); /* 높이 증가 (250 → 220) */
+            margin-top: -80px;
+            /* 더 위로 올려서 헤더와 많이 겹치게 */
+            height: calc(100vh - 220px + 80px);
+            /* 높이 증가 (250 → 220) */
         }
 
         .gallery-container {
-            height: 100%; /* gallery-section의 높이에 맞춤 */
+            height: 100%;
+            /* gallery-section의 높이에 맞춤 */
             min-height: 500px;
             overflow: hidden;
             position: relative;
@@ -251,15 +264,15 @@
         .gallery-grid {
             position: absolute;
             display: grid;
-            grid-template-columns: repeat(70, 100px);
+            grid-template-columns: repeat(70, 90px);
             gap: 50px;
             padding: 40px;
             width: max-content;
         }
 
         .gallery-item {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             background-color: transparent;
             border-radius: 0;
             overflow: visible;
@@ -445,11 +458,20 @@
             position: fixed;
             left: 48px;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(-50%) translateX(-20px);
             display: flex;
             flex-direction: column;
             gap: 10px;
             z-index: 500;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .floating-nav.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(-50%) translateX(0);
         }
 
         .floating-nav-item {
@@ -499,6 +521,16 @@
             }
         }
 
+        /* 사이드바 절대영역: 1281px 이상에서 텍스트가 사이드바와 겹치지 않도록 */
+        /* 사이드바 우측 끝: left(48px) + line(3px) + gap(18px) + 텍스트(~200px) ≈ 280px */
+        @media (min-width: 1281px) {
+
+            .project-info,
+            .content-section {
+                padding-left: max(40px, calc(300px - (100vw - 1200px) / 2));
+            }
+        }
+
         /* Footer */
         footer {
             border-top: 1px solid #e5e5e5;
@@ -539,8 +571,10 @@
             }
 
             .gallery-section {
-                margin-top: -60px; /* 모바일에서도 더 위로 */
-                height: calc(100vh - 150px + 60px); /* 모바일도 높이 증가 (180 → 150) */
+                margin-top: -60px;
+                /* 모바일에서도 더 위로 */
+                height: calc(100vh - 150px + 60px);
+                /* 모바일도 높이 증가 (180 → 150) */
             }
 
             .gallery-container {
@@ -579,6 +613,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="header-content">
@@ -595,13 +630,17 @@
             <span class="floating-nav-line"></span>
             Overview
         </a>
+        <a href="#section-core-values" class="floating-nav-item" data-target="section-core-values">
+            <span class="floating-nav-line"></span>
+            Core Values
+        </a>
         <a href="#section-2d" class="floating-nav-item" data-target="section-2d">
             <span class="floating-nav-line"></span>
-            2D Visuals & Guide
+            2D Visuals
         </a>
         <a href="#section-3d" class="floating-nav-item" data-target="section-3d">
             <span class="floating-nav-line"></span>
-            3D Visuals & Guide
+            3D Visuals
         </a>
         <a href="#section-illustrations" class="floating-nav-item" data-target="section-illustrations">
             <span class="floating-nav-line"></span>
@@ -609,7 +648,7 @@
         </a>
         <a href="#section-onboarding" class="floating-nav-item" data-target="section-onboarding">
             <span class="floating-nav-line"></span>
-            Design System Onboarding
+            System Onboarding
         </a>
     </nav>
 
@@ -632,26 +671,58 @@
 
         <!-- Project Info Section -->
         <section class="project-info" id="section-overview">
-            <h1>여기어때 컴퍼니 : Visual System</h1>
             <div class="project-meta">
                 <div class="project-meta-item">
-                    <span class="meta-label">Year</span>
-                    <span class="meta-value">2025</span>
+                    <span class="meta-label">Project Name</span>
+                    <span class="meta-value">Yeogi Visual System</span>
                 </div>
                 <div class="project-meta-item">
-                    <span class="meta-label">Role</span>
-                    <span class="meta-value">Visual Design, Art Direction</span>
+                    <span class="meta-label">Project Period</span>
+                    <span class="meta-value">2025~ 진행 중</span>
                 </div>
                 <div class="project-meta-item">
-                    <span class="meta-label">Client</span>
-                    <span class="meta-value">여기어때 컴퍼니</span>
+                    <span class="meta-label">Contribution</span>
+                    <span class="meta-value">80% — Collaboration with Platform Team</span>
+                </div>
+                <div class="project-meta-item">
+                    <span class="meta-label">Tools</span>
+                    <span class="meta-value">Illustrator, Blender 3D,<br>AI (ChatGPT, Gemini)</span>
                 </div>
             </div>
+            <h1>여기어때 컴퍼니 : Visual System</h1>
             <p class="project-description">
-                여기어때 컴퍼니의 새로운 비주얼 시스템을 구축했습니다. 
-                브랜드 아이덴티티를 강화하고 다양한 터치포인트에서 일관된 경험을 제공하기 위한 
+                여기어때 컴퍼니의 새로운 비주얼 시스템을 구축했습니다.
+                브랜드 아이덴티티를 강화하고 다양한 터치포인트에서 일관된 경험을 제공하기 위한
                 포괄적인 디자인 언어와 그래픽 요소들을 개발했습니다.
             </p>
+        </section>
+
+        <!-- Core Values Section -->
+        <section class="content-section" id="section-core-values">
+            <span class="section-label">Core Values</span>
+            <h2>핵심 가치</h2>
+            <p class="section-description">
+                여기어때 비주얼 시스템이 지향하는 핵심 가치입니다.
+                모든 디자인 결정의 기준이 되는 원칙들로, 일관된 브랜드 경험을 위한 토대를 이룹니다.
+            </p>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Clarity</h3>
+                    <p>복잡함을 걷어내고 명확하게. 사용자가 즉시 이해할 수 있는 직관적인 시각 언어를 추구합니다.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Warmth</h3>
+                    <p>따뜻하고 친근한 감성. 여행과 여가의 설렘을 담아 사용자와 정서적으로 연결되는 디자인입니다.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Consistency</h3>
+                    <p>모든 터치포인트에서 하나의 목소리. 통일된 시각 언어로 브랜드 신뢰도를 높입니다.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Scalability</h3>
+                    <p>성장에 맞게 유연하게 확장되는 시스템. 새로운 서비스와 컨텍스트에도 일관성을 유지합니다.</p>
+                </div>
+            </div>
         </section>
 
         <!-- 2D Visuals & Guide Section -->
@@ -765,6 +836,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer>
@@ -1007,7 +1079,7 @@
                 'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/3d-graphic/image-twobed-3d.png',
             ]
         };
-        
+
         // 배열을 랜덤하게 섞는 함수 (Fisher-Yates shuffle)
         function shuffleArray(array) {
             const shuffled = [...array];
@@ -1017,16 +1089,16 @@
             }
             return shuffled;
         }
-        
+
         // 동일 이미지 연속 방지를 위한 개선된 섞기 함수
         function shuffleWithoutConsecutiveDuplicates(array) {
             // 먼저 기본 섞기
             let shuffled = shuffleArray(array);
-            
+
             // 100개 아이템 생성을 위한 배열
             const result = [];
             const arrayLength = array.length;
-            
+
             // 인덱스 풀 생성 (각 이미지를 여러번 사용)
             const indexPool = [];
             const repetitions = Math.ceil(100 / arrayLength) + 1;
@@ -1034,16 +1106,16 @@
                 const tempShuffled = shuffleArray([...Array(arrayLength).keys()]);
                 indexPool.push(...tempShuffled);
             }
-            
+
             // 첫 번째 아이템
             result.push(array[indexPool[0]]);
             let lastIndex = indexPool[0];
             let poolIndex = 1;
-            
+
             // 100개 아이템 채우기 (동일 이미지 연속 방지)
             while (result.length < 100 && poolIndex < indexPool.length) {
                 const currentIndex = indexPool[poolIndex];
-                
+
                 // 이전과 다른 이미지면 추가
                 if (currentIndex !== lastIndex) {
                     result.push(array[currentIndex]);
@@ -1054,7 +1126,7 @@
                     poolIndex++;
                 }
             }
-            
+
             // 100개가 안 채워졌으면 나머지 채우기
             while (result.length < 100) {
                 const randomIndex = Math.floor(Math.random() * arrayLength);
@@ -1063,7 +1135,7 @@
                     lastIndex = randomIndex;
                 }
             }
-            
+
             return result;
         }
 
@@ -1073,20 +1145,20 @@
                 this.canvas = document.getElementById('galleryCanvas');
                 this.grid = document.getElementById('galleryGrid');
                 this.tooltip = document.getElementById('dragTooltip');
-                
+
                 this.isDragging = false;
                 this.startX = 0;
                 this.startY = 0;
-                
+
                 // 초기 위치를 그리드 중앙으로 (7x7 구조의 3번째 타일)
                 // 이렇게 하면 위/아래/좌/우 모든 방향에 콘텐츠 존재
-                const itemSize = 100;
+                const itemSize = 90;
                 const gap = 50; // 간격 50px
                 const columns = 10;
                 const rows = 10;
                 const tileWidth = columns * itemSize + (columns - 1) * gap;
                 const tileHeight = rows * itemSize + (rows - 1) * gap;
-                
+
                 // 3번째 타일 위치로 시작
                 this.translateX = -tileWidth * 3;
                 this.translateY = -tileHeight * 3;
@@ -1099,7 +1171,7 @@
                 this.tooltipShown = false; // 툴팁 표시 여부
                 this.showTooltip = false; // 툴팁 표시 플래그
                 this.hasEverDragged = false; // 한 번이라도 드래그했는지 여부
-                
+
                 this.init();
             }
 
@@ -1115,20 +1187,20 @@
                 const tilesX = 7;
                 const tilesY = 7;
                 this.grid.innerHTML = '';
-                
+
                 // 현재 모드에 맞는 이미지 배열 가져오기
                 const images = imageMapping[this.viewMode];
-                
+
                 // 동일 이미지 연속 방지 섞기
                 const shuffledImages = shuffleWithoutConsecutiveDuplicates(images);
-                
+
                 // 49개 타일 모두 동일한 랜덤 순서로 채움
                 for (let ty = 0; ty < tilesY; ty++) {
                     for (let tx = 0; tx < tilesX; tx++) {
                         for (let i = 0; i < totalItems; i++) {
                             const item = document.createElement('div');
                             item.className = 'gallery-item';
-                            
+
                             const img = document.createElement('img');
                             img.src = shuffledImages[i];
                             img.alt = '';
@@ -1138,7 +1210,7 @@
                             // 인덱스는 원본 배열에서의 위치 저장
                             const originalIndex = images.indexOf(shuffledImages[i]);
                             img.dataset.index = originalIndex >= 0 ? originalIndex : 0;
-                            
+
                             item.appendChild(img);
                             this.grid.appendChild(item);
                         }
@@ -1152,20 +1224,20 @@
                 this.container.addEventListener('mousemove', this.onMouseMove.bind(this));
                 this.container.addEventListener('mouseup', this.onMouseUp.bind(this));
                 this.container.addEventListener('mouseleave', this.onMouseUp.bind(this));
-                
+
                 // Hover detection for auto-scroll and tooltip
                 this.container.addEventListener('mouseenter', (e) => {
                     // 버튼 영역이 아닐 때만 호버로 인식
                     if (!e.target.closest('.gallery-controls')) {
                         this.isHovering = true;
-                        
+
                         // 한 번이라도 드래그했다면 툴팁 표시 안 함
                         if (!this.hasEverDragged) {
                             this.showTooltip = true;
                         }
                     }
                 });
-                
+
                 this.container.addEventListener('mousemove', (e) => {
                     // 버튼 영역에서는 호버 해제 및 툴팁 숨김
                     if (e.target.closest('.gallery-controls')) {
@@ -1174,7 +1246,7 @@
                         this.tooltip.classList.remove('show');
                         return;
                     }
-                    
+
                     // 드래그 중이 아니고, 한 번도 드래그 안 했을 때만 툴팁 위치 업데이트
                     if (!this.isDragging && this.showTooltip && !this.hasEverDragged) {
                         this.tooltip.style.left = e.clientX + 'px';
@@ -1183,23 +1255,23 @@
                         this.isHovering = true;
                     }
                 });
-                
+
                 this.container.addEventListener('mouseleave', () => {
                     this.isHovering = false;
                     this.showTooltip = false;
                     this.tooltip.classList.remove('show');
                 });
-                
+
                 // Touch events
                 this.container.addEventListener('touchstart', this.onTouchStart.bind(this));
                 this.container.addEventListener('touchmove', this.onTouchMove.bind(this));
                 this.container.addEventListener('touchend', this.onTouchEnd.bind(this));
-                
+
                 // View mode toggle - 갤러리 컨트롤 버튼
                 document.querySelectorAll('.control-toggle-button').forEach(button => {
                     button.addEventListener('click', this.toggleViewMode.bind(this));
                 });
-                
+
                 // 클릭 이벤트 차단
                 this.container.addEventListener('click', (e) => {
                     if (this.isDragged) {
@@ -1214,7 +1286,7 @@
                 this.tooltip.classList.remove('show');
                 this.showTooltip = false;
                 this.hasEverDragged = true; // 드래그 기록
-                
+
                 this.isDragging = true;
                 this.isDragged = false;
                 this.mouseDownX = e.clientX;
@@ -1226,42 +1298,42 @@
 
             onMouseMove(e) {
                 if (!this.isDragging) return;
-                
+
                 const deltaX = e.clientX - this.startX;
                 const deltaY = e.clientY - this.startY;
-                
+
                 // 드래그 거리 계산
                 const dragDistance = Math.sqrt(
-                    Math.pow(e.clientX - this.mouseDownX, 2) + 
+                    Math.pow(e.clientX - this.mouseDownX, 2) +
                     Math.pow(e.clientY - this.mouseDownY, 2)
                 );
-                
+
                 if (dragDistance > this.dragThreshold) {
                     this.isDragged = true;
                 }
-                
+
                 this.velocity.x = deltaX - this.translateX;
                 this.velocity.y = deltaY - this.translateY;
-                
+
                 this.translateX = deltaX;
                 this.translateY = deltaY;
-                
+
                 this.updateTransform();
             }
 
             onMouseUp() {
                 if (this.isDragging) {
-                    const itemSize = 100;
-                    const gap = 50; // 간격 50px
+                    const itemSize = 90;
+                    const gap = 45; // 간격 45px
                     const columns = 10;
                     const rows = 10;
                     const tileWidth = columns * itemSize + (columns - 1) * gap;
                     const tileHeight = rows * itemSize + (rows - 1) * gap;
-                    
+
                     // 중앙 위치
                     const centerX = -tileWidth * 3;
                     const centerY = -tileHeight * 3;
-                    
+
                     // 중앙 기준 ±1타일 범위로 리셋
                     while (this.translateX <= centerX - tileWidth) {
                         this.translateX += tileWidth;
@@ -1271,7 +1343,7 @@
                         this.translateX -= tileWidth;
                         this.startX += tileWidth;
                     }
-                    
+
                     while (this.translateY <= centerY - tileHeight) {
                         this.translateY += tileHeight;
                         this.startY -= tileHeight;
@@ -1280,10 +1352,10 @@
                         this.translateY -= tileHeight;
                         this.startY += tileHeight;
                     }
-                    
+
                     this.updateTransform();
                 }
-                
+
                 this.isDragging = false;
                 if (!this.hasEverDragged) {
                     this.showTooltip = true;
@@ -1301,14 +1373,14 @@
 
             onTouchMove(e) {
                 if (!this.isDragging || e.touches.length !== 1) return;
-                
+
                 e.preventDefault();
                 const deltaX = e.touches[0].clientX - this.startX;
                 const deltaY = e.touches[0].clientY - this.startY;
-                
+
                 this.translateX = deltaX;
                 this.translateY = deltaY;
-                
+
                 this.updateTransform();
             }
 
@@ -1322,96 +1394,96 @@
             }
 
             startAnimation() {
-                const itemSize = 100;
+                const itemSize = 90;
                 const gap = 50; // 간격 50px
                 const columns = 10;
                 const rows = 10;
                 const tileWidth = columns * itemSize + (columns - 1) * gap;
                 const tileHeight = rows * itemSize + (rows - 1) * gap;
-                
+
                 // 중앙 위치 (3번째 타일)
                 const centerX = -tileWidth * 3;
                 const centerY = -tileHeight * 3;
-                
+
                 const animationLoop = () => {
                     // 자동 스크롤
                     if (!this.isHovering && !this.isDragging) {
                         this.translateX -= this.autoScrollSpeed;
                     }
-                    
+
                     // 관성 효과
                     if (!this.isDragging && (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1)) {
                         this.velocity.x *= 0.95;
                         this.velocity.y *= 0.95;
-                        
+
                         this.translateX += this.velocity.x;
                         this.translateY += this.velocity.y;
                     }
-                    
+
                     // 무한 루프 - 중앙 기준 ±1타일 범위에서 리셋
                     if (!this.isDragging) {
                         // 왼쪽으로 1타일 넘어가면 리셋
                         if (this.translateX <= centerX - tileWidth) {
                             this.translateX += tileWidth;
                             this.startX -= tileWidth;
-                        } 
+                        }
                         // 오른쪽으로 1타일 넘어가면 리셋
                         else if (this.translateX >= centerX + tileWidth) {
                             this.translateX -= tileWidth;
                             this.startX += tileWidth;
                         }
-                        
+
                         // 위로 1타일 넘어가면 리셋
                         if (this.translateY <= centerY - tileHeight) {
                             this.translateY += tileHeight;
                             this.startY -= tileHeight;
-                        } 
+                        }
                         // 아래로 1타일 넘어가면 리셋
                         else if (this.translateY >= centerY + tileHeight) {
                             this.translateY -= tileHeight;
                             this.startY += tileHeight;
                         }
                     }
-                    
+
                     this.updateTransform();
                     requestAnimationFrame(animationLoop);
                 };
-                
+
                 animationLoop();
             }
 
             toggleViewMode(e) {
                 const button = e.target;
                 const mode = button.dataset.mode;
-                
+
                 if (mode === this.viewMode) return;
-                
+
                 // 버튼 상태 업데이트
                 document.querySelectorAll('.control-toggle-button').forEach(btn => {
                     btn.classList.remove('active');
                 });
                 button.classList.add('active');
-                
+
                 // 뷰 모드 업데이트
                 this.viewMode = mode;
-                
+
                 // 이미지 전환 최적화: 즉시 변경 (transition 없음)
                 const images = imageMapping[mode];
                 const allImages = document.querySelectorAll('.gallery-item img');
-                
+
                 // requestAnimationFrame으로 부드러운 업데이트
                 requestAnimationFrame(() => {
                     allImages.forEach(img => {
                         const index = parseInt(img.dataset.index);
                         const newSrc = images[index % images.length];
-                        
+
                         // 이미지가 이미 로드된 경우 즉시 변경
                         if (img.src !== newSrc) {
                             img.src = newSrc;
                         }
                     });
                 });
-                
+
                 // 3D 효과는 제거 (불필요한 성능 저하)
             }
         }
@@ -1431,7 +1503,7 @@
         });
 
         // Floating nav - active state (Intersection Observer)
-        const navSections = document.querySelectorAll('#section-overview, #section-2d, #section-3d, #section-illustrations, #section-onboarding');
+        const navSections = document.querySelectorAll('#section-overview, #section-2d, #section-3d, #section-illustrations, #section-onboarding, #section-core-values');
         const navItems = document.querySelectorAll('.floating-nav-item');
 
         const navObserver = new IntersectionObserver((entries) => {
@@ -1460,21 +1532,30 @@
         // Initialize gallery
         const gallery = new InfiniteGallery();
 
-        // 스크롤 이벤트: 갤러리 영역 벗어나면 블러 제거
+        // 스크롤 이벤트: 갤러리 영역 벗어나면 블러 제거 + 사이드바 표시
         const header = document.querySelector('header');
         const gallerySection = document.querySelector('.gallery-section');
-        
+        const floatingNav = document.querySelector('.floating-nav');
+
         window.addEventListener('scroll', () => {
             const galleryBottom = gallerySection.offsetTop + gallerySection.offsetHeight;
             const scrollPosition = window.scrollY;
-            
+
             // 갤러리 영역을 벗어나면 블러 제거
             if (scrollPosition > galleryBottom) {
                 header.classList.add('no-blur');
             } else {
                 header.classList.remove('no-blur');
             }
+
+            // 갤러리 영역을 벗어나면 사이드바 표시, 갤러리 영역이면 숨김
+            if (scrollPosition > galleryBottom - 300) {
+                floatingNav.classList.add('visible');
+            } else {
+                floatingNav.classList.remove('visible');
+            }
         });
     </script>
 </body>
+
 </html>
