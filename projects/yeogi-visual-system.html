@@ -112,11 +112,15 @@
         }
 
         .project-info h1 {
-            font-size: 3rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            margin-top: 80px;
-            margin-bottom: 32px;
             letter-spacing: -0.03em;
+            margin-top: 12px;
+            margin-bottom: 16px;
+        }
+
+        .project-info .section-label {
+            margin-top: 80px;
         }
 
         /* Info 카드 - Favorite Brand 스타일 */
@@ -219,10 +223,17 @@
         }
 
         .project-description {
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 1.8;
-            color: #333333;
-            max-width: 800px;
+            color: #666666;
+            max-width: 680px;
+        }
+
+        .section-image {
+            display: block;
+            width: 100%;
+            margin-top: 32px;
+            border-radius: 12px;
         }
 
         /* Gallery Container */
@@ -393,13 +404,6 @@
             margin: 0 auto;
         }
 
-        .content-section h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            letter-spacing: -0.02em;
-        }
-
         .content-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -432,12 +436,15 @@
         /* Section Label */
         .section-label {
             display: inline-block;
-            color: #999999;
+            color: #555555;
             font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             font-weight: 600;
             margin-bottom: 16px;
+            padding: 4px 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
         }
 
         .content-section h2 {
@@ -564,7 +571,7 @@
             }
 
             .project-info h1 {
-                font-size: 2rem;
+                font-size: 1.6rem;
             }
 
             .project-meta {
@@ -612,6 +619,99 @@
                 padding: 8px 20px;
                 font-size: 0.85rem;
             }
+        }
+
+        /* ── 카테고리 아이콘 행 ── */
+        .icon-row-section {
+            margin-top: 40px;
+        }
+
+        .icon-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 12px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            width: 88px;
+            z-index: 1;
+            transition:
+                width 0.22s ease,
+                background 0.2s ease,
+                box-shadow 0.22s ease;
+        }
+
+        .icon-item:hover {
+            width: 120px;
+            background: #ffffff;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.12),
+                0 2px 8px rgba(0, 0, 0, 0.07);
+            z-index: 10;
+        }
+
+        .icon-item .icon-img {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .icon-item .icon-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: #666666;
+            white-space: nowrap;
+            transition: color 0.2s, font-weight 0.2s;
+        }
+
+        .icon-item:hover .icon-label {
+            color: #0a0a0a;
+            font-weight: 600;
+        }
+
+        /* 호버 카드: 이름·설명만 아래에 추가 (아이콘·라벨은 그대로 유지) */
+        .icon-item .hover-card {
+            width: 100%;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition:
+                max-height 0.22s ease,
+                opacity 0.18s ease;
+        }
+
+        .icon-item:hover .hover-card {
+            max-height: 80px;
+            opacity: 1;
+        }
+
+        /* 호버카드 내 중복 아이콘·이름 숨김 */
+        .hover-card .hover-card-img,
+        .hover-card .hover-card-name {
+            display: none;
+        }
+
+        .hover-card .hover-card-desc {
+            font-size: 0.69rem;
+            color: #666666;
+            line-height: 1.5;
+            padding-top: 4px;
+            text-align: center;
         }
     </style>
 </head>
@@ -691,12 +791,15 @@
                     <span class="meta-value">Illustrator, Blender 3D,<br>AI (ChatGPT, Gemini)</span>
                 </div>
             </div>
+            <span class="section-label">Overview</span>
             <h1>여기어때 컴퍼니 : Visual System</h1>
             <p class="project-description">
-                여기어때 컴퍼니의 새로운 비주얼 시스템을 구축했습니다.
-                브랜드 아이덴티티를 강화하고 다양한 터치포인트에서 일관된 경험을 제공하기 위한
-                포괄적인 디자인 언어와 그래픽 요소들을 개발했습니다.
+                여기어때의 비주얼은 꾸준히 고도화되고 있고, 초기 버전에 비해 훨씬 더 발전된 모습으로 확장되고 있어요.
+                Simple, Scalable, Lively라는 코어 밸류를 기반으로 시작해 계속 발전 중인 비주얼 셋을 보여주고자 합니다.
             </p>
+            <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2Fimages%2Fimage01.webp?alt=media&token=70a08183-ce52-467a-aa59-2cf5a8865d25"
+                 alt="여기어때 컴퍼니 Visual System Overview"
+                 class="section-image">
         </section>
 
         <!-- Core Values Section -->
@@ -763,6 +866,134 @@
                 2D 오브젝트와 동일한 아이덴티티를 유지하면서 입체감과 깊이를 더한 3D 그래픽 시스템입니다.
                 캠페인, 랜딩페이지, 고관여 콘텐츠에서 더 풍부한 시각적 임팩트를 제공합니다.
             </p>
+
+            <!-- 카테고리 아이콘 행 -->
+            <div class="icon-row-section">
+                <div class="icon-row">
+
+                    <div class="icon-item">
+                        <img class="icon-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Foverseasaccommodation.png?alt=media" alt="해외숙소">
+                        <span class="icon-label">해외숙소</span>
+                        <div class="hover-card">
+                            <img class="hover-card-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Foverseasaccommodation.png?alt=media" alt="해외숙소">
+                            <div class="hover-card-name">해외숙소</div>
+                            <div class="hover-card-desc">전 세계 인기 숙소를 한눈에 비교·예약</div>
+                        </div>
+                    </div>
+
+                    <div class="icon-item">
+                        <img class="icon-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fmotel.png?alt=media" alt="모텔">
+                        <span class="icon-label">모텔</span>
+                        <div class="hover-card">
+                            <img class="hover-card-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fmotel.png?alt=media" alt="모텔">
+                            <div class="hover-card-name">모텔</div>
+                            <div class="hover-card-desc">가성비 좋은 모텔을 간편하게 예약</div>
+                        </div>
+                    </div>
+
+                    <div class="icon-item">
+                        <img class="icon-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fhotel.png?alt=media" alt="호텔·리조트">
+                        <span class="icon-label">호텔·리조트</span>
+                        <div class="hover-card">
+                            <img class="hover-card-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fhotel.png?alt=media" alt="호텔·리조트">
+                            <div class="hover-card-name">호텔·리조트</div>
+                            <div class="hover-card-desc">특별한 여행을 위한 프리미엄 호텔·리조트</div>
+                        </div>
+                    </div>
+
+                    <div class="icon-item">
+                        <img class="icon-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fpension.png?alt=media" alt="펜션·풀빌라">
+                        <span class="icon-label">펜션·풀빌라</span>
+                        <div class="hover-card">
+                            <img class="hover-card-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fpension.png?alt=media" alt="펜션·풀빌라">
+                            <div class="hover-card-name">펜션·풀빌라</div>
+                            <div class="hover-card-desc">독채 펜션·풀빌라로 프라이빗하게</div>
+                        </div>
+                    </div>
+
+                    <div class="icon-item">
+                        <img class="icon-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fhomevilla.png?alt=media" alt="홈앤빌라">
+                        <span class="icon-label">홈앤빌라</span>
+                        <div class="hover-card">
+                            <img class="hover-card-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fhomevilla.png?alt=media" alt="홈앤빌라">
+                            <div class="hover-card-name">홈앤빌라</div>
+                            <div class="hover-card-desc">집처럼 편안한 홈 & 빌라 숙소</div>
+                        </div>
+                    </div>
+
+                    <div class="icon-item">
+                        <img class="icon-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fcamping.png?alt=media" alt="캠핑·글램핑">
+                        <span class="icon-label">캠핑·글램핑</span>
+                        <div class="hover-card">
+                            <img class="hover-card-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fcamping.png?alt=media" alt="캠핑·글램핑">
+                            <div class="hover-card-name">캠핑·글램핑</div>
+                            <div class="hover-card-desc">자연 속 캠핑부터 럭셔리 글램핑까지</div>
+                        </div>
+                    </div>
+
+                    <div class="icon-item">
+                        <img class="icon-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fguesthouse.png?alt=media" alt="게하·한옥">
+                        <span class="icon-label">게하·한옥</span>
+                        <div class="hover-card">
+                            <img class="hover-card-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fguesthouse.png?alt=media" alt="게하·한옥">
+                            <div class="hover-card-name">게하·한옥</div>
+                            <div class="hover-card-desc">게스트하우스부터 전통 한옥 숙소까지</div>
+                        </div>
+                    </div>
+
+                    <div class="icon-item">
+                        <img class="icon-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fspacerental.png?alt=media" alt="공간대여">
+                        <span class="icon-label">공간대여</span>
+                        <div class="hover-card">
+                            <img class="hover-card-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fspacerental.png?alt=media" alt="공간대여">
+                            <div class="hover-card-name">공간대여</div>
+                            <div class="hover-card-desc">파티룸·스튜디오 공간을 간편하게 대여</div>
+                        </div>
+                    </div>
+
+                    <div class="icon-item">
+                        <img class="icon-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fairlines.png?alt=media" alt="항공">
+                        <span class="icon-label">항공</span>
+                        <div class="hover-card">
+                            <img class="hover-card-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fairlines.png?alt=media" alt="항공">
+                            <div class="hover-card-name">항공</div>
+                            <div class="hover-card-desc">국내외 항공권 최저가 예약</div>
+                        </div>
+                    </div>
+
+                    <div class="icon-item">
+                        <img class="icon-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fflightaccommodation.png?alt=media" alt="항공+숙소">
+                        <span class="icon-label">항공+숙소</span>
+                        <div class="hover-card">
+                            <img class="hover-card-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fflightaccommodation.png?alt=media" alt="항공+숙소">
+                            <div class="hover-card-name">항공+숙소</div>
+                            <div class="hover-card-desc">항공권과 숙소를 한 번에 패키지로</div>
+                        </div>
+                    </div>
+
+                    <div class="icon-item">
+                        <img class="icon-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Frentalcar.png?alt=media" alt="렌터카">
+                        <span class="icon-label">렌터카</span>
+                        <div class="hover-card">
+                            <img class="hover-card-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Frentalcar.png?alt=media" alt="렌터카">
+                            <div class="hover-card-name">렌터카</div>
+                            <div class="hover-card-desc">여행지에서 편리한 렌터카 이용</div>
+                        </div>
+                    </div>
+
+                    <div class="icon-item">
+                        <img class="icon-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fleisureticket.png?alt=media" alt="레저티켓">
+                        <span class="icon-label">레저티켓</span>
+                        <div class="hover-card">
+                            <img class="hover-card-img" src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2Fleisureticket.png?alt=media" alt="레저티켓">
+                            <div class="hover-card-name">레저티켓</div>
+                            <div class="hover-card-desc">다양한 레저·액티비티 티켓 할인 구매</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
             <div class="content-grid">
                 <div class="content-card">
                     <h3>3D Style Guide</h3>
