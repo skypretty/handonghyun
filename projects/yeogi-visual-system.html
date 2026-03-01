@@ -23,7 +23,7 @@
             background-color: #ffffff;
             color: #0a0a0a;
             line-height: 1.5;
-            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         /* Header */
@@ -109,6 +109,9 @@
             padding: 60px 40px 40px;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            overflow: visible;
         }
 
         .project-info h1 {
@@ -237,6 +240,60 @@
             width: 100%;
             margin-top: 32px;
             border-radius: 12px;
+        }
+
+        .overview-image-area {
+            position: relative;
+            margin-top: 32px;
+        }
+
+        .overview-thumb-wrapper {
+            position: absolute;
+            top: 0;
+            right: -170px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 14px;
+            padding: 10px;
+        }
+
+        .overview-thumb-row {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .overview-thumb {
+            width: 128px;
+            aspect-ratio: 16 / 9;
+            border-radius: 10px;
+            cursor: pointer;
+            overflow: hidden;
+            flex-shrink: 0;
+            transition: transform 0.25s ease,
+                        box-shadow 0.25s ease,
+                        opacity 0.25s ease,
+                        outline 0.15s ease;
+            position: relative;
+            opacity: 0.25;
+            outline: 2px solid transparent;
+            outline-offset: 3px;
+        }
+
+        .overview-thumb:hover {
+            opacity: 0.55;
+        }
+
+        .overview-thumb.active {
+            opacity: 1;
+            outline: 2px solid #0a0a0a;
+        }
+
+        .overview-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
         }
 
         /* Gallery Container */
@@ -419,6 +476,127 @@
             border-radius: 24px;
         }
 
+        .section-visual-triangle {
+            width: 100%;
+            aspect-ratio: 1 / 0.866;
+            background-color: #f0f0f0;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .section-text-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .section-text-block h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: #0a0a0a;
+            line-height: 1.3;
+        }
+
+        .section-text-block p {
+            color: #444444;
+            line-height: 1.85;
+            font-size: 0.95rem;
+        }
+
+        .section-text-block ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .section-text-block ul li {
+            color: #555;
+            font-size: 0.9rem;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .section-text-block ul li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: #bbb;
+        }
+
+        .section-2col-bottom {
+            margin-top: 80px;
+        }
+
+        /* Illustration Fan Carousel */
+        .illust-fan-section {
+            margin-top: 80px;
+            overflow: hidden;
+        }
+
+        .illust-fan-track {
+            position: relative;
+            width: 100%;
+            height: 460px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1400px;
+        }
+
+        .illust-fan-card {
+            position: absolute;
+            width: 40%;
+            aspect-ratio: 16 / 9;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.55s ease,
+                        box-shadow 0.55s ease;
+            will-change: transform;
+            overflow: hidden;
+        }
+
+        .illust-fan-card[data-pos="0"] {
+            transform: translateX(0) translateZ(0) rotateY(0deg) scale(1);
+            opacity: 1;
+            z-index: 10;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.20);
+        }
+        .illust-fan-card[data-pos="1"] {
+            transform: translateX(58%) translateZ(-160px) rotateY(-24deg) scale(0.76);
+            opacity: 0.70;
+            z-index: 9;
+        }
+        .illust-fan-card[data-pos="-1"] {
+            transform: translateX(-58%) translateZ(-160px) rotateY(24deg) scale(0.76);
+            opacity: 0.70;
+            z-index: 9;
+        }
+        .illust-fan-card[data-pos="2"] {
+            transform: translateX(104%) translateZ(-310px) rotateY(-40deg) scale(0.56);
+            opacity: 0.42;
+            z-index: 8;
+        }
+        .illust-fan-card[data-pos="-2"] {
+            transform: translateX(-104%) translateZ(-310px) rotateY(40deg) scale(0.56);
+            opacity: 0.42;
+            z-index: 8;
+        }
+        .illust-fan-card[data-pos="3"] {
+            transform: translateX(142%) translateZ(-440px) rotateY(-52deg) scale(0.40);
+            opacity: 0.20;
+            z-index: 7;
+        }
+        .illust-fan-card[data-pos="-3"] {
+            transform: translateX(-142%) translateZ(-440px) rotateY(52deg) scale(0.40);
+            opacity: 0.20;
+            z-index: 7;
+        }
+
 
         /* Additional Content Section */
         .content-section {
@@ -569,6 +747,46 @@
             text-align: center;
             color: #999999;
             font-size: 0.85rem;
+        }
+
+        /* 27인치 이상 대형 모니터 - 사이드바 확대 */
+        @media (min-width: 1800px) {
+            .floating-nav {
+                left: 72px;
+                gap: 16px;
+            }
+
+            .floating-nav-item {
+                font-size: 1.1rem;
+                gap: 22px;
+                padding: 10px 0;
+            }
+
+            .floating-nav-line {
+                width: 4px;
+                height: 26px;
+            }
+
+            .floating-nav-item.active .floating-nav-line {
+                height: 52px;
+            }
+        }
+
+        /* Overview 썸네일 - 좁은 화면에서 하단 가로 배치로 전환 */
+        @media (max-width: 1400px) {
+            .overview-thumb-wrapper {
+                position: static;
+                margin-top: 16px;
+            }
+
+            .overview-thumb-row {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .overview-thumb {
+                width: 160px;
+            }
         }
 
         /* Responsive */
@@ -790,25 +1008,42 @@
             width: 280px;
             height: 280px;
             border-radius: 9999px;
-            background-color: #f0f0f0;
+            background: linear-gradient(to bottom, rgba(255, 118, 118, 0.15) 0%, #F5F5F5 40%);
             display: flex;
             flex-direction: column;
             align-items: center;
             overflow: hidden;
             padding: 36px 0 20px;
             transition: height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
-        /* 순차 딜레이 */
-        .core-value-pill:nth-child(1) { transition-delay: 0s; }
-        .core-value-pill:nth-child(2) { transition-delay: 0.2s; }
-        .core-value-pill:nth-child(3) { transition-delay: 0.4s; }
+        .core-value-pill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            padding: 1.5px;
+            background: linear-gradient(to bottom, #FF7676, transparent 40%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                          linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask: linear-gradient(#fff 0 0) content-box,
+                  linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* collapse 시 역순 딜레이 (3→2→1) */
+        .core-value-pill:nth-child(1) { transition-delay: 0.2s; }
+        .core-value-pill:nth-child(2) { transition-delay: 0.1s; }
+        .core-value-pill:nth-child(3) { transition-delay: 0s; }
 
         .core-value-graphic {
             width: 240px;
             height: 240px;
             border-radius: 50%;
-            background-color: #e8e8e8;
+            background-color: #ffffff;
             flex-shrink: 0;
             margin-top: auto;
             transform: scale(0);
@@ -817,9 +1052,10 @@
                         opacity 0.45s ease;
         }
 
-        .core-value-pill:nth-child(1) .core-value-graphic { transition-delay: 0.65s; }
-        .core-value-pill:nth-child(2) .core-value-graphic { transition-delay: 0.85s; }
-        .core-value-pill:nth-child(3) .core-value-graphic { transition-delay: 1.05s; }
+        /* collapse 시 graphic 즉시 사라짐 */
+        .core-value-pill:nth-child(1) .core-value-graphic { transition-delay: 0s; }
+        .core-value-pill:nth-child(2) .core-value-graphic { transition-delay: 0s; }
+        .core-value-pill:nth-child(3) .core-value-graphic { transition-delay: 0s; }
 
         .core-value-pill-title {
             font-size: 1.25rem;
@@ -832,9 +1068,10 @@
             transition: margin-top 0.55s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .core-value-pill:nth-child(1) .core-value-pill-title { transition-delay: 0s; }
-        .core-value-pill:nth-child(2) .core-value-pill-title { transition-delay: 0.2s; }
-        .core-value-pill:nth-child(3) .core-value-pill-title { transition-delay: 0.4s; }
+        /* collapse 시 title 역순 */
+        .core-value-pill:nth-child(1) .core-value-pill-title { transition-delay: 0.2s; }
+        .core-value-pill:nth-child(2) .core-value-pill-title { transition-delay: 0.1s; }
+        .core-value-pill:nth-child(3) .core-value-pill-title { transition-delay: 0s; }
 
         .core-value-pill-desc {
             font-size: 0.9rem;
@@ -849,17 +1086,27 @@
             transition: opacity 0.4s ease, max-height 0.4s ease, margin-top 0.4s ease;
         }
 
-        .core-value-pill:nth-child(1) .core-value-pill-desc { transition-delay: 0.5s; }
-        .core-value-pill:nth-child(2) .core-value-pill-desc { transition-delay: 0.7s; }
-        .core-value-pill:nth-child(3) .core-value-pill-desc { transition-delay: 0.9s; }
+        /* collapse 시 desc 즉시 사라짐 */
+        .core-value-pill:nth-child(1) .core-value-pill-desc { transition-delay: 0s; }
+        .core-value-pill:nth-child(2) .core-value-pill-desc { transition-delay: 0s; }
+        .core-value-pill:nth-child(3) .core-value-pill-desc { transition-delay: 0s; }
 
         .core-values-pills.expanded .core-value-pill {
             height: 480px;
         }
 
+        /* expand 시 순차 딜레이 (1→2→3) */
+        .core-values-pills.expanded .core-value-pill:nth-child(1) { transition-delay: 0s; }
+        .core-values-pills.expanded .core-value-pill:nth-child(2) { transition-delay: 0.2s; }
+        .core-values-pills.expanded .core-value-pill:nth-child(3) { transition-delay: 0.4s; }
+
         .core-values-pills.expanded .core-value-pill-title {
             margin-top: 32px;
         }
+
+        .core-values-pills.expanded .core-value-pill:nth-child(1) .core-value-pill-title { transition-delay: 0s; }
+        .core-values-pills.expanded .core-value-pill:nth-child(2) .core-value-pill-title { transition-delay: 0.2s; }
+        .core-values-pills.expanded .core-value-pill:nth-child(3) .core-value-pill-title { transition-delay: 0.4s; }
 
         .core-values-pills.expanded .core-value-pill-desc {
             opacity: 1;
@@ -867,12 +1114,20 @@
             margin-top: 12px;
         }
 
+        .core-values-pills.expanded .core-value-pill:nth-child(1) .core-value-pill-desc { transition-delay: 0.5s; }
+        .core-values-pills.expanded .core-value-pill:nth-child(2) .core-value-pill-desc { transition-delay: 0.7s; }
+        .core-values-pills.expanded .core-value-pill:nth-child(3) .core-value-pill-desc { transition-delay: 0.9s; }
+
         .core-values-pills.expanded .core-value-graphic {
             transform: scale(1);
             opacity: 1;
         }
 
-        @media (max-width: 768px) {
+        .core-values-pills.expanded .core-value-pill:nth-child(1) .core-value-graphic { transition-delay: 0.65s; }
+        .core-values-pills.expanded .core-value-pill:nth-child(2) .core-value-graphic { transition-delay: 0.85s; }
+        .core-values-pills.expanded .core-value-pill:nth-child(3) .core-value-graphic { transition-delay: 1.05s; }
+
+@media (max-width: 768px) {
             .core-values-pills {
                 flex-direction: column;
                 align-items: center;
@@ -966,8 +1221,24 @@
                 여기어때의 비주얼은 꾸준히 고도화되고 있고, 초기 버전에 비해 훨씬 더 발전된 모습으로 확장되고 있어요.
                 Simple, Scalable, Lively라는 코어 밸류를 기반으로 시작해 계속 발전 중인 비주얼 셋을 보여주고자 합니다.
             </p>
-            <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2Fimages%2Foverview.webp?alt=media"
-                alt="여기어때 컴퍼니 Visual System Overview" class="section-image">
+            <div class="overview-image-area">
+                <img id="overview-main-img"
+                    src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2Fimages%2Foverview01.webp?alt=media"
+                    alt="여기어때 컴퍼니 Visual System Overview" class="section-image">
+                <div class="overview-thumb-wrapper">
+                    <div class="overview-thumb-row">
+                        <div class="overview-thumb active" data-thumb="0">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2Fimages%2Foverview01.webp?alt=media" alt="Overview 1">
+                        </div>
+                        <div class="overview-thumb" data-thumb="1">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2Fimages%2Foverview02.webp?alt=media" alt="Overview 2">
+                        </div>
+                        <div class="overview-thumb" data-thumb="2">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2Fimages%2Foverview03.webp?alt=media" alt="Overview 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Core Values Section -->
@@ -1005,26 +1276,29 @@
                 여기어때 컴퍼니의 2D 그래픽 아이콘 시스템입니다. 음식, 여행, 레저 등 다양한 카테고리에 걸쳐
                 일관된 스타일로 제작된 2D 오브젝트들로, 서비스 전반의 비주얼 언어를 정의합니다.
             </p>
+            <!-- Row 1: 정사각형 | System Graphic 설명 -->
             <div class="section-2col">
                 <div class="section-visual-square"></div>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <h3>Style Guide</h3>
-                        <p>플랫한 형태와 명확한 실루엣을 기반으로 제작된 2D 그래픽 스타일 가이드. 색상, 선 굵기, 여백 비율을 정의합니다.</p>
-                    </div>
-                    <div class="content-card">
-                        <h3>Color System</h3>
-                        <p>카테고리별 색상 팔레트와 컬러 사용 원칙. 브랜드 컬러와의 조화를 고려한 오브젝트 색상 시스템입니다.</p>
-                    </div>
-                    <div class="content-card">
-                        <h3>Grid & Sizing</h3>
-                        <p>100×100px 기준 그리드 시스템과 다양한 해상도 대응을 위한 사이즈 가이드라인입니다.</p>
-                    </div>
-                    <div class="content-card">
-                        <h3>Usage Rules</h3>
-                        <p>UI 컴포넌트, 마케팅 소재, 서비스 화면 내 2D 오브젝트 활용 규칙과 금지 사항입니다.</p>
-                    </div>
+                <div class="section-text-block">
+                    <h3>System Graphic</h3>
+                    <p>여기어때의 그래픽 시스템은 서비스 전반의 일관된 시각 언어를 형성합니다. 플랫한 형태와 절제된 색상을 기반으로, 각 오브젝트는 브랜드 아이덴티티를 직관적으로 전달합니다.</p>
+                    <ul>
+                        <li>100×100px 기준 그리드 시스템</li>
+                        <li>카테고리별 색상 팔레트와 컬러 원칙</li>
+                        <li>플랫한 형태와 명확한 실루엣</li>
+                        <li>UI, 마케팅 소재 전반 활용 가능</li>
+                    </ul>
                 </div>
+            </div>
+
+            <!-- Row 2: 2D 설명 텍스트 | 정사각형 -->
+            <div class="section-2col section-2col-bottom">
+                <div class="section-text-block">
+                    <h3>2D 오브젝트</h3>
+                    <p>음식, 여행, 레저 카테고리에 걸쳐 일관된 스타일로 제작된 2D 오브젝트입니다. 서비스 내 다양한 맥락에서 사용자 경험을 풍부하게 만드는 시각적 자산으로 활용됩니다.</p>
+                    <p>각 오브젝트는 명확한 실루엣, 제한된 색상 수, 통일된 선 굵기를 통해 어떤 배경에서도 높은 식별성을 유지합니다.</p>
+                </div>
+                <div class="section-visual-square"></div>
             </div>
         </section>
 
@@ -1173,6 +1447,19 @@
                 <div class="content-card">
                     <h3>Application</h3>
                     <p>Empty state, 에러 페이지, 온보딩, 이벤트 배너 등 실제 서비스 화면 내 일러스트 적용 사례입니다.</p>
+                </div>
+            </div>
+
+            <!-- Illustration Fan Carousel -->
+            <div class="illust-fan-section">
+                <div class="illust-fan-track">
+                    <div class="illust-fan-card" data-index="0" style="background:#f5e8dc;"></div>
+                    <div class="illust-fan-card" data-index="1" style="background:#dceaf5;"></div>
+                    <div class="illust-fan-card" data-index="2" style="background:#e8dcf5;"></div>
+                    <div class="illust-fan-card" data-index="3" style="background:#dcf5e8;"></div>
+                    <div class="illust-fan-card" data-index="4" style="background:#f5dce8;"></div>
+                    <div class="illust-fan-card" data-index="5" style="background:#f5f0dc;"></div>
+                    <div class="illust-fan-card" data-index="6" style="background:#dcdcf5;"></div>
                 </div>
             </div>
         </section>
@@ -1970,19 +2257,69 @@
             }
         });
 
-        // Core Values - 스크롤 시 원 → 원기둥 애니메이션
+        // Core Values - 스크롤 시 원 → 원기둥, 위로 스크롤 시 원기둥 → 원 애니메이션
         const coreValuesPills = document.querySelector('.core-values-pills');
         if (coreValuesPills) {
             const pillObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         coreValuesPills.classList.add('expanded');
-                        pillObserver.unobserve(coreValuesPills);
+                    } else {
+                        coreValuesPills.classList.remove('expanded');
                     }
                 });
-            }, { threshold: 0.95 });
+            }, { threshold: 0.4 });
             pillObserver.observe(coreValuesPills);
         }
+
+        // Illustration Fan Carousel
+        const fanCards = document.querySelectorAll('.illust-fan-card');
+        let fanActiveIndex = 3;
+
+        function updateFanPositions() {
+            fanCards.forEach((card, i) => {
+                card.dataset.pos = i - fanActiveIndex;
+            });
+        }
+
+        fanCards.forEach((card, i) => {
+            card.addEventListener('click', () => {
+                fanActiveIndex = i;
+                updateFanPositions();
+            });
+        });
+
+        updateFanPositions();
+
+        // Overview 썸네일 클릭 → 다음 이미지로 순환
+        const overviewThumbs = document.querySelectorAll('.overview-thumb');
+        const overviewMainImg = document.getElementById('overview-main-img');
+        overviewMainImg.style.transition = 'opacity 0.25s ease';
+
+        // 실제 이미지 URL로 교체 가능
+        const overviewImages = [
+            'https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2Fimages%2Foverview01.webp?alt=media',
+            'https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2Fimages%2Foverview02.webp?alt=media',
+            'https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2Fimages%2Foverview03.webp?alt=media',
+        ];
+
+        let overviewActive = 0;
+
+        function goToOverview(index) {
+            overviewActive = index;
+            overviewMainImg.style.opacity = '0';
+            setTimeout(() => {
+                overviewMainImg.src = overviewImages[overviewActive];
+                overviewMainImg.style.opacity = '1';
+            }, 200);
+            overviewThumbs.forEach((t, i) => t.classList.toggle('active', i === overviewActive));
+        }
+
+        overviewThumbs.forEach((thumb, i) => {
+            thumb.addEventListener('click', () => {
+                goToOverview(i);
+            });
+        });
     </script>
 </body>
 
