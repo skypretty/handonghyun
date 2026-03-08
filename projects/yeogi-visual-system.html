@@ -478,17 +478,6 @@
             overflow: hidden;
         }
 
-        .section-visual-square::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 32%;
-            background: linear-gradient(to bottom, transparent, #ffffff);
-            pointer-events: none;
-        }
-
         .section-visual-triangle {
             width: 100%;
             aspect-ratio: 1 / 0.866;
@@ -718,9 +707,14 @@
         .illust-image-area {
             width: 100%;
             margin-top: 32px;
+            margin-bottom: 14px;
             border-radius: 12px;
             background-color: #f0f0f0;
             aspect-ratio: 16 / 9;
+            /* 뒤에 카드가 더 있음을 암시하는 스택 그림자 */
+            box-shadow:
+                7px 7px 0 0 rgba(0, 0, 0, 0.07),
+                14px 14px 0 0 rgba(0, 0, 0, 0.04);
         }
 
         /* Illustration Deck Carousel */
@@ -1755,24 +1749,73 @@
                 </div>
             </div>
 
-            <div class="content-grid">
-                <div class="content-card">
-                    <h3>3D Style Guide</h3>
-                    <p>재질감, 조명 방향, 그림자 처리 등 3D 그래픽 전반에 적용되는 스타일 원칙을 정의합니다.</p>
-                </div>
-                <div class="content-card">
-                    <h3>Light & Shadow</h3>
-                    <p>일관된 광원 방향과 그림자 표현 방식. 모든 3D 오브젝트에 통일된 조명 규칙을 적용합니다.</p>
-                </div>
-                <div class="content-card">
-                    <h3>Material System</h3>
-                    <p>오브젝트 유형에 따른 재질 표현 가이드. 매트, 글로시, 반투명 소재별 렌더링 기준입니다.</p>
-                </div>
-                <div class="content-card">
-                    <h3>Usage Rules</h3>
-                    <p>3D 비주얼이 활용되는 컨텍스트와 2D와의 혼용 가이드. 해상도 및 포맷 기준을 포함합니다.</p>
+            <!-- Row 1: 정사각형 | 3D 시스템 설명 -->
+            <div class="section-2col" style="margin-top: 60px;">
+                <div class="section-visual-square"></div>
+                <div class="section-text-block">
+                    <h3>3D 그래픽 시스템</h3>
+                    <p>2D 오브젝트와 동일한 아이덴티티를 바탕으로, 입체감과 깊이감을 더해 더욱 풍부한 시각적 임팩트를 전달합니다. Blender 기반으로 제작된 고품질 3D 오브젝트들입니다.</p>
+                    <ul>
+                        <li>통일된 광원 방향과 그림자 원칙</li>
+                        <li>재질 유형별 렌더링 기준 (매트·글로시·반투명)</li>
+                        <li>2D와 동일한 카테고리 체계 적용</li>
+                        <li>캠페인·랜딩페이지·고관여 콘텐츠 활용</li>
+                    </ul>
                 </div>
             </div>
+
+            <!-- Row 2: 3D 활용 설명 | 정사각형 -->
+            <div class="section-2col section-2col-bottom">
+                <div class="section-text-block">
+                    <h3>3D 오브젝트</h3>
+                    <p>음식, 여행, 레저 카테고리 전반에 걸쳐 제작된 3D 오브젝트입니다. 2D 그래픽과 동일한 실루엣을 유지하면서 재질감과 조명으로 입체감을 부여합니다.</p>
+                    <p>서비스 내 특별한 순간과 고관여 컨텍스트에서 사용자 경험에 깊이와 감성을 더하는 시각 자산으로 활용됩니다.</p>
+                </div>
+                <div class="section-visual-square"></div>
+            </div>
+
+            <!-- 3D Rule Cards -->
+            <div class="object-rule-section">
+                <div class="object-rule-scroll">
+                    <div class="object-rule-card">
+                        <span class="object-rule-card-num">Rule 01</span>
+                        <div class="object-rule-card-visual"></div>
+                        <span class="object-rule-card-title">광원 방향</span>
+                        <p class="object-rule-card-desc">모든 3D 오브젝트에 통일된 광원 방향을 적용합니다. 상단 좌측 45° 각도를 기준으로 일관된 조명을 구현합니다.</p>
+                    </div>
+                    <div class="object-rule-card">
+                        <span class="object-rule-card-num">Rule 02</span>
+                        <div class="object-rule-card-visual"></div>
+                        <span class="object-rule-card-title">재질 표현</span>
+                        <p class="object-rule-card-desc">오브젝트 특성에 따라 매트, 글로시, 반투명 세 가지 재질 타입 중 적합한 유형을 선택하여 적용합니다.</p>
+                    </div>
+                    <div class="object-rule-card">
+                        <span class="object-rule-card-num">Rule 03</span>
+                        <div class="object-rule-card-visual"></div>
+                        <span class="object-rule-card-title">그림자 처리</span>
+                        <p class="object-rule-card-desc">그림자는 오브젝트 하단에 부드럽게 드리워지도록 처리합니다. 과도한 그림자 표현은 지양합니다.</p>
+                    </div>
+                    <div class="object-rule-card">
+                        <span class="object-rule-card-num">Rule 04</span>
+                        <div class="object-rule-card-visual"></div>
+                        <span class="object-rule-card-title">형태 일관성</span>
+                        <p class="object-rule-card-desc">2D 오브젝트의 실루엣을 기반으로 3D 형태를 제작합니다. 동일한 카테고리 체계와 비율 원칙을 유지합니다.</p>
+                    </div>
+                    <div class="object-rule-card">
+                        <span class="object-rule-card-num">Rule 05</span>
+                        <div class="object-rule-card-visual"></div>
+                        <span class="object-rule-card-title">색상 시스템</span>
+                        <p class="object-rule-card-desc">2D와 동일한 색상 팔레트를 기반으로 합니다. 재질감 표현을 위한 명도·채도 조정은 허용 범위 내에서 가능합니다.</p>
+                    </div>
+                    <div class="object-rule-card">
+                        <span class="object-rule-card-num">Rule 06</span>
+                        <div class="object-rule-card-visual"></div>
+                        <span class="object-rule-card-title">렌더링 기준</span>
+                        <p class="object-rule-card-desc">최종 산출물은 PNG 투명 배경으로 내보냅니다. 해상도는 최소 2x 이상을 원칙으로 하며 포맷별 기준을 따릅니다.</p>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <!-- Illustrations Section -->
@@ -2659,26 +2702,27 @@
             updateFanPositions();
         })();
 
-        // 2D 오브젝트 규칙 카드 드래그 (translateX + 관성)
-        (function () {
-            const section = document.querySelector('.object-rule-section');
-            const scroll = document.querySelector('.object-rule-scroll');
-            if (!scroll || !section) return;
+        // 오브젝트 규칙 카드 드래그 (translateX + 관성) — 2D·3D 공통
+        document.querySelectorAll('.object-rule-section').forEach(function (section) {
+            const scroll = section.querySelector('.object-rule-scroll');
+            if (!scroll) return;
 
             let curX = 0, isDragging = false, startX = 0, startCurX = 0;
             let velX = 0, lastX = 0, moved = false, rafId = null;
 
             function totalW() {
-                // 카드 전체 너비 (gap 포함)
                 const cards = scroll.querySelectorAll('.object-rule-card');
                 let w = 0;
                 cards.forEach((c, i) => { w += c.offsetWidth + (i < cards.length - 1 ? 16 : 0); });
                 return w;
             }
 
+            function getMin() {
+                return -(totalW() - section.getBoundingClientRect().width);
+            }
+
             function clamp(v) {
-                const min = -(totalW() - section.offsetWidth + 60); // 60px 우측 여백
-                return Math.max(min, Math.min(0, v));
+                return Math.max(getMin(), Math.min(0, v));
             }
 
             function apply(x) {
@@ -2708,17 +2752,22 @@
                 scroll.classList.remove('is-dragging');
                 (function momentum() {
                     if (Math.abs(velX) < 0.5) return;
-                    apply(curX + velX);
+                    const min = getMin();
+                    const next = curX + velX;
+                    if (next <= min) {
+                        curX = min;
+                        scroll.style.transform = `translateX(${curX}px)`;
+                        return;
+                    }
+                    apply(next);
                     velX *= 0.92;
                     rafId = requestAnimationFrame(momentum);
                 })();
             });
 
             scroll.addEventListener('click', e => { if (moved) e.stopPropagation(); }, true);
-
-            // 카드 클릭 시 드래그 여부 외부에서 확인할 수 있도록 플래그 노출
             scroll._wasMoved = () => moved;
-        })();
+        });
 
         // Overview 썸네일 클릭 → 이미지 전환
         const overviewThumbs = document.querySelectorAll('.overview-thumb');
@@ -2794,11 +2843,11 @@
             }
 
             // 카드 클릭 (드래그 중이면 무시)
-            const ruleScroll = document.querySelector('.object-rule-scroll');
             document.querySelectorAll('.object-rule-card').forEach(card => {
                 card.style.cursor = 'pointer';
                 card.addEventListener('click', () => {
-                    if (ruleScroll && ruleScroll._wasMoved && ruleScroll._wasMoved()) return;
+                    const parentScroll = card.closest('.object-rule-scroll');
+                    if (parentScroll && parentScroll._wasMoved && parentScroll._wasMoved()) return;
                     openModal(card);
                 });
             });
