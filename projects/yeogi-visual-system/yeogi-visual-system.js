@@ -929,10 +929,12 @@
                             <line x1="14" y1="2" x2="2" y2="14"/>
                         </svg>
                     </button>
-                    <span class="rule-modal-num"></span>
                     <div class="rule-modal-visual"></div>
-                    <p class="rule-modal-title"></p>
-                    <p class="rule-modal-desc"></p>
+                    <div class="rule-modal-body">
+                        <span class="rule-modal-num"></span>
+                        <p class="rule-modal-title"></p>
+                        <p class="rule-modal-desc"></p>
+                    </div>
                 </div>`;
             document.body.appendChild(overlay);
 
