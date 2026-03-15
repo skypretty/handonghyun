@@ -994,3 +994,163 @@
             if (col2) col2.appendChild(buildCards([...icons].reverse()));
             if (col3) col3.appendChild(buildCards(icons.slice(3).concat(icons.slice(0, 3))));
         })();
+
+/* ── Intro Animation ── */
+(function () {
+    var overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:10000;background:#fff;overflow:hidden;font-family:Poppins,sans-serif;';
+    document.body.appendChild(overlay);
+
+    var W = window.innerWidth, H = window.innerHeight;
+    var fontSize = Math.min(Math.max(W * 0.09, 56), 128);
+
+    // 텍스트 픽셀 샘플링
+    function sampleTextPixels(lines, step) {
+        var c = document.createElement('canvas');
+        c.width = W; c.height = H;
+        var cx = c.getContext('2d');
+        cx.fillStyle = '#000';
+        cx.font = '700 ' + fontSize + 'px Poppins, sans-serif';
+        cx.textAlign = 'center';
+        cx.textBaseline = 'middle';
+        var lineH = fontSize * 1.2;
+        var totalH = lineH * lines.length;
+        lines.forEach(function (line, i) {
+            var y = H / 2 - totalH / 2 + lineH * i + lineH / 2;
+            cx.fillText(line, W / 2, y);
+        });
+        var data = cx.getImageData(0, 0, W, H).data;
+        var pts = [];
+        for (var y = 0; y < H; y += step) {
+            for (var x = 0; x < W; x += step) {
+                if (data[(y * W + x) * 4 + 3] > 128) pts.push({ x: x, y: y });
+            }
+        }
+        return pts;
+    }
+
+    var targets = sampleTextPixels(['여기어때 비주얼', '시스템을 소개합니다'], 4);
+
+    var canvas = document.createElement('canvas');
+    canvas.width = W; canvas.height = H;
+    canvas.style.cssText = 'position:absolute;inset:0;z-index:1;';
+    overlay.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+
+    var COLORS = [
+        [249, 66, 57],   // 레드 (3x)
+        [249, 66, 57],
+        [249, 66, 57],
+        [255, 180, 50],  // 옐로 (3x)
+        [255, 180, 50],
+        [255, 180, 50],
+        [20, 100, 220],  // 블루 (2x)
+        [20, 100, 220],
+        [54, 187, 156],  // 민트 #36BB9C (2x)
+        [54, 187, 156],
+        [20, 20, 20],    // 블랙 (1x)
+    ];
+
+    var particles = targets.map(function (t) {
+        var c = COLORS[Math.floor(Math.random() * COLORS.length)];
+        return {
+            tx: t.x, ty: t.y,
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: Math.random() * 2 + 1.2,
+            cr: c[0], cg: c[1], cb: c[2],
+            offset: Math.random() * 0.3,
+            shape: ['circle','square','triangle'][Math.floor(Math.random() * 3)],
+            rotation: Math.random() * Math.PI * 2,
+        };
+    });
+
+    // DOM 타이틀 (캔버스 아래 대기)
+    var title = document.createElement('p');
+    title.innerHTML = '여기어때 비주얼<br>시스템을 소개합니다';
+    title.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:clamp(3.5rem,8vw,8rem);font-weight:700;color:#0a0a0a;letter-spacing:-0.04em;line-height:1.15;text-align:center;margin:0;opacity:0;transition:none;z-index:0;width:100%;';
+    overlay.appendChild(title);
+
+    var APPEAR_DUR = 180;
+    var GATHER_DUR = 1400;
+    var phase = 'appear';
+    var phaseStart = null;
+
+    function easeInCubic(t) { return t * t * t; }
+
+    function drawShape(pt, x, y, r, color) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(pt.rotation);
+        ctx.beginPath();
+        ctx.fillStyle = color;
+        if (pt.shape === 'circle') {
+            ctx.arc(0, 0, Math.max(r, 0.5), 0, Math.PI * 2);
+        } else if (pt.shape === 'square') {
+            var s = Math.max(r * 1.6, 0.8);
+            ctx.rect(-s / 2, -s / 2, s, s);
+        } else {
+            var s = Math.max(r * 2, 1);
+            ctx.moveTo(0, -s);
+            ctx.lineTo(s * 0.866, s * 0.5);
+            ctx.lineTo(-s * 0.866, s * 0.5);
+            ctx.closePath();
+        }
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function tick(now) {
+        if (!phaseStart) phaseStart = now;
+        var elapsed = now - phaseStart;
+
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, W, H);
+
+        if (phase === 'appear') {
+            var p = Math.min(elapsed / APPEAR_DUR, 1);
+            particles.forEach(function (pt) {
+                drawShape(pt, pt.x, pt.y, pt.r,
+                    'rgba(' + pt.cr + ',' + pt.cg + ',' + pt.cb + ',' + (Math.min(p * 3, 1) * 0.7) + ')');
+            });
+            if (p >= 1) { phase = 'gather'; phaseStart = null; }
+            requestAnimationFrame(tick);
+
+        } else {
+            var p = Math.min(elapsed / GATHER_DUR, 1);
+            var particleFade = p >= 0.85 ? 1 - (p - 0.85) / 0.15 : 1;
+
+            particles.forEach(function (pt) {
+                var localP = Math.min(Math.max((p - pt.offset) / (1 - pt.offset), 0), 1);
+                var eased = easeInCubic(localP);
+                var cx = pt.x + (pt.tx - pt.x) * eased;
+                var cy = pt.y + (pt.ty - pt.y) * eased;
+                var r = pt.r * (1 - eased * 0.55);
+                var alpha = (0.7 + eased * 0.3) * particleFade;
+                var ri = Math.round(pt.cr + (10 - pt.cr) * eased);
+                var gi = Math.round(pt.cg + (10 - pt.cg) * eased);
+                var bi = Math.round(pt.cb + (10 - pt.cb) * eased);
+                drawShape(pt, cx, cy, r, 'rgba(' + ri + ',' + gi + ',' + bi + ',' + alpha + ')');
+            });
+
+            if (p < 1) {
+                requestAnimationFrame(tick);
+            } else {
+                // 파티클 완료 → 캔버스 제거 + 텍스트 페이드인
+                canvas.remove();
+                title.style.transition = 'opacity 0.4s ease';
+                title.style.opacity = '1';
+
+                // 텍스트 유지 후 오버레이 페이드아웃
+                setTimeout(function () {
+                    overlay.style.transition = 'opacity 0.5s ease';
+                    overlay.style.opacity = '0';
+                    overlay.style.pointerEvents = 'none';
+                    setTimeout(function () { overlay.remove(); }, 520);
+                }, 900);
+            }
+        }
+    }
+
+    setTimeout(function () { requestAnimationFrame(tick); }, 200);
+})();

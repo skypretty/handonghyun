@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intro Effect Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #111; font-family: 'Poppins', sans-serif; }
+
+    .controls {
+        position: fixed;
+        top: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 99999;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .controls button {
+        padding: 10px 20px;
+        border: 1px solid #444;
+        background: #1a1a1a;
+        color: #fff;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background 0.2s, border-color 0.2s;
+        white-space: nowrap;
+    }
+    .controls button:hover { background: #2a2a2a; border-color: #666; }
+    .controls button.active { background: #fff; color: #000; border-color: #fff; }
+
+    .hint {
+        position: fixed;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #444;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        z-index: 99999;
+        white-space: nowrap;
+    }
+
+    .divider {
+        width: 1px;
+        height: 28px;
+        background: #333;
+        align-self: center;
+    }
+
+    /* ── 공통 오버레이 ── */
+    .overlay {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        background: #ffffff;
+        z-index: 10000;
+    }
+    .ov-label {
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #aaaaaa;
+        opacity: 0;
+    }
+    .ov-title {
+        font-size: clamp(3.5rem, 8vw, 8rem);
+        font-weight: 700;
+        color: #0a0a0a;
+        letter-spacing: -0.04em;
+        line-height: 1.15;
+        text-align: center;
+        margin: 0;
+        opacity: 0;
+    }
+
+    /* ── Shimmer (Effect 2) ── */
+    @keyframes shimmer {
+        0%   { background-position: 150% center; }
+        100% { background-position: -150% center; }
+    }
+    .shimmer-on {
+        background: linear-gradient(90deg,
+            #0a0a0a 0%, #0a0a0a 25%,
+            #c0c0c0 45%, #f5f5f5 50%, #c0c0c0 55%,
+            #0a0a0a 75%, #0a0a0a 100%
+        );
+        background-size: 250% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 1.6s ease forwards;
+    }
+
+    /* ── Clip Reveal (Effect 4) ── */
+    .clip-row {
+        overflow: hidden;
+        line-height: 1.2;
+        display: block;
+    }
+    .clip-row span {
+        display: block;
+        font-size: clamp(3.5rem, 8vw, 8rem);
+        font-weight: 700;
+        color: #0a0a0a;
+        letter-spacing: -0.04em;
+        transform: translateY(110%);
+    }
+</style>
+</head>
+<body>
+
+<div class="controls">
+    <button onclick="run(1)" id="btn1">1. Blur → Focus</button>
+    <button onclick="run('1b')" id="btn1b">1-B. Scale + Blur</button>
+    <button onclick="run('1c')" id="btn1c">1-C. Chromatic</button>
+    <button onclick="run('1d')" id="btn1d">1-D. Particle</button>
+    <div class="divider"></div>
+    <button onclick="run(2)" id="btn2">2. Shimmer Sweep</button>
+    <div class="divider"></div>
+    <button onclick="run(3)" id="btn3">3. Letter Spacing</button>
+    <button onclick="run('3b')" id="btn3b">3-B. Overshoot</button>
+    <button onclick="run('3c')" id="btn3c">3-C. Stagger Lines</button>
+    <div class="divider"></div>
+    <button onclick="run(4)" id="btn4">4. Clip Reveal</button>
+</div>
+<p class="hint">버튼을 눌러 각 효과를 테스트하세요</p>
+
+<script>
+let ov = null;
+
+function clear() {
+    if (ov) { ov.remove(); ov = null; }
+    document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+}
+
+function makeOverlay() {
+    clear();
+    const el = document.createElement('div');
+    el.className = 'overlay';
+    document.body.appendChild(el);
+    ov = el;
+    return el;
+}
+
+function fadeOut(el, after) {
+    setTimeout(() => {
+        el.style.transition = 'opacity 0.5s ease';
+        el.style.opacity = '0';
+        setTimeout(() => el.remove(), 520);
+    }, after);
+}
+
+function fadeUpEl(el, dur, delay) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(10px)';
+    setTimeout(() => {
+        el.style.transition = `opacity ${dur}ms ease, transform ${dur}ms ease`;
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+    }, delay);
+}
+
+/* ── 1. Blur → Focus ── */
+function effect1(el) {
+    const label = makeLabel(el);
+    const title = makeTitle(el);
+    function go(e, dur, delay, blur) {
+        e.style.opacity = '0';
+        e.style.transform = 'translateY(10px)';
+        e.style.filter = `blur(${blur}px)`;
+        setTimeout(() => {
+            e.style.transition = `opacity ${dur}ms ease, transform ${dur}ms ease, filter ${dur}ms ease`;
+            e.style.opacity = '1';
+            e.style.transform = 'translateY(0)';
+            e.style.filter = 'blur(0px)';
+        }, delay);
+    }
+    setTimeout(() => {
+        go(label, 800, 300, 12);
+        go(title, 1100, 600, 32);
+        fadeOut(el, 2500);
+    }, 100);
+}
+
+/* ── 1-B. Scale + Blur ── */
+function effect1b(el) {
+    const label = makeLabel(el);
+    const title = makeTitle(el);
+    function go(e, dur, delay, blur, scale) {
+        e.style.opacity = '0';
+        e.style.filter = `blur(${blur}px)`;
+        e.style.transform = `scale(${scale})`;
+        setTimeout(() => {
+            e.style.transition = `opacity ${dur}ms ease, filter ${dur}ms cubic-bezier(0.4,0,0.2,1), transform ${dur}ms cubic-bezier(0.4,0,0.2,1)`;
+            e.style.opacity = '1';
+            e.style.filter = 'blur(0px)';
+            e.style.transform = 'scale(1)';
+        }, delay);
+    }
+    setTimeout(() => {
+        go(label, 900, 300, 10, 1.08);
+        go(title, 1200, 600, 36, 1.12);
+        fadeOut(el, 2500);
+    }, 100);
+}
+
+/* ── 1-C. Chromatic Aberration ── */
+function effect1c(el) {
+    const label = makeLabel(el);
+    const title = makeTitle(el);
+
+    // 색수차: text-shadow로 R/B 채널 분리 → 수렴
+    function go(e, dur, delay, blur) {
+        e.style.opacity = '0';
+        e.style.transform = 'translateY(10px)';
+        e.style.filter = `blur(${blur}px)`;
+        e.style.textShadow = '6px 0 rgba(255,0,80,0.5), -6px 0 rgba(0,100,255,0.5)';
+        setTimeout(() => {
+            e.style.transition = `opacity ${dur}ms ease, transform ${dur}ms ease, filter ${dur}ms ease, text-shadow ${dur}ms ease`;
+            e.style.opacity = '1';
+            e.style.transform = 'translateY(0)';
+            e.style.filter = 'blur(0px)';
+            e.style.textShadow = '0px 0 rgba(255,0,80,0), 0px 0 rgba(0,100,255,0)';
+        }, delay);
+    }
+    setTimeout(() => {
+        go(label, 900, 300, 8);
+        go(title, 1100, 600, 28);
+        fadeOut(el, 2500);
+    }, 100);
+}
+
+/* ── 1-D. Particle Gather ── */
+function effect1d(el) {
+    el.style.background = '#ffffff';
+
+    function sampleTextPixels(lines, fontSize, canvasW, canvasH, step) {
+        const c = document.createElement('canvas');
+        c.width = canvasW; c.height = canvasH;
+        const ctx = c.getContext('2d');
+        ctx.fillStyle = '#000';
+        ctx.font = `700 ${fontSize}px Poppins, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        const lineH = fontSize * 1.2;
+        const totalH = lineH * lines.length;
+        lines.forEach((line, i) => {
+            const y = canvasH / 2 - totalH / 2 + lineH * i + lineH / 2;
+            ctx.fillText(line, canvasW / 2, y);
+        });
+        const data = ctx.getImageData(0, 0, canvasW, canvasH).data;
+        const pts = [];
+        for (let y = 0; y < canvasH; y += step) {
+            for (let x = 0; x < canvasW; x += step) {
+                if (data[(y * canvasW + x) * 4 + 3] > 128) pts.push({ x, y });
+            }
+        }
+        return pts;
+    }
+
+    const W = window.innerWidth, H = window.innerHeight;
+    const fontSize = Math.min(Math.max(W * 0.09, 56), 128);
+    const targets = sampleTextPixels(['여기어때 비주얼', '시스템을 소개합니다'], fontSize, W, H, 4);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = W; canvas.height = H;
+    canvas.style.cssText = 'position:absolute;inset:0;';
+    el.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+
+    // 6가지 컬러 — 수렴 시 블랙으로 변함
+    const COLORS = [
+        [249, 66, 57],   // 레드 (3x)
+        [249, 66, 57],
+        [249, 66, 57],
+        [255, 180, 50],  // 옐로 (3x)
+        [255, 180, 50],
+        [255, 180, 50],
+        [20, 100, 220],  // 블루 (2x)
+        [20, 100, 220],
+        [54, 187, 156],  // 민트 #36BB9C (2x)
+        [54, 187, 156],
+        [20, 20, 20],    // 블랙 (1x)
+    ];
+
+    const particles = targets.map(t => {
+        const c = COLORS[Math.floor(Math.random() * COLORS.length)];
+        return {
+            tx: t.x, ty: t.y,
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: Math.random() * 2 + 1.2,
+            cr: c[0], cg: c[1], cb: c[2],
+            // 파티클마다 수렴 시작 타이밍이 다름 (0~0.3 사이 랜덤 오프셋)
+            offset: Math.random() * 0.3,
+            shape: ['circle','square','triangle'][Math.floor(Math.random() * 3)],
+            rotation: Math.random() * Math.PI * 2,
+        };
+    });
+
+    const APPEAR_DUR = 180;
+    const GATHER_DUR = 1400;
+    let phase = 'appear';
+    let phaseStart = null;
+
+    function easeInCubic(t) { return t * t * t; }
+
+    // 텍스트를 캔버스 아래에 미리 배치 (opacity 0으로 대기)
+    const title = makeTitle(el);
+    title.style.opacity = '0';
+    title.style.transition = 'none';
+    canvas.style.zIndex = '1';
+
+    function tick(now) {
+        if (!phaseStart) phaseStart = now;
+        const elapsed = now - phaseStart;
+
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, W, H);
+
+        function drawShape(pt, x, y, r, color) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(pt.rotation);
+            ctx.beginPath();
+            ctx.fillStyle = color;
+            if (pt.shape === 'circle') {
+                ctx.arc(0, 0, Math.max(r, 0.5), 0, Math.PI * 2);
+            } else if (pt.shape === 'square') {
+                const s = Math.max(r * 1.6, 0.8);
+                ctx.rect(-s / 2, -s / 2, s, s);
+            } else {
+                const s = Math.max(r * 2, 1);
+                ctx.moveTo(0, -s);
+                ctx.lineTo(s * 0.866, s * 0.5);
+                ctx.lineTo(-s * 0.866, s * 0.5);
+                ctx.closePath();
+            }
+            ctx.fill();
+            ctx.restore();
+        }
+
+        if (phase === 'appear') {
+            const p = Math.min(elapsed / APPEAR_DUR, 1);
+            particles.forEach(pt => {
+                drawShape(pt, pt.x, pt.y, pt.r,
+                    `rgba(${pt.cr},${pt.cg},${pt.cb},${Math.min(p * 3, 1) * 0.7})`);
+            });
+            if (p >= 1) { phase = 'gather'; phaseStart = now; }
+            requestAnimationFrame(tick);
+
+        } else {
+            const p = Math.min(elapsed / GATHER_DUR, 1);
+            const particleFade = p >= 0.85 ? 1 - (p - 0.85) / 0.15 : 1;
+
+            particles.forEach(pt => {
+                const localP = Math.min(Math.max((p - pt.offset) / (1 - pt.offset), 0), 1);
+                const eased = easeInCubic(localP);
+                const cx = pt.x + (pt.tx - pt.x) * eased;
+                const cy = pt.y + (pt.ty - pt.y) * eased;
+                const r = pt.r * (1 - eased * 0.55);
+                const alpha = (0.7 + eased * 0.3) * particleFade;
+                const ri = Math.round(pt.cr + (10 - pt.cr) * eased);
+                const gi = Math.round(pt.cg + (10 - pt.cg) * eased);
+                const bi = Math.round(pt.cb + (10 - pt.cb) * eased);
+                drawShape(pt, cx, cy, r, `rgba(${ri},${gi},${bi},${alpha})`);
+            });
+
+            if (p < 1) {
+                requestAnimationFrame(tick);
+            } else {
+                canvas.remove();
+                title.style.transition = 'opacity 0.4s ease';
+                title.style.opacity = '1';
+            }
+        }
+    }
+
+    setTimeout(() => requestAnimationFrame(tick), 200);
+    fadeOut(el, 3400);
+}
+
+/* ── 2. Shimmer Sweep ── */
+function effect2(el) {
+    const label = makeLabel(el);
+    const title = makeTitle(el);
+    setTimeout(() => {
+        fadeUpEl(label, 800, 300);
+        fadeUpEl(title, 1000, 600);
+        // 타이틀 등장 완료 후 shimmer 한 번
+        setTimeout(() => title.classList.add('shimmer-on'), 1750);
+        fadeOut(el, 2500);
+    }, 100);
+}
+
+/* ── 3. Letter Spacing Collapse ── */
+function effect3(el) {
+    const label = makeLabel(el);
+    const title = makeTitle(el);
+    setTimeout(() => {
+        fadeUpEl(label, 800, 300);
+        title.style.opacity = '0';
+        title.style.transform = 'translateY(10px)';
+        title.style.letterSpacing = '0.18em';
+        title.style.wordSpacing = '-0.35em';
+        setTimeout(() => {
+            title.style.transition = 'opacity 900ms ease, transform 900ms ease, letter-spacing 1.3s cubic-bezier(0.4, 0, 0.2, 1), word-spacing 1.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            title.style.opacity = '1';
+            title.style.transform = 'translateY(0)';
+            title.style.letterSpacing = '0.02em';
+            title.style.wordSpacing = '0em';
+        }, 600);
+        fadeOut(el, 2500);
+    }, 100);
+}
+
+/* ── 3-B. Letter Spacing Overshoot ── */
+/* 자간이 한 번 더 벌어졌다가 탄성으로 되돌아옴 */
+function effect3b(el) {
+    const label = makeLabel(el);
+    const title = makeTitle(el);
+    setTimeout(() => {
+        fadeUpEl(label, 800, 300);
+        title.style.opacity = '0';
+        title.style.letterSpacing = '-0.04em';
+        setTimeout(() => {
+            // 1단계: 페이드인 + 자간 확장
+            title.style.transition = 'opacity 600ms ease, letter-spacing 600ms cubic-bezier(0.4, 0, 0.6, 1)';
+            title.style.opacity = '1';
+            title.style.letterSpacing = '0.22em';
+            // 2단계: 다시 좁혀짐 (overshoot 탄성)
+            setTimeout(() => {
+                title.style.transition = 'letter-spacing 1.1s cubic-bezier(0.34, 1.3, 0.64, 1)';
+                title.style.letterSpacing = '-0.04em';
+            }, 620);
+        }, 600);
+        fadeOut(el, 2500);
+    }, 100);
+}
+
+/* ── 3-C. Stagger Lines ── */
+/* 두 줄이 서로 반대 자간 방향에서 시작해 정상으로 */
+function effect3c(el) {
+    const label = makeLabel(el);
+
+    const wrap = document.createElement('div');
+    wrap.style.textAlign = 'center';
+    el.appendChild(wrap);
+
+    const configs = [
+        { text: '여기어때 비주얼', startSpacing: '0.2em', delay: 600 },
+        { text: '시스템을 소개합니다', startSpacing: '-0.12em', delay: 750 },
+    ];
+
+    const lines = configs.map(cfg => {
+        const p = document.createElement('p');
+        p.className = 'ov-title';
+        p.style.opacity = '0';
+        p.style.letterSpacing = cfg.startSpacing;
+        p.style.display = 'block';
+        p.textContent = cfg.text;
+        wrap.appendChild(p);
+        return { el: p, ...cfg };
+    });
+
+    setTimeout(() => {
+        fadeUpEl(label, 800, 300);
+        lines.forEach(line => {
+            setTimeout(() => {
+                line.el.style.transition = 'opacity 800ms ease, letter-spacing 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
+                line.el.style.opacity = '1';
+                line.el.style.letterSpacing = '-0.04em';
+            }, line.delay);
+        });
+        fadeOut(el, 2500);
+    }, 100);
+}
+
+/* ── 4. Clip Reveal ── */
+function effect4(el) {
+    const label = makeLabel(el);
+
+    const wrap = document.createElement('div');
+    wrap.style.textAlign = 'center';
+    el.appendChild(wrap);
+
+    const lines = ['여기어때 비주얼', '시스템을 소개합니다'];
+    const spans = lines.map((text, i) => {
+        const row = document.createElement('div');
+        row.className = 'clip-row';
+        const span = document.createElement('span');
+        span.textContent = text;
+        row.appendChild(span);
+        wrap.appendChild(row);
+        return span;
+    });
+
+    setTimeout(() => {
+        fadeUpEl(label, 800, 300);
+        setTimeout(() => {
+            spans.forEach((s, i) => {
+                setTimeout(() => {
+                    s.style.transition = 'transform 0.85s cubic-bezier(0.16, 1, 0.3, 1)';
+                    s.style.transform = 'translateY(0)';
+                }, i * 110);
+            });
+        }, 550);
+        fadeOut(el, 2500);
+    }, 100);
+}
+
+function makeLabel(el) {
+    const s = document.createElement('span');
+    s.className = 'ov-label';
+    s.textContent = 'Yeogi Visual System';
+    el.appendChild(s);
+    return s;
+}
+function makeTitle(el) {
+    const p = document.createElement('p');
+    p.className = 'ov-title';
+    p.innerHTML = '여기어때 비주얼<br>시스템을 소개합니다';
+    el.appendChild(p);
+    return p;
+}
+
+const effectMap = {
+    1: effect1, '1b': effect1b, '1c': effect1c, '1d': effect1d,
+    2: effect2, 3: effect3,
+    '3b': effect3b, '3c': effect3c, 4: effect4
+};
+
+function run(n) {
+    document.getElementById('btn' + n).classList.add('active');
+    const el = makeOverlay();
+    effectMap[n](el);
+}
+</script>
+</body>
+</html>
