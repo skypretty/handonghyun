@@ -414,7 +414,7 @@
             background-color: rgba(0, 0, 0, 0.85);
             color: white;
             padding: 10px 16px;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 0.85rem;
             pointer-events: none;
             z-index: 9999;
@@ -547,9 +547,9 @@
             margin-top: 60px;
             position: relative;
             overflow: visible;
-            /* 왼쪽 경계에서 클리핑 — 오른쪽은 무한 허용 */
             clip-path: inset(-40px -9999px -40px 0);
         }
+
 
         .object-rule-scroll {
             display: flex;
@@ -569,50 +569,59 @@
         }
 
         .object-rule-card {
-            flex: 0 0 350px;
-            height: 500px;
+            flex: 0 0 300px;
             background-color: #f7f7f7;
             border-radius: 12px;
-            padding: 32px 28px;
+            padding: 24px 24px 28px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            transition: background-color 0.25s ease;
+            gap: 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
         }
 
         .object-rule-card:hover {
-            background-color: #f0f0f0;
+            transform: translateY(-8px);
         }
 
         .object-rule-card-num {
+            display: inline-flex;
+            align-self: flex-start;
+            padding: 5px 12px;
+            border-radius: 100px;
             font-size: 0.72rem;
             font-weight: 600;
-            letter-spacing: 0.12em;
-            color: #bbbbbb;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .object-rule-card-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 12px;
+            flex-shrink: 0;
+            display: block;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .object-rule-card-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             letter-spacing: -0.02em;
             color: #0a0a0a;
             line-height: 1.4;
+            margin-top: 18px;
+            margin-bottom: 8px;
         }
 
         .object-rule-card-desc {
-            font-size: 0.875rem;
+            font-size: 0.85rem;
             color: #666666;
-            line-height: 1.8;
-            margin-top: auto;
-        }
-
-        .object-rule-card-visual {
-            width: 100%;
-            flex: 1;
-            background-color: #ebebeb;
-            border-radius: 12px;
-            margin-top: 4px;
+            line-height: 1.75;
         }
 
         /* Rule Card Modal */
@@ -748,6 +757,7 @@
             margin-top: 60px;
             border-radius: 12px;
             overflow: hidden;
+            border: 1px solid #e5e5e5;
         }
 
         .core-value-logo-area img {
@@ -1018,6 +1028,189 @@
                 padding-left: max(40px, calc(300px - (100vw - 1200px) / 2));
             }
         }
+
+        /* ─── 3D Showcase Split Banner ─────────────────────────────── */
+        .showcase-split {
+            display: flex;
+            height: 540px;
+            margin-top: 60px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e8e8e8;
+        }
+
+        .showcase-left {
+            width: 55%;
+            display: flex;
+            gap: 10px;
+            padding: 0 10px;
+            overflow: hidden;
+            position: relative;
+            background: #f5f5f5;
+        }
+
+        /* top/bottom fade */
+        .showcase-left::before,
+        .showcase-left::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 100px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .showcase-left::before {
+            top: 0;
+            background: linear-gradient(to bottom, #f5f5f5, transparent);
+        }
+        .showcase-left::after {
+            bottom: 0;
+            background: linear-gradient(to top, #f5f5f5, transparent);
+        }
+
+        /* right-edge fade into white */
+        .showcase-left .showcase-fade-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 90px;
+            background: linear-gradient(to right, transparent, #ffffff);
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .scroll-col {
+            flex: 1;
+            overflow: hidden;
+            padding: 10px 0;
+        }
+
+        .scroll-col-track {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .scroll-col-up {
+            animation: showcaseScrollUp 24s linear infinite;
+        }
+
+        .scroll-col-down {
+            animation: showcaseScrollDown 30s linear infinite;
+        }
+
+        @keyframes showcaseScrollUp {
+            0%   { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        @keyframes showcaseScrollDown {
+            0%   { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
+        }
+
+        .scroll-icon-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            flex-shrink: 0;
+        }
+
+        .scroll-icon-card img {
+            width: 72%;
+            height: 72%;
+            object-fit: contain;
+        }
+
+        .showcase-right {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 56px;
+            background: #ffffff;
+            border-left: 1px solid #e8e8e8;
+        }
+
+        .showcase-eyebrow {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #f94239;
+            margin-bottom: 16px;
+        }
+
+        .showcase-title {
+            font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.18;
+            color: #0a0a0a;
+            margin-bottom: 20px;
+        }
+
+        .showcase-desc {
+            font-size: 0.95rem;
+            color: #666666;
+            line-height: 1.75;
+            margin-bottom: 44px;
+        }
+
+        .showcase-stats {
+            display: flex;
+            gap: 36px;
+        }
+
+        .showcase-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .stat-num {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            color: #0a0a0a;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: #aaaaaa;
+        }
+
+        @media (max-width: 768px) {
+            .showcase-split {
+                flex-direction: column;
+                height: auto;
+            }
+            .showcase-left {
+                width: 100%;
+                height: 240px;
+            }
+            .showcase-right {
+                width: 100%;
+                padding: 40px 28px;
+                border-left: none;
+                border-top: 1px solid #e8e8e8;
+            }
+            .showcase-stats {
+                gap: 24px;
+            }
+        }
+        /* ──────────────────────────────────────────────────────────── */
 
         /* Footer */
         footer {

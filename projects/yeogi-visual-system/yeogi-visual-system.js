@@ -916,66 +916,81 @@
             goToOverview((overviewActive + 1) % overviewImages.length);
         }, 4000);
 
-        // Rule Card 모달
+        // System Graphic Showcase Split — 2D 이미지 컬럼 생성
         (function () {
-            // 모달 DOM 생성
-            const overlay = document.createElement('div');
-            overlay.className = 'rule-modal-overlay';
-            overlay.innerHTML = `
-                <div class="rule-modal" role="dialog" aria-modal="true">
-                    <button class="rule-modal-close" aria-label="닫기">
-                        <svg viewBox="0 0 16 16" fill="none">
-                            <line x1="2" y1="2" x2="14" y2="14"/>
-                            <line x1="14" y1="2" x2="2" y2="14"/>
-                        </svg>
-                    </button>
-                    <div class="rule-modal-visual"></div>
-                    <div class="rule-modal-body">
-                        <span class="rule-modal-num"></span>
-                        <p class="rule-modal-title"></p>
-                        <p class="rule-modal-desc"></p>
-                    </div>
-                </div>`;
-            document.body.appendChild(overlay);
+            const BASE = 'https://pub-61ec350ba14f41ed9d298c92375918b9.r2.dev/2d-graphic/';
+            const images = [
+                'image-pizza-2d.png', 'image-cake-pink-2d.png', 'image-coffee-2d.png',
+                'image-hamburger-2d.png', 'image-donut-2d.png', 'image-sushi-2d.png',
+                'image-bibimbap-2d.png', 'image-croissant-2d.png', 'image-juice-2d.png',
+                'image-beer-2d.png', 'image-chicken-2d.png', 'image-cake-brown-2d.png',
+            ];
 
-            const modalNum = overlay.querySelector('.rule-modal-num');
-            const modalTitle = overlay.querySelector('.rule-modal-title');
-            const modalDesc = overlay.querySelector('.rule-modal-desc');
-            const closeBtn = overlay.querySelector('.rule-modal-close');
-
-            function openModal(card) {
-                modalNum.textContent = card.querySelector('.object-rule-card-num').textContent;
-                modalTitle.textContent = card.querySelector('.object-rule-card-title').textContent;
-                modalDesc.textContent = card.querySelector('.object-rule-card-desc').textContent;
-                overlay.classList.add('is-open');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeModal() {
-                overlay.classList.remove('is-open');
-                document.body.style.overflow = '';
-            }
-
-            // 카드 클릭 (드래그 중이면 무시)
-            document.querySelectorAll('.object-rule-card').forEach(card => {
-                card.style.cursor = 'pointer';
-                card.addEventListener('click', () => {
-                    const parentScroll = card.closest('.object-rule-scroll');
-                    if (parentScroll && parentScroll._wasMoved && parentScroll._wasMoved()) return;
-                    openModal(card);
+            function buildCards(list) {
+                const frag = document.createDocumentFragment();
+                [list, list].forEach(set => {
+                    set.forEach(file => {
+                        const card = document.createElement('div');
+                        card.className = 'scroll-icon-card';
+                        const img = document.createElement('img');
+                        img.src = BASE + file;
+                        img.alt = '';
+                        img.loading = 'lazy';
+                        card.appendChild(img);
+                        frag.appendChild(card);
+                    });
                 });
-            });
+                return frag;
+            }
 
-            // X 버튼
-            closeBtn.addEventListener('click', closeModal);
+            const col1 = document.getElementById('sysCol1');
+            const col2 = document.getElementById('sysCol2');
+            const col3 = document.getElementById('sysCol3');
+            if (col1) col1.appendChild(buildCards(images));
+            if (col2) col2.appendChild(buildCards([...images].reverse()));
+            if (col3) col3.appendChild(buildCards(images.slice(4).concat(images.slice(0, 4))));
+        })();
 
-            // 오버레이 배경 클릭
-            overlay.addEventListener('click', e => {
-                if (e.target === overlay) closeModal();
-            });
+        // 3D Showcase Split — 스크롤 컬럼 아이콘 생성
+        (function () {
+            const BASE = 'https://firebasestorage.googleapis.com/v0/b/portfolio-37e15.firebasestorage.app/o/yeogi-visual-system%2F3d-category-icon%2F';
+            const icons = [
+                { file: 'overseasaccommodation.png', name: '해외숙소' },
+                { file: 'motel.png',                 name: '모텔' },
+                { file: 'hotel.png',                 name: '호텔·리조트' },
+                { file: 'pension.png',               name: '펜션·풀빌라' },
+                { file: 'homevilla.png',              name: '홈앤빌라' },
+                { file: 'camping.png',               name: '캠핑·글램핑' },
+                { file: 'guesthouse.png',            name: '게하·한옥' },
+                { file: 'spacerental.png',           name: '공간대여' },
+                { file: 'airlines.png',              name: '항공' },
+                { file: 'flightaccommodation.png',   name: '항공+숙소' },
+                { file: 'rentalcar.png',             name: '렌터카' },
+                { file: 'leisureticket.png',         name: '레저티켓' },
+            ];
 
-            // ESC 키
-            document.addEventListener('keydown', e => {
-                if (e.key === 'Escape') closeModal();
-            });
+            function buildCards(list) {
+                const frag = document.createDocumentFragment();
+                // 두 번 반복 → seamless loop (-50% translateY)
+                [list, list].forEach(set => {
+                    set.forEach(icon => {
+                        const card = document.createElement('div');
+                        card.className = 'scroll-icon-card';
+                        const img = document.createElement('img');
+                        img.src = BASE + icon.file + '?alt=media';
+                        img.alt = icon.name;
+                        img.loading = 'lazy';
+                        card.appendChild(img);
+                        frag.appendChild(card);
+                    });
+                });
+                return frag;
+            }
+
+            const col1 = document.getElementById('showcaseCol1');
+            const col2 = document.getElementById('showcaseCol2');
+            const col3 = document.getElementById('showcaseCol3');
+            if (col1) col1.appendChild(buildCards(icons));
+            if (col2) col2.appendChild(buildCards([...icons].reverse()));
+            if (col3) col3.appendChild(buildCards(icons.slice(3).concat(icons.slice(0, 3))));
         })();
